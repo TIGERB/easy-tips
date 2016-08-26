@@ -1,5 +1,5 @@
-# career-tips
-a little tips in my code career
+# career-tips | 踩坑路
+a little tips in my code career | 码字踩过的那些坑
 
 
 ## 设计模式
@@ -24,36 +24,80 @@ a little tips in my code career
 - 更少代码元素：常量，变量，函数，类，包 …… 都属于代码元素，降低复杂性
 - 以上四个原则的重要程度依次降低
 
+>
+
 ## php笔记
+
+###### client和nginx简易交互过程
+- step1:
+- step2:
+- step3:
+- step4:
+- step5:
+
+###### nginx和php简易交互过程
+- 背景：web server和服务端语言交互依赖的是cgi(Common Gateway Interface)协议，php-cgi实现了cgi,由于cgi效率
+不高，后期产生了fastcgi协议,php-fpm是对fastcgi的实现
+- 流程：
+  + step1:nginx接收到一条http请求，会把环境变量，请求参数转变成php能懂的php变量
+  ```
+  // nginx 配置资料
+  location ~ \.php$ {
+        include snippets/fastcgi-php.conf; //step1
+        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+  }
+  ```
+  + step2:nginx匹配到.php结尾的访问通过fastcgi_pass命令传递给php-fpm.sock文件，其实这里
+  的ngnix发挥的是反向代理的角色，把http协议请求转到cgi协议请求
+  ```
+  // nginx 配置资料
+  location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.0-fpm.sock;// step2
+  }
+  ```
+  + step3:php-fpm.sock文件会被php-fpm的master进程所引用，这里nginx和php-fpm使用的是
+  linux的进程间通信方式unix domain socks，是一种基于文件而不是网络底册协议的通信方式
+  + step4:php-fpm的master进程接收到请求后，会把请求分发到php-fpm的子进程，每个php-fpm
+  子进程都包含一个php解析器
+  + step5:php-fpm进程处理完请求后返回给nginx
+
+
+
 ```
+//课外知识
 pm.max_children = 最大并发数
 
 详细的答案：
-pm.max_children 表示 php-fpm 能启动的子进程的最大数量。因为 php-fpm 是多进程单线程同步模式，即一个子进程同时最多处理一个请求，所以子进程数等于最大并发数。
+pm.max_children 表示 php-fpm 能启动的子进程的最大数量。
+因为 php-fpm 是多进程单线程同步模式，即一个子进程同时最多处理一个请求，所以子进程数等于最大并发数。
 ```
 
 ```
 /**
  * 超级调试
  *
- * 写入变量值到Runtime/Logs/debug.log
- * @param  mixed $data
+ * 写入变量值到\var\log\php_super_debug.log
+ * @param  mixed  $data     日志数据
+ * @param  string $log_path 日志路径
+ * @param  string $log_name 日志名称
  * @return void       
  */
-function super_debug($data, $log_name='debug')
+function super_debug($data, $log_path='\var\log\', $log_name='debug')
 {
-  error_log(json_encode($data, JSON_UNESCAPED_UNICODE)."\n", 3, '\var\log\php_super_debug.log');
+  error_log(json_encode($data, JSON_UNESCAPED_UNICODE)."\n", 3, $log_path.$log_name);
 }
 ```
 
 ```
-// php下载
+// php下载图片
 header('Content-type: image/jpeg');
 header('Content-Disposition: attachment; filename=download_name.jpg');
 readfile($yourFilePath);
 ```
 
 ```
+// php5.5以上的
 if (class_exists('\CURLFile')) {
     curl_setopt($curl, CURLOPT_SAFE_UPLOAD, true);
     $data = array('file' => new \CURLFile(realpath($destination)));//5.5+
@@ -69,15 +113,16 @@ if (class_exists('\CURLFile')) {
 
 - linux
     + df -h: 更易读的查看磁盘空间
-    + truncate -s 0 access.log：清理日志
+    + sudo rm -rf \*.log：清理日志
     + socket
         * http socket = ip:port
         * unix domain socket: unix process communication 进程间通信
+    + ubuntu16.04安装php5源：sudo apt-add-repository ppa:ondrej/php
 
 - mysql
     + 数据清理：TRUNCATE TABLE XXX
 
-- tip:
+- php:
     + json_encode($data, JSON_UNESCAPED_UNICODE)
     + php的自定义头信息都可以使用$_SERVER['HTTP_*']来获取
     + 如果你想知道脚本开始执行(译注：即服务器端收到客户端请求)的时刻，使用$_SERVER[‘REQUEST_TIME’]要好于time()
