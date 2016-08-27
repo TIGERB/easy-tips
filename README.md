@@ -1,21 +1,30 @@
 # career-tips | 踩坑路
-a little tips in my code career | 码字踩过的那些坑
+a little tips in my code career | 码码踩过的那些坑
 
 
-## 设计模式
+## Desigin Pattern | 设计模式
+
+> 破坑：利用内存中的实例维护变量，避免满天传变量，优化代码结构
 
 ###### 面向对象的设计原则
 - 对接口编程，不要对实现编程
 - 使用对象之间的组合，减少对继承的使用
+- 抽象用于不同的事物，而接口用于事物的行为
 
 ###### 设计模式的设计原则
 - 开闭原则：对扩展开放，对修改封闭
+  + mean: 实例的内部不可修改，但可以增加新功能
 - 依赖倒转：对接口编程，依赖于抽象而不依赖于具体
+  + mean: 就是把公共的拿出来，定义成抽象类、接口、抽象方法，然后大家再去实现这个抽
+  象，实现的方法各有不同，各个实体相互独立没有依赖，各个实体离开谁都能活
 - 接口隔离：使用多个接口，而不是对一个接口编程，去依赖降低耦合
+  + mean: 就是抽象再抽象
 - 最少知道：减少内部依赖，尽可能的独立
+  + mean: 实现依赖注入容器，把依赖的实体注入到一个实例（所谓容器）
 - 合成复用：多个独立的实体合成聚合，而不是使用继承
+  + mean：尽可能不用继承，使用以上三种方式构成代码结构
 - 里氏代换：超类（父类）出现的地方，派生类（子类）都可以出现
-- 抽象用于不同的事物，而接口用于事物的行为
+  + mean：能用父类实现的子类也能实现
 
 ###### 简单设计原则
 - 通过所有测试:及需求为上
@@ -24,20 +33,22 @@ a little tips in my code career | 码字踩过的那些坑
 - 更少代码元素：常量，变量，函数，类，包 …… 都属于代码元素，降低复杂性
 - 以上四个原则的重要程度依次降低
 
->
+>  核心：高内聚松耦合（单一职责），外部依赖，实体对抽象编程，抽象就是分层
 
-## php笔记
+## PHP Note | php笔记
 
 ###### client和nginx简易交互过程
-- step1:
-- step2:
-- step3:
-- step4:
-- step5:
+- step1:client发起http请求
+- step2:dns服务器解析域名得到主机ip
+- step3:默认端口为80，通过ip+port建立tcp/ip链接
+- step4:建立连接的tcp/ip三次握手，建立成功发送数据包
+- step5:nginx匹配请求
+  + case .html: 静态内容，分发静态内容响应
+  + case .php: php脚本，转发请求内容到php-fpm进程，分发php-fpm返回的内容响应
+- step6:断开连接的tcp/ip四次握手，断开连接
 
 ###### nginx和php简易交互过程
-- 背景：web server和服务端语言交互依赖的是cgi(Common Gateway Interface)协议，php-cgi实现了cgi,由于cgi效率
-不高，后期产生了fastcgi协议,php-fpm是对fastcgi的实现
+- 背景：web server和服务端语言交互依赖的是cgi(Common Gateway Interface)协议，php-cgi实现了cgi,由于cgi效率不高，后期产生了fastcgi协议,php-fpm就是对fastcgi的实现
 - 流程：
   + step1:nginx接收到一条http请求，会把环境变量，请求参数转变成php能懂的php变量
   ```
@@ -48,7 +59,7 @@ a little tips in my code career | 码字踩过的那些坑
   }
   ```
   + step2:nginx匹配到.php结尾的访问通过fastcgi_pass命令传递给php-fpm.sock文件，其实这里
-  的ngnix发挥的是反向代理的角色，把http协议请求转到cgi协议请求
+的ngnix发挥的是反向代理的角色，把http协议请求转到fastcgi协议请求
   ```
   // nginx 配置资料
   location ~ \.php$ {
@@ -59,10 +70,10 @@ a little tips in my code career | 码字踩过的那些坑
   + step3:php-fpm.sock文件会被php-fpm的master进程所引用，这里nginx和php-fpm使用的是
   linux的进程间通信方式unix domain socks，是一种基于文件而不是网络底册协议的通信方式
   + step4:php-fpm的master进程接收到请求后，会把请求分发到php-fpm的子进程，每个php-fpm
-  子进程都包含一个php解析器
+子进程都包含一个php解析器
   + step5:php-fpm进程处理完请求后返回给nginx
 
-
+###### 知识碎片
 
 ```
 //课外知识
@@ -77,6 +88,7 @@ pm.max_children 表示 php-fpm 能启动的子进程的最大数量。
 /**
  * 超级调试
  *
+ * 调试非本地环境或分布式环境，通过Log查看变量传递
  * 写入变量值到\var\log\php_super_debug.log
  * @param  mixed  $data     日志数据
  * @param  string $log_path 日志路径
@@ -90,14 +102,14 @@ function super_debug($data, $log_path='\var\log\', $log_name='debug')
 ```
 
 ```
-// php下载图片
+// php实现下载图片
 header('Content-type: image/jpeg');
 header('Content-Disposition: attachment; filename=download_name.jpg');
 readfile($yourFilePath);
 ```
 
 ```
-// php5.5以上的
+// php上传图片兼容版本写法
 if (class_exists('\CURLFile')) {
     curl_setopt($curl, CURLOPT_SAFE_UPLOAD, true);
     $data = array('file' => new \CURLFile(realpath($destination)));//5.5+
@@ -109,7 +121,7 @@ if (class_exists('\CURLFile')) {
 }
 ```
 
-// pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+###### 技巧
 
 - linux
     + df -h: 更易读的查看磁盘空间
@@ -142,7 +154,8 @@ if (class_exists('\CURLFile')) {
 - PHP还是有很多不足的地方，比如无法进行高效的运算
 
 
-## 互联网协议(internet protocol)：从上到下，越上越接近用户，越下越接近硬件
+## Internet Protocol | 互联网协议
+- 概括：从上到下，越上越接近用户，越下越接近硬件
 - 应用层:
     + 规定应用程序的数据格式
     + [HEAD(以太网标头) [HEAD(IP标头) [HEAD(TCP标头) DATA(应用层数据包)]]]
@@ -185,8 +198,9 @@ if (class_exists('\CURLFile')) {
     + 终端(pc，phone，pad...)的物理连接(光缆，电缆，路由...)，负责传递0和1信号
 
 
-tcp/ip connect:
+
 ```
+tcp/ip connect: tcp/ip的三次握手
         syn握手信号
         ------------->
         syn/ack确认字符
