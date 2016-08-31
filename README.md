@@ -2,7 +2,7 @@
 a little tips in my code career | 码码踩过的那些坑
 
 
-## Desigin Pattern | 设计模式
+## 设计模式
 
 > 破坑：利用内存中的实例维护变量，避免满天传变量，优化代码结构
 
@@ -35,7 +35,7 @@ a little tips in my code career | 码码踩过的那些坑
 
 >  核心：高内聚松耦合（单一职责），外部依赖，实体对抽象编程，抽象就是分层
 
-## PHP Note | php笔记
+## PHP笔记
 
 ###### client和nginx简易交互过程
 - step1:client发起http请求
@@ -76,7 +76,8 @@ a little tips in my code career | 码码踩过的那些坑
 ###### 知识碎片
 
 ```
-//课外知识
+//phpfpm配置
+
 pm.max_children = 最大并发数
 
 详细的答案：
@@ -85,6 +86,8 @@ pm.max_children 表示 php-fpm 能启动的子进程的最大数量。
 ```
 
 ```
+//日志调试方法
+
 /**
  * 超级调试
  *
@@ -103,13 +106,15 @@ function super_debug($data, $log_path='\var\log\', $log_name='debug')
 
 ```
 // php实现下载图片
+
 header('Content-type: image/jpeg');
 header('Content-Disposition: attachment; filename=download_name.jpg');
 readfile($yourFilePath);
 ```
 
 ```
-// php上传图片兼容版本写法
+// php5.6开始干掉了@语法，php上传图片兼容版本写法
+
 if (class_exists('\CURLFile')) {
     curl_setopt($curl, CURLOPT_SAFE_UPLOAD, true);
     $data = array('file' => new \CURLFile(realpath($destination)));//5.5+
@@ -119,6 +124,18 @@ if (class_exists('\CURLFile')) {
     }
     $data = array('file' => '@' . realpath($destination));//<=5.5
 }
+```
+
+```
+// 序列化与反序列化
+
+概念:
+序列化：把变量(所有类型)转成能传输和储存的变量(不丢失原变量的属性和结构)
+反序列化：把字符串转成原变量
+
+函数：
+序列化：serialize, json_encode(不能序列化对象)
+反序列化：unserialize, json_decode
 ```
 
 ###### 技巧
@@ -133,6 +150,13 @@ if (class_exists('\CURLFile')) {
 
 - mysql
     + 数据清理：TRUNCATE TABLE XXX
+    + 水平分表：MERGE关键字
+    + 完全克隆一张表：
+      * 克隆表结构：CREATE TABLE table_copy LIKE table_destination
+      * 克隆数据：INSERT INTO table_copy SELECT \* FORM table_destination
+    + 重命名字段：ALTER TABLE table_destination CHANGE column_destination new_name data_type
+    + 导出数据： mysqldump -h 127.0.0.1 -u root -p "database_name" "table_name" --where="condition" > file_name.sql
+    + 导入数据：source "flie"
 
 - php:
     + json_encode($data, JSON_UNESCAPED_UNICODE)
@@ -154,7 +178,7 @@ if (class_exists('\CURLFile')) {
 - PHP还是有很多不足的地方，比如无法进行高效的运算
 
 
-## Internet Protocol | 互联网协议
+## 互联网协议
 - 概括：从上到下，越上越接近用户，越下越接近硬件
 - 应用层:
     + 规定应用程序的数据格式
