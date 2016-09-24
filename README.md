@@ -1,10 +1,18 @@
 # career-tips | 踩坑路
-a little tips in my code career | 码码踩过的那些坑
+a little tips in my code career | 码码踩过的那些坑*2015-2016*
+
+> 记一下这一年码码中我需要去了解的基础知识，有不对的欢迎大家指证出来
+
+---
+
+- [关于设计模式](#设计模式)
+- [关于PHP](#PHP)
+- [关于互联网协议](#互联网协议)
+
+---
 
 
 ## 设计模式
-
-> 破坑：利用内存中的实例维护变量，避免满天传变量，优化代码结构
 
 ###### 面向对象的设计原则
 - 对接口编程，不要对实现编程
@@ -35,7 +43,7 @@ a little tips in my code career | 码码踩过的那些坑
 
 >  核心：高内聚松耦合（单一职责），外部依赖，实体对抽象编程，抽象就是分层
 
-## PHP笔记
+## PHP
 
 ###### client和nginx简易交互过程
 - step1:client发起http请求
@@ -48,7 +56,7 @@ a little tips in my code career | 码码踩过的那些坑
 - step6:断开连接的tcp/ip四次握手，断开连接
 
 ###### nginx和php简易交互过程
-- 背景：web server和服务端语言交互依赖的是cgi(Common Gateway Interface)协议，php-cgi实现了cgi,由于cgi效率不高，后期产生了fastcgi协议,php-fpm就是对fastcgi的实现
+- 背景：web server和服务端语言交互依赖的是cgi(Common Gateway Interface)协议，由于cgi效率不高，后期产生了fastcgi协议(一种常驻型的cgi协议),php-cgi实现了fastcgi，但是相比php-cgi,php-fpm提供了更好的PHP进程管理方式，可以有效控制内存和进程、可以平滑重载PHP配置
 - 流程：
   + step1:nginx接收到一条http请求，会把环境变量，请求参数转变成php能懂的php变量
   ```
@@ -138,15 +146,51 @@ if (class_exists('\CURLFile')) {
 反序列化：unserialize, json_decode
 ```
 
+```
+// 记一个坑
+
+ip2long函数
+- 32位系统下会转成带符号的int，范围-2^31~2^31-1
+- 64位系统下会转成带不符号的int，范围0~2^32-1
+```
+
+```
+# redis发布订阅
+ini_set(‘default_socket_timeout’, -1);
+
+$redis = new \Redis();
+$redis->pconnect('127.0.0.1', 6379);
+
+//订阅
+$redis->subscribe(['msg'], 'callfun');
+
+function callfun($redis, $channel, $msg)
+{
+  var_dump([
+    'redis' => $redis,
+    'channel' => $channel,
+    'msg' => $msg
+  ]);
+}
+
+//发布
+$redis = new \Redis();
+$redis->connect('127.0.0.1', 6379);
+$redis->publish('msg', 'moon cake');
+$redis->close();
+```
+
 ###### 技巧
 
 - linux
     + df -h: 更易读的查看磁盘空间
+    + du -h --max-depth=1 file_path:查看文件夹占用的空间，--max-depth文件夹下显示层级
     + sudo rm -rf \*.log：清理日志
     + socket
         * http socket = ip:port
         * unix domain socket: unix process communication 进程间通信
     + ubuntu16.04安装php5源：sudo apt-add-repository ppa:ondrej/php
+    + ubuntu中文支持：sudo apt-get install language-pack-zh-hant language-pack-zh-hans
 
 - mysql
     + 数据清理：TRUNCATE TABLE XXX
@@ -167,6 +211,7 @@ if (class_exists('\CURLFile')) {
     + foreach后的好习惯reset指针位置，unset掉$key，$value
     + curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     + laravel ['lærə,vɛl]
+    + php中的语言结构：echo,exit(),print,empty(),unset(),isset(),list(),eval(),array()
 - git:
     + git commit --amend 重写最近commit message
     + git cherry-pick 移花接木
@@ -174,7 +219,7 @@ if (class_exists('\CURLFile')) {
     + 修改包来源: sudo composer config repositories.包名 vcs 包地址
 
 
-## PHP的不足
+###### PHP的不足
 - PHP还是有很多不足的地方，比如无法进行高效的运算
 
 
@@ -196,6 +241,15 @@ if (class_exists('\CURLFile')) {
     + TCP协议：
         * 带有确认机制的UDP协议
         * 过程复杂，实现困难，消耗资源
+        ```
+          tcp/ip connect: tcp/ip的三次握手
+                  syn握手信号
+                  ------------->
+                  syn/ack确认字符
+          client  <-------------  server
+                  ack确认包
+                  -------------->
+        ```
 
 - 网络层(主机到主机的通信):
     + IP协议
@@ -220,15 +274,3 @@ if (class_exists('\CURLFile')) {
 
 - 实体层：
     + 终端(pc，phone，pad...)的物理连接(光缆，电缆，路由...)，负责传递0和1信号
-
-
-
-```
-tcp/ip connect: tcp/ip的三次握手
-        syn握手信号
-        ------------->
-        syn/ack确认字符
-client  <-------------  server
-        ack确认包
-        -------------->
-```
