@@ -1,285 +1,31 @@
 # career-tips | 踩坑路
-a little tips in my code career | 码码踩过的那些坑*2015-2016*
+a little tips in my code career
 
-> 记一下这一年码码中我需要去了解的基础知识，有不对的欢迎大家指证出来
-
----
-
-- [关于设计模式](#设计模式)
-- [关于PHP](#PHP)
-- [关于互联网协议](#互联网协议)
+> 码码中的基础知识，有不对的欢迎大家指证出来
 
 ---
 
+### 目录
 
-## 设计模式
+- [关于设计模式](https://github.com/TIGERB/career-tips#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F)
+  + [单例模式](https://github.com/TIGERB/career-tips/blob/master/singleton/test.php)
+  + [观察者模式](https://github.com/TIGERB/career-tips/blob/master/observer/test.php)
+  + [策略模式](https://github.com/TIGERB/career-tips/blob/master/strategy/test.php)
+  + [访问者模式](https://github.com/TIGERB/career-tips/blob/master/visitor/test.php)
+- [关于PHP](https://github.com/TIGERB/career-tips#php)
+- [关于互联网协议](https://github.com/TIGERB/career-tips#%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%8F%E8%AE%AE)
 
-###### 面向对象的设计原则
-- 对接口编程，不要对实现编程
-- 使用对象之间的组合，减少对继承的使用
-- 抽象用于不同的事物，而接口用于事物的行为
-
-###### 设计模式的设计原则
-- 开闭原则：对扩展开放，对修改封闭
-  + mean: 实例的内部不可修改，但可以增加新功能
-- 依赖倒转：对接口编程，依赖于抽象而不依赖于具体
-  + mean: 就是把公共的拿出来，定义成抽象类、接口、抽象方法，然后大家再去实现这个抽
-  象，实现的方法各有不同，各个实体相互独立没有依赖，各个实体离开谁都能活
-- 接口隔离：使用多个接口，而不是对一个接口编程，去依赖降低耦合
-  + mean: 就是抽象再抽象
-- 最少知道：减少内部依赖，尽可能的独立
-  + mean: 实现依赖注入容器，把依赖的实体注入到一个实例（所谓容器）
-- 合成复用：多个独立的实体合成聚合，而不是使用继承
-  + mean：尽可能不用继承，使用以上三种方式构成代码结构
-- 里氏代换：超类（父类）出现的地方，派生类（子类）都可以出现
-  + mean：能用父类实现的子类也能实现
-
-###### 简单设计原则
-- 通过所有测试:及需求为上
-- 尽可能的消除重复：高内聚低耦合
-- 尽可能的清晰表达：可读性
-- 更少代码元素：常量，变量，函数，类，包 …… 都属于代码元素，降低复杂性
-- 以上四个原则的重要程度依次降低
-
->  核心：高内聚松耦合（单一职责），外部依赖，实体对抽象编程，抽象就是分层
-
-
-## PHP
-
-###### client和nginx简易交互过程
-- step1:client发起http请求
-- step2:dns服务器解析域名得到主机ip
-- step3:默认端口为80，通过ip+port建立tcp/ip链接
-- step4:建立连接的tcp/ip三次握手，建立成功发送数据包
-- step5:nginx匹配请求
-  + case .html: 静态内容，分发静态内容响应
-  + case .php: php脚本，转发请求内容到php-fpm进程，分发php-fpm返回的内容响应
-- step6:断开连接的tcp/ip四次握手，断开连接
-
-###### nginx和php简易交互过程
-- 背景：web server和服务端语言交互依赖的是cgi(Common Gateway Interface)协议，由于cgi效率不高，后期产生了fastcgi协议(一种常驻型的cgi协议),php-cgi实现了fastcgi，但是相比php-cgi,php-fpm提供了更好的PHP进程管理方式，可以有效控制内存和进程、可以平滑重载PHP配置
-- 流程：
-  + step1:nginx接收到一条http请求，会把环境变量，请求参数转变成php能懂的php变量
-  ```
-  // nginx 配置资料
-  location ~ \.php$ {
-        include snippets/fastcgi-php.conf; //step1
-        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
-  }
-  ```
-  + step2:nginx匹配到.php结尾的访问通过fastcgi_pass命令传递给php-fpm.sock文件，其实这里
-的ngnix发挥的是反向代理的角色，把http协议请求转到fastcgi协议请求
-  ```
-  // nginx 配置资料
-  location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/run/php/php7.0-fpm.sock;// step2
-  }
-  ```
-  + step3:php-fpm.sock文件会被php-fpm的master进程所引用，这里nginx和php-fpm使用的是
-  linux的进程间通信方式unix domain socks，是一种基于文件而不是网络底册协议的通信方式
-  + step4:php-fpm的master进程接收到请求后，会把请求分发到php-fpm的子进程，每个php-fpm
-子进程都包含一个php解析器
-  + step5:php-fpm进程处理完请求后返回给nginx
-
-###### 知识碎片
+### 测试
 
 ```
-//phpfpm配置
+单例模式: php singleton/test.php
 
-pm.max_children = 最大并发数
+观察者模式: php observer/test.php
 
-详细的答案：
-pm.max_children 表示 php-fpm 能启动的子进程的最大数量。
-因为 php-fpm 是多进程单线程同步模式，即一个子进程同时最多处理一个请求，所以子进程数等于最大并发数。
-```
+策略模式: php strategy/test.php
 
-```
-//日志调试方法
+访问者模式: php visitor/test.php
 
-/**
- * 超级调试
- *
- * 调试非本地环境或分布式环境，通过Log查看变量传递
- * 写入变量值到\var\log\php_super_debug.log
- * @param  mixed  $data     日志数据
- * @param  string $log_path 日志路径
- * @param  string $log_name 日志名称
- * @return void       
- */
-function super_debug($data, $log_path='\var\log\', $log_name='debug')
-{
-  error_log(json_encode($data, JSON_UNESCAPED_UNICODE)."\n", 3, $log_path.$log_name);
-}
-```
+......类推
 
 ```
-// php实现下载图片
-
-header('Content-type: image/jpeg');
-header('Content-Disposition: attachment; filename=download_name.jpg');
-readfile($yourFilePath);
-```
-
-```
-// php5.6开始干掉了@语法，php上传图片兼容版本写法
-
-if (class_exists('\CURLFile')) {
-    curl_setopt($curl, CURLOPT_SAFE_UPLOAD, true);
-    $data = array('file' => new \CURLFile(realpath($destination)));//5.5+
-} else {
-    if (defined('CURLOPT_SAFE_UPLOAD')) {
-        curl_setopt($curl, CURLOPT_SAFE_UPLOAD, false);
-    }
-    $data = array('file' => '@' . realpath($destination));//<=5.5
-}
-```
-
-```
-// 序列化与反序列化
-
-概念:
-序列化：把变量(所有类型)转成能传输和储存的变量(不丢失原变量的属性和结构)
-反序列化：把字符串转成原变量
-
-函数：
-序列化：serialize, json_encode(不能序列化对象)
-反序列化：unserialize, json_decode
-```
-
-```
-// 记一个坑
-
-ip2long函数
-- 32位系统下会转成带符号的int，范围-2^31~2^31-1
-- 64位系统下会转成带不符号的int，范围0~2^32-1
-```
-
-```
-// static和self的区别
-
-- static: 代表当前所引用的类
-- self: 代表当前代码片断所在的类
-
-```
-
-```
-# redis发布订阅
-ini_set(‘default_socket_timeout’, -1);
-
-$redis = new \Redis();
-$redis->pconnect('127.0.0.1', 6379);
-
-//订阅
-$redis->subscribe(['msg'], 'callfun');
-
-function callfun($redis, $channel, $msg)
-{
-  var_dump([
-    'redis' => $redis,
-    'channel' => $channel,
-    'msg' => $msg
-  ]);
-}
-
-//发布
-$redis = new \Redis();
-$redis->connect('127.0.0.1', 6379);
-$redis->publish('msg', 'moon cake');
-$redis->close();
-```
-
-###### 技巧
-
-- linux
-    + df -h: 更易读的查看磁盘空间
-    + du -h --max-depth=1 file_path:查看文件夹占用的空间，--max-depth文件夹下显示层级
-    + sudo rm -rf \*.log：清理日志
-    + socket
-        * http socket = ip:port
-        * unix domain socket: unix process communication 进程间通信
-    + ubuntu16.04安装php5源：sudo apt-add-repository ppa:ondrej/php
-    + ubuntu中文支持：sudo apt-get install language-pack-zh-hant language-pack-zh-hans
-
-- mysql
-    + 数据清理：TRUNCATE TABLE XXX
-    + 水平分表：MERGE关键字
-    + 完全克隆一张表：
-      * 克隆表结构：CREATE TABLE table_copy LIKE table_destination
-      * 克隆数据：INSERT INTO table_copy SELECT \* FORM table_destination
-    + 重命名字段：ALTER TABLE table_destination CHANGE column_destination new_name data_type
-    + 导出数据： mysqldump -h 127.0.0.1 -u root -p "database_name" "table_name" --where="condition" > file_name.sql
-    + 导入数据：source "flie"
-
-- php:
-    + json_encode($data, JSON_UNESCAPED_UNICODE)
-    + php的自定义头信息都可以使用$_SERVER['HTTP_*']来获取
-    + 如果你想知道脚本开始执行(译注：即服务器端收到客户端请求)的时刻，使用$_SERVER[‘REQUEST_TIME’]要好于time()
-    + error_log(json_encode($data, JSON_UNESCAPED_UNICODE), 1/3, 'tigerbcoder@gmail.com/log_path')
-    + sudo watch service php5.6-fpm status
-    + foreach后的好习惯reset指针位置，unset掉$key，$value
-    + curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    + laravel ['lærə,vɛl]
-    + php中的语言结构：echo,exit(),print,empty(),unset(),isset(),list(),eval(),array()
-- git:
-    + git commit --amend 重写最近commit message
-    + git cherry-pick 移花接木
-- composer:
-    + 修改包来源: sudo composer config repositories.包名 vcs 包地址
-
-
-###### PHP的不足
-- PHP还是有很多不足的地方，比如无法进行高效的运算
-
-
-## 互联网协议
-- 概括：从上到下，越上越接近用户，越下越接近硬件
-- 应用层:
-    + 规定应用程序的数据格式
-    + [HEAD(以太网标头) [HEAD(IP标头) [HEAD(TCP标头) DATA(应用层数据包)]]]
-
-- 传输层(端口到端口的通信):
-    + 端口：
-        * 0到65535(2^16)的整数
-        * 进程使用网卡的编号
-        * 通过IP+mac确定主机，只要确定主机+端口(套接字socket)，就能进行程序间的通信
-    + UDP协议：
-        * 数据包中加入端口依赖的新协议
-        * 数据包[HEAD(发送、接收mac) [HEAD(发送、接收ip) [HEAD(发送、接收端口) DATA]]]
-        * 简单，可靠性差，不知道对方是否接受包
-    + TCP协议：
-        * 带有确认机制的UDP协议
-        * 过程复杂，实现困难，消耗资源
-        ```
-          tcp/ip connect: tcp/ip的三次握手
-                  syn握手信号
-                  ------------->
-                  syn/ack确认字符
-          client  <-------------  server
-                  ack确认包
-                  -------------->
-        ```
-
-- 网络层(主机到主机的通信):
-    + IP协议
-        * ipv4:
-            - 32个二进制位表示，由网络部分和主机部分构成，
-            - 子网掩码: 网络部分都为1，主机部分都为0，目的判断ip的网络部分，如255.255.255.0(11111111.11111111.11111111.00000000)
-            - IP数据包：标头Head+数据Data,放进以太网数据包的Data部分[HEAD [HEAD DATA]]
-            - IP数据包的传递：
-                + 非同一网络：无法获得mac地址,发送数据到网关，网关处理
-                + 同一网络：mac地址填写FF:FF:FF:FF:FF:FF:FF，广播数据，对比ip，不符合丢包
-
-- 链接层：
-    + 定义数据包(帧Frame)
-        * 标头(Head):数据包的一些说明项, 如发送者、接收者、数据类型
-        * 数据(Data):数据包的具体内容
-        * 数据包:[HEAD DATA]
-    + 定义网卡和网卡唯一的mac地址
-        * 以太网规定接入网络的所有终端都应该具有网卡接口，数据包必须是从一个网卡的mac地址到另一网卡接口的mac地址
-        * mac全球唯一，16位16位进制组成，前6厂商编号，后6网卡流水号
-    + 广播发送数据
-        * 向本网络内的所有设备发送数据包，对比接收者mac地址，不是丢包，是接受
-
-- 实体层：
-    + 终端(pc，phone，pad...)的物理连接(光缆，电缆，路由...)，负责传递0和1信号
