@@ -1,0 +1,17 @@
+<?php
+namespace factoryAbstract;
+
+/**
+ * 实体鸡
+ *
+ */
+class Corn implements PlantInterface
+{
+  /**
+   * 构造函数
+   */
+  public function __construct()
+  {
+    echo "生产了一些玉米~ \n\n";
+  }
+}
