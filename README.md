@@ -11,10 +11,11 @@ a little tips in my code career
   + [工厂模式](https://github.com/TIGERB/career-tips/blob/master/factory/test.php)
   + [抽象工厂模式](https://github.com/TIGERB/career-tips/blob/master/factoryAbstract/test.php)
   + [单例模式](https://github.com/TIGERB/career-tips/blob/master/singleton/test.php)
+  + [建造者模式](https://github.com/TIGERB/career-tips/blob/master/builder/test.php)
+  + [原型模式](https://github.com/TIGERB/career-tips/blob/master/prototype/test.php)
   + [观察者模式](https://github.com/TIGERB/career-tips/blob/master/observer/test.php)
   + [策略模式](https://github.com/TIGERB/career-tips/blob/master/strategy/test.php)
   + [访问者模式](https://github.com/TIGERB/career-tips/blob/master/visitor/test.php)
-  + [建造者模式](https://github.com/TIGERB/career-tips/blob/master/builder/test.php)
 - [关于PHP](https://github.com/TIGERB/career-tips/blob/master/tips-2016.md#php)
 - [关于互联网协议](https://github.com/TIGERB/career-tips/blob/master/tips-2016.md#互联网协议)
 
