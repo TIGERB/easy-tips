@@ -8,6 +8,8 @@ a little tips in my code career
 ### 目录
 
 - [关于设计模式](https://github.com/TIGERB/career-tips/blob/master/tips-2016.md#设计模式)
+  + [工厂模式](https://github.com/TIGERB/career-tips/blob/master/factory/test.php)
+  + [抽象工厂模式](https://github.com/TIGERB/career-tips/blob/master/factoryAbstract/test.php)
   + [单例模式](https://github.com/TIGERB/career-tips/blob/master/singleton/test.php)
   + [观察者模式](https://github.com/TIGERB/career-tips/blob/master/observer/test.php)
   + [策略模式](https://github.com/TIGERB/career-tips/blob/master/strategy/test.php)
