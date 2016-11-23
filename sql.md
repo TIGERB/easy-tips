@@ -1,8 +1,7 @@
 ## 常用sql语句整理：mysql
 
----
 
-###### 增
+1. 增
 
 - 增加一张表
 ```
@@ -49,7 +48,7 @@ AFTER `column_name`;
   ```
 
 
-###### 删
+2. 删
 
 - 逐行删除
 ```
@@ -80,7 +79,7 @@ ADD INDEX your_index_name(your_column_name);
 ```
 
 
-###### 改
+3. 改
 
 - 变更数据
 ```
@@ -105,7 +104,7 @@ SET a.column = b.anther_column
 WHERE a.id = b.a_id...;
 ```
 
-###### 查
+4. 查
 
 
 - 普通查询
@@ -142,13 +141,13 @@ AS b
 WHERE a.column_name = b.column_name...;
 ```
 
-###### 复制一张表结构
+5. 复制一张表结构
 ```
 CREATE `your_table_name`
 LIKE `destination_table_name`;
 ```
 
-###### 完全复制一张表：表结构+全部数据
+6. 完全复制一张表：表结构+全部数据
 ```
 CREATE `your_table_name`
 LIKE `destination_table_name`;
