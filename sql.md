@@ -136,7 +136,7 @@ HAVING aggregate_function(column_name)...;
 SELECT *
 FROM database_name.your_table_name
 AS a
-JOIN anther_database_name.your_anther_table_name
+JOIN another_database_name.your_another_table_name
 AS b
 WHERE a.column_name = b.column_name...;
 ```
