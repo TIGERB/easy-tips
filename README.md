@@ -24,6 +24,7 @@ a little tips in my code career
     - [适配器模式](https://github.com/TIGERB/easy-tips/blob/master/adapter/test.php)
     - [装饰器模式](https://github.com/TIGERB/easy-tips/blob/master/decorator/test.php)
     - [过滤器模式](https://github.com/TIGERB/easy-tips/blob/master/filter/test.php)
+    - [组合模式](https://github.com/TIGERB/easy-tips/blob/master/composite/test.php)
 
   - 行为型模式
 
