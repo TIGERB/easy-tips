@@ -67,3 +67,7 @@
 
 ......类推
 ```
+
+## 纠错
+
+如果大家发现有什么不对的地方，可以发起一个[issue](https://github.com/TIGERB/easy-tips/issues),我会及时纠正，THX～
