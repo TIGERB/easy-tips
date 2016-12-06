@@ -27,12 +27,14 @@
     - [原型模式](https://github.com/TIGERB/easy-tips/blob/master/prototype/test.php)
 
   - 结构型模式
+  
     - [桥接模式](https://github.com/TIGERB/easy-tips/blob/master/bridge/test.php)
     - [适配器模式](https://github.com/TIGERB/easy-tips/blob/master/adapter/test.php)
     - [装饰器模式](https://github.com/TIGERB/easy-tips/blob/master/decorator/test.php)
     - [过滤器模式](https://github.com/TIGERB/easy-tips/blob/master/filter/test.php)
     - [组合模式](https://github.com/TIGERB/easy-tips/blob/master/composite/test.php)
     - [外观模式](https://github.com/TIGERB/easy-tips/blob/master/facade/test.php)
+    - [享元模式](https://github.com/TIGERB/easy-tips/blob/master/flyweight/test.php)
 
   - 行为型模式
 
