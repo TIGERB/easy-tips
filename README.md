@@ -39,6 +39,7 @@
 
   - 行为型模式
 
+    - [责任链模式](https://github.com/TIGERB/easy-tips/blob/master/chainOfResponsibility/test.php)
     - [观察者模式](https://github.com/TIGERB/easy-tips/blob/master/observer/test.php)
     - [策略模式](https://github.com/TIGERB/easy-tips/blob/master/strategy/test.php)
     - [访问者模式](https://github.com/TIGERB/easy-tips/blob/master/visitor/test.php)
