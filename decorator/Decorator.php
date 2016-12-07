@@ -25,7 +25,7 @@ abstract class Decorator implements ShoesInterface
    */
   public function product()
   {
-      $this->phone->product();
+      $this->shoes->product();
   }
 
   /**

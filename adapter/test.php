@@ -23,7 +23,7 @@ function autoload($class)
 use adapter\AudioPlayer;
 
 try {
-  //生产一台MP4设备
+  //生产一台设备
   $mp4 = new AudioPlayer();
   // 播放一个mp3
   $mp4->play('忍者', 'mp3');
