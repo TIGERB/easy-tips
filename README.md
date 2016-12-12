@@ -45,6 +45,7 @@
     - [访问者模式](https://github.com/TIGERB/easy-tips/blob/master/visitor/test.php)
     - [命令模式](https://github.com/TIGERB/easy-tips/blob/master/command/test.php)
     - [解释器模式](https://github.com/TIGERB/easy-tips/blob/master/interpreter/test.php)
+    - [迭代器模式](https://github.com/TIGERB/easy-tips/blob/master/iterator/test.php)
 
 - 数据结构
 
