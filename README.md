@@ -56,6 +56,7 @@
     - [命令模式](https://github.com/TIGERB/easy-tips/blob/master/command/test.php)
     - [迭代器模式](https://github.com/TIGERB/easy-tips/blob/master/iterator/test.php)
     - [中介者器模式](https://github.com/TIGERB/easy-tips/blob/master/mediator/test.php)
+    - [空对象模式](https://github.com/TIGERB/easy-tips/blob/master/nullObject/test.php)
 
 - 数据结构(not-start)
 
