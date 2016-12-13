@@ -40,10 +40,12 @@ try {
   $create = new OrderCreate($text, [
     'filename' => 'test.txt'
   ]);
+  // 写入命令
   $write  = new OrderWrite($text, [
     'filename' => 'test.txt',
     'content'  => 'life is a struggle'
   ]);
+  // 保存命令
   $save   = new OrderSave($text, [
     'filename' => 'text.txt'
   ]);

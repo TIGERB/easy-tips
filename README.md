@@ -20,32 +20,33 @@
 
   - 创建型模式
 
+    - [单例模式](https://github.com/TIGERB/easy-tips/blob/master/singleton/test.php)
     - [工厂模式](https://github.com/TIGERB/easy-tips/blob/master/factory/test.php)
     - [抽象工厂模式](https://github.com/TIGERB/easy-tips/blob/master/factoryAbstract/test.php)
-    - [单例模式](https://github.com/TIGERB/easy-tips/blob/master/singleton/test.php)
-    - [建造者模式](https://github.com/TIGERB/easy-tips/blob/master/builder/test.php)
     - [原型模式](https://github.com/TIGERB/easy-tips/blob/master/prototype/test.php)
+    - [建造者模式](https://github.com/TIGERB/easy-tips/blob/master/builder/test.php)
 
   - 结构型模式
 
     - [桥接模式](https://github.com/TIGERB/easy-tips/blob/master/bridge/test.php)
+    - [享元模式](https://github.com/TIGERB/easy-tips/blob/master/flyweight/test.php)
+    - [外观模式](https://github.com/TIGERB/easy-tips/blob/master/facade/test.php)
     - [适配器模式](https://github.com/TIGERB/easy-tips/blob/master/adapter/test.php)
     - [装饰器模式](https://github.com/TIGERB/easy-tips/blob/master/decorator/test.php)
-    - [过滤器模式](https://github.com/TIGERB/easy-tips/blob/master/filter/test.php)
     - [组合模式](https://github.com/TIGERB/easy-tips/blob/master/composite/test.php)
-    - [外观模式](https://github.com/TIGERB/easy-tips/blob/master/facade/test.php)
-    - [享元模式](https://github.com/TIGERB/easy-tips/blob/master/flyweight/test.php)
     - [代理模式](https://github.com/TIGERB/easy-tips/blob/master/proxy/test.php)
+    - [过滤器模式](https://github.com/TIGERB/easy-tips/blob/master/filter/test.php)
 
   - 行为型模式
 
-    - [责任链模式](https://github.com/TIGERB/easy-tips/blob/master/chainOfResponsibility/test.php)
-    - [观察者模式](https://github.com/TIGERB/easy-tips/blob/master/observer/test.php)
     - [策略模式](https://github.com/TIGERB/easy-tips/blob/master/strategy/test.php)
+    - [观察者模式](https://github.com/TIGERB/easy-tips/blob/master/observer/test.php)
+    - [责任链模式](https://github.com/TIGERB/easy-tips/blob/master/chainOfResponsibility/test.php)
     - [访问者模式](https://github.com/TIGERB/easy-tips/blob/master/visitor/test.php)
-    - [命令模式](https://github.com/TIGERB/easy-tips/blob/master/command/test.php)
     - [解释器模式](https://github.com/TIGERB/easy-tips/blob/master/interpreter/test.php)
+    - [命令模式](https://github.com/TIGERB/easy-tips/blob/master/command/test.php)
     - [迭代器模式](https://github.com/TIGERB/easy-tips/blob/master/iterator/test.php)
+    - [中介者器模式](https://github.com/TIGERB/easy-tips/blob/master/mediator/test.php)
 
 - 数据结构
 
