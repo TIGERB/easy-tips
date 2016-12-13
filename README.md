@@ -2,23 +2,30 @@
 
 > 一个php技术栈后端猿的知识储备大纲
 
+- not-start: 代表还未开始总结
+- doing: 代表总结中
+- done: 代表总结完毕
+- fixing: 代表查漏补缺修改中
+
 ## 目录
 
-- php
+- php(doing)
 
   - [碎片知识](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#知识碎片)
 
-- mysql
+- mysql(doing)
 
   - [常用sql语句整理](https://github.com/TIGERB/easy-tips/blob/master/sql.md)
 
-- redis
+- redis(not-start)
 
   - 常用命令
 
-- [设计模式](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#设计模式)
+- 设计模式(done/fixing)
 
-  - 创建型模式
+  -[概念](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#设计模式)
+
+  - 创建型模式实例
 
     - [单例模式](https://github.com/TIGERB/easy-tips/blob/master/singleton/test.php)
     - [工厂模式](https://github.com/TIGERB/easy-tips/blob/master/factory/test.php)
@@ -26,7 +33,7 @@
     - [原型模式](https://github.com/TIGERB/easy-tips/blob/master/prototype/test.php)
     - [建造者模式](https://github.com/TIGERB/easy-tips/blob/master/builder/test.php)
 
-  - 结构型模式
+  - 结构型模式实例
 
     - [桥接模式](https://github.com/TIGERB/easy-tips/blob/master/bridge/test.php)
     - [享元模式](https://github.com/TIGERB/easy-tips/blob/master/flyweight/test.php)
@@ -37,9 +44,10 @@
     - [代理模式](https://github.com/TIGERB/easy-tips/blob/master/proxy/test.php)
     - [过滤器模式](https://github.com/TIGERB/easy-tips/blob/master/filter/test.php)
 
-  - 行为型模式
+  - 行为型模式实例
 
     - [策略模式](https://github.com/TIGERB/easy-tips/blob/master/strategy/test.php)
+    - [状态模式](https://github.com/TIGERB/easy-tips/blob/master/state/test.php)
     - [观察者模式](https://github.com/TIGERB/easy-tips/blob/master/observer/test.php)
     - [责任链模式](https://github.com/TIGERB/easy-tips/blob/master/chainOfResponsibility/test.php)
     - [访问者模式](https://github.com/TIGERB/easy-tips/blob/master/visitor/test.php)
@@ -49,17 +57,17 @@
     - [迭代器模式](https://github.com/TIGERB/easy-tips/blob/master/iterator/test.php)
     - [中介者器模式](https://github.com/TIGERB/easy-tips/blob/master/mediator/test.php)
 
-- 数据结构
+- 数据结构(not-start)
 
-- 算法
+- 算法(not-start)
 
-- 网络基础
+- 网络基础(doing)
 
   - [互联网协议概述](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#互联网协议)
   - [client和nginx简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#client和nginx简易交互过程)
   - [nginx和php简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#nginx和php简易交互过程)
 
-- 计算机基础
+- 计算机基础(not-start)
 
 
 
