@@ -23,7 +23,7 @@
 
 - 设计模式(done/fixing)
 
-  -[概念](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#设计模式)
+  - [概念](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#设计模式)
 
   - 创建型模式实例
 
@@ -46,6 +46,7 @@
 
   - 行为型模式实例
 
+    - [模板模式](https://github.com/TIGERB/easy-tips/blob/master/template/test.php)
     - [策略模式](https://github.com/TIGERB/easy-tips/blob/master/strategy/test.php)
     - [状态模式](https://github.com/TIGERB/easy-tips/blob/master/state/test.php)
     - [观察者模式](https://github.com/TIGERB/easy-tips/blob/master/observer/test.php)
