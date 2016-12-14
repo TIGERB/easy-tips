@@ -18,7 +18,7 @@ class Singleton
    * 
    * @return void
    */
-  public function __contruct()
+  private function __construct()
   {
     
   }
