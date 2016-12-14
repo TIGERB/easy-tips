@@ -58,10 +58,6 @@ class Prototype extends PrototypeAbstract
    */
   public function getPrototype()
   {
-    // instance运算符的优先级高于！
-    if(!$this->_instance instanceof self){
-      $this->_instance = clone $this;
-    }
-    return $this->_instance;
+     return clone $this;
   }
 }
