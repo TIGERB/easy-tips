@@ -6,7 +6,7 @@
  * 理解：遍历对象内部的属性，无需对外暴露内部的构成
  * 下面我们来实现一个迭代器访问学校所有的老师
  *
- * @author  TIGERB <tigerbcode@gmail.com>
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 

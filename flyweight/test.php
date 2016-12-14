@@ -9,7 +9,7 @@
  *
  * 下面我们借助最简单的’工厂模式‘来实现享元模式，就是给工厂加了个缓存池
  *
- * @author  TIGERB <tigerbcode@gmail.com>
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 

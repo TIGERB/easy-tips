@@ -7,7 +7,7 @@
  * 我的理解：把对象构建成树形结构
  *
  *
- * @author  TIGERB <tigerbcode@gmail.com>
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 

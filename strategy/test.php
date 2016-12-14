@@ -1,11 +1,11 @@
 <?php
 /**
  * 行为型模式
- * 
+ *
  * php策略模式
  * 策略依照使用而定
- * 
- * @author  TIGERB <tigerbcode@gmail.com>
+ *
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 
@@ -31,4 +31,3 @@ $substanceOne->someOperation();
 // 使用策略2
 $substanceTwo = new Substance(new StrategyExampleTwo);
 $substanceTwo->someOperation();
-

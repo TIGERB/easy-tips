@@ -1,11 +1,11 @@
 <?php
 /**
  * 创建型模式
- * 
+ *
  * php原型模式
  * 用于创建对象成本过高时
- * 
- * @author  TIGERB <tigerbcode@gmail.com>
+ *
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 
@@ -34,7 +34,3 @@ $prototypeCloneOne->getName();
 $prototypeCloneTwo = $prototype->getPrototype();
 $prototypeCloneTwo->_name = 'two';
 $prototypeCloneTwo->getName();
-
-
-
-

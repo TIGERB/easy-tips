@@ -7,7 +7,7 @@
  * 使用场景：构建一个编译器，SQL解析器
  * 下面我们来实现一个简单增删改查的sql解析器
  *
- * @author  TIGERB <tigerbcode@gmail.com>
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 

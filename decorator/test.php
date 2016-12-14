@@ -6,7 +6,7 @@
  * 对现有的对象增加功能
  * 和适配器的区别：适配器是连接两个接口，装饰器是对现有的对象包装
  *
- * @author  TIGERB <tigerbcode@gmail.com>
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 

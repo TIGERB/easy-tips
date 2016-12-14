@@ -1,14 +1,14 @@
 <?php
 /**
  * 创建型模式
- * 
+ *
  * php抽象工厂模式
  *
  * 说说我理解的工厂模式和抽象工厂模式的区别：
  * 工厂就是一个独立公司，负责生产对象；
  * 抽象工厂就是集团，负责生产子公司（工厂）；
 
- * @author  TIGERB <tigerbcode@gmail.com>
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 
@@ -37,5 +37,3 @@ $farmAnimail->produce('pig');
 $farmPlant    = $farmProducer->produceFarm('plant');
 // 生产水稻
 $farmPlant->produce('rice');
-
-

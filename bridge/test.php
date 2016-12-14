@@ -6,7 +6,7 @@
  * 基础的结构型设计模式：将抽象和实现解耦,对抽象的实现是实体行为对接口的实现
  * 例如：人 => 抽象为属性：性别 动作：吃 => 人吃的动作抽象为interface => 实现不同的吃法
  *
- * @author  TIGERB <tigerbcode@gmail.com>
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 

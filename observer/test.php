@@ -1,11 +1,11 @@
 <?php
 /**
  * 行为型模式
- * 
+ *
  * php观察者模式
  * 观察者观察被观察者，被观察者通知观察者
- * 
- * @author  TIGERB <tigerbcode@gmail.com>
+ *
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 

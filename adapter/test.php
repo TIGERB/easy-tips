@@ -5,7 +5,7 @@
  * php适配器模式
  * 把实现了不同接口的对象通过适配器的方式组合起来放在一个新的环境
  *
- * @author  TIGERB <tigerbcode@gmail.com>
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 

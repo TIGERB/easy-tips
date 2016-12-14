@@ -9,7 +9,7 @@
  * 下面实现老师课堂叫学生回答问题
  *
  *
- * @author  TIGERB <tigerbcode@gmail.com>
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 

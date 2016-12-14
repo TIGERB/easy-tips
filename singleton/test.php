@@ -1,10 +1,10 @@
 <?php
 /**
  * 创建型模式
- * 
+ *
  * php单例模式
- * 
- * @author  TIGERB <tigerbcode@gmail.com>
+ *
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 

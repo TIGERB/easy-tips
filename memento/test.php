@@ -8,7 +8,7 @@
  *
  * 下面我们来实现编辑器的undo(撤销)/redo（重置）功能
  *
- * @author  TIGERB <tigerbcode@gmail.com>
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 

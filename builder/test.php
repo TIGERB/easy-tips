@@ -1,7 +1,7 @@
 <?php
 /**
  * 创建型模式
- * 
+ *
  * php建造者模式
  * 简单对象构建复杂对象
  * 基本组件不变，但是组件之间的组合方式善变
@@ -14,8 +14,8 @@
  * 硬件 => 屏幕，cpu, 内存， 储存， 摄像头
  * // 软件又由以下构成
  * 软件 => android, ubuntu
- * 
- * @author  TIGERB <tigerbcode@gmail.com>
+ *
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 
@@ -40,7 +40,3 @@ $builder = new PhoneBuilder('某米8s', [
     'storage' => 64,
     'camera'  => '2000w'
   ],['os' => 'android 6.0']);
-
-
-
-

@@ -1,10 +1,10 @@
 <?php
 /**
  * 创建型模式
- * 
+ *
  * php工厂模式
 
- * @author  TIGERB <tigerbcode@gmail.com>
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 
@@ -29,6 +29,3 @@ $farm->produce('chicken');
 
 // 生产一只猪
 $farm->produce('pig');
-
-
-

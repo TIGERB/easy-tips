@@ -6,7 +6,7 @@
  * 使用不同的标准来过滤一组对象，说实话没明白该模式的意义，忘你留言补充讲解
  *
  *
- * @author  TIGERB <tigerbcode@gmail.com>
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 

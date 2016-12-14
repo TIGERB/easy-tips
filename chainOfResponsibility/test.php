@@ -7,7 +7,7 @@
  * 可以干什么：我们可以做一个filter,或者gateway
  *
  *
- * @author  TIGERB <tigerbcode@gmail.com>
+ * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
  */
 
