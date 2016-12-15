@@ -24,7 +24,7 @@ use factory\Farm;
 // 初始化一个工厂
 $farm = new Farm();
 
-// 成产一只鸡
+// 生产一只鸡
 $farm->produce('chicken');
 
 // 生产一只猪
