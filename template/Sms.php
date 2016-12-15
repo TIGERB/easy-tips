@@ -28,7 +28,7 @@ abstract class Sms
    *
    * @param array $config 运营商配置
    */
-  final function __construct(array $config=[])
+  final function __construct($config=[])
   {
     // 初始化配置
     $this->initialize($config);
@@ -42,7 +42,7 @@ abstract class Sms
    * @param  array $config 运营商配置
    * @return void
    */
-  abstract function initialize(array $config=[]);
+  abstract function initialize($config=[]);
 
   /**
    * 生成短信文本
@@ -64,7 +64,7 @@ abstract class Sms
    * @param  integer $mobile 手机号
    * @return void
    */
-  abstract function sendSms(int $mobile=0);
+  abstract function sendSms($mobile=0);
 
   /**
    * 发送短信
@@ -74,7 +74,7 @@ abstract class Sms
    * @param  integer $mobile 手机号
    * @return void
    */
-  final function send(int $mobile=0)
+  final function send($mobile=0)
   {
     // 生成文本
     $this->makeText();
