@@ -19,11 +19,11 @@ class FarmPlant
   {
     switch ($type) {
       case 'rice':
-        return new Chicken();
+        return new Rice();
         break;
 
       case 'corn':
-        return new Pig();
+        return new Cron();
         break;
       
       default:
