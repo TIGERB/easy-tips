@@ -1,17 +1,19 @@
 # easy-tips
 
+
 > 一个php技术栈后端猿的知识储备大纲
 
-- not-start: 代表还未开始总结
-- doing: 代表总结中
-- done: 代表总结完毕
-- fixing: 代表查漏补缺修改中
+## 前言
+
+为什么把php,mysql,redis放在前三位？因为php/mysql/redis基础是一个当代phper的根基。
 
 ## 目录
 
 - php(doing)
 
-  - [碎片知识](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#知识碎片)
+  - 符合PSR-1/PSR-2的PHP编程规范
+  - php-fpm/nginx交互[https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#client和nginx简易交互过程]
+  - 其他[https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#知识碎片]
 
 - mysql(doing)
 
@@ -87,6 +89,25 @@
 ......类推
 ```
 
+## 备注
+
+- not-start: 代表还未开始总结
+- doing: 代表总结中
+- done: 代表总结完毕
+- fixing: 代表查漏补缺修改中
+
 ## 纠错
 
-如果大家发现有什么不对的地方，可以发起一个[issue](https://github.com/TIGERB/easy-tips/issues),我会及时纠正，THX～
+如果大家发现有什么不对的地方，可以发起一个[issue](https://github.com/TIGERB/easy-tips/issues)或者[pull request](https://github.com/TIGERB/easy-tips),我会及时纠正，THX～
+
+> 补充:发起pull requestd的commit message请参考文章[Commit message 和 Change log 编写指南]<http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html>
+
+## 感谢
+
+感谢以下朋友的issue或pull request：
+
+- @[faynwol](https://github.com/faynwol)
+- @[whahuzhihao](https://github.com/whahuzhihao)
+- @[snriud](https://github.com/snriud)
+- @[fhefh2015](https://github.com/fhefh2015)
+- @[RJustice](https://github.com/RJustice)
