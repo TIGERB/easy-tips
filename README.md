@@ -100,7 +100,7 @@
 
 如果大家发现有什么不对的地方，可以发起一个[issue](https://github.com/TIGERB/easy-tips/issues)或者[pull request](https://github.com/TIGERB/easy-tips),我会及时纠正，THX～
 
-> 补充:发起pull requestd的commit message请参考文章[Commit message 和 Change log 编写指南]<http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html>
+> 补充:发起pull request的commit message请参考文章[Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
 
 ## 感谢
 

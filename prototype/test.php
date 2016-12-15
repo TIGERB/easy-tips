@@ -34,3 +34,6 @@ $prototypeCloneOne->getName();
 $prototypeCloneTwo = $prototype->getPrototype();
 $prototypeCloneTwo->_name = 'two';
 $prototypeCloneTwo->getName();
+
+// 再次获取$prototypeCloneOne的名称
+$prototypeCloneOne->getName();

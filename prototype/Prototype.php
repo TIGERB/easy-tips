@@ -7,23 +7,10 @@ namespace prototype;
 class Prototype extends PrototypeAbstract
 { 
   /**
-   * 名称
-   * @var string
-   */
-  private $_name = '';
-
-
-  /**
-   * 实例
-   * @var string
-   */
-  private $_instance;  
-
-  /**
    * 构造函数
-   * 
+   *
    * @param  string $name 属性一
-   * @return void               
+   * @return void
    */
   public function __constuct($name='')
   {
@@ -32,7 +19,7 @@ class Prototype extends PrototypeAbstract
 
   /**
    * 魔术方法 设置属性
-   * 
+   *
    * @param string $name  属性名称
    * @param string $value 属性值
    */
@@ -40,10 +27,10 @@ class Prototype extends PrototypeAbstract
   {
     $this->$name = $value;
   }
-  
+
   /**
    * 打印对象名称
-   * 
+   *
    * @return sting
    */
   public function getName()
@@ -53,7 +40,7 @@ class Prototype extends PrototypeAbstract
 
   /**
    * 获取原型对象
-   * 
+   *
    * @return object
    */
   public function getPrototype()
