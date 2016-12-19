@@ -1,27 +1,58 @@
 # easy-tips
 
-
 > 一个php技术栈后端猿的知识储备大纲
 
 ## 前言
 
 为什么把php,mysql,redis放在前三位？因为php/mysql/redis基础是一个当代phper的根基。
 
+## 备注
+
+状态        | 含义
+--------- | -------
+not-start | 当前未开始总结
+doing     | 总结中
+done      | 总结完毕
+fixing    | 查漏补缺修改中
+
 ## 目录
 
-- php(doing)
+- PHP(doing)
 
-  - 符合PSR-1/PSR-2的PHP编程规范
-  - php-fpm/nginx交互[https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#client和nginx简易交互过程]
-  - 其他[https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#知识碎片]
+  - [符合PSR-1/PSR-2的PHP编程规范实例](https://github.com/TIGERB/easy-tips/blob/master/standard.php)
 
-- mysql(doing)
+  - 基础知识[读(R)好(T)文(F)档(M)]
 
-  - [常用sql语句整理](https://github.com/TIGERB/easy-tips/blob/master/sql.md)
+    - [数据类型](http://php.net/manual/zh/language.types.php)
+    - [运算符优先级](http://php.net/manual/zh/language.operators.precedence.php)
+    - [string函数](http://php.net/ref.strings)
+    - [array函数](http://php.net/manual/zh/ref.array.php)
+    - [面向对象](http://php.net/manual/zh/language.oop5.php)
+    - 版本新特性
 
-- redis(not-start)
+      - [7.1](http://php.net/manual/zh/migration71.new-features.php)
+      - [7.0](http://php.net/manual/zh/migration70.new-features.php)
+      - [5.6](http://php.net/manual/zh/migration56.new-features.php)
+      - [5.5](http://php.net/manual/zh/migration55.new-features.php)
+      - [5.4](http://php.net/manual/zh/migration54.new-features.php)
+      - [5.3](http://php.net/manual/zh/migration53.new-features.php)
+
+  - [工作中遇到的一些坑](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#工作中遇到的一些坑)
+
+- Mysql(doing)
+
+  - [常用sql语句](https://github.com/TIGERB/easy-tips/blob/master/sql.md)
+  - 引擎
+  - 索引
+  - 锁机制
+
+- Redis(not-start)
 
   - 常用命令
+  - 常见使用场景实战
+
+    - 队列
+    - 订阅/推送
 
 - 设计模式(done/fixing)
 
@@ -63,38 +94,49 @@
 
 - 数据结构(not-start)
 
+  - 数组
+  - 堆/栈
+  - 树
+  - 队列
+  - 链表
+  - 图
+  - 散列表
+
 - 算法(not-start)
+
+  - 算法分析
+
+    - 时间复杂度/空间复杂度/正确性/可读性/健壮性
+
+  - 算法实战
 
 - 网络基础(doing)
 
   - [互联网协议概述](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#互联网协议)
   - [client和nginx简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#client和nginx简易交互过程)
-  - [nginx和php简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#nginx和php简易交互过程)
+  - [nginx和php-fpm简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#nginx和php简易交互过程)
 
 - 计算机基础(not-start)
 
-
+  - linux常用命令
 
 ## 设计模式测试
 
+运行脚本： php [文件夹名称]/test.php
+
 ```
-单例模式: php singleton/test.php
+例如,
 
-观察者模式: php observer/test.php
+测试责任链模式： 运行 php chainOfResponsibility/test.php
 
-策略模式: php strategy/test.php
+运行结果：
 
-访问者模式: php visitor/test.php
-
-......类推
+请求5850c8354b298: 令牌校验通过～
+请求5850c8354b298: 请求频率校验通过～
+请求5850c8354b298: 参数校验通过～
+请求5850c8354b298: 签名校验通过～
+请求5850c8354b298: 权限校验通过～
 ```
-
-## 备注
-
-- not-start: 代表还未开始总结
-- doing: 代表总结中
-- done: 代表总结完毕
-- fixing: 代表查漏补缺修改中
 
 ## 纠错
 
@@ -111,3 +153,4 @@
 - @[snriud](https://github.com/snriud)
 - @[fhefh2015](https://github.com/fhefh2015)
 - @[RJustice](https://github.com/RJustice)
+- @[ooing](https://github.com/ooing)
