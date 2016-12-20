@@ -27,6 +27,7 @@ fixing    | 查漏补缺修改中
     - [运算符优先级](http://php.net/manual/zh/language.operators.precedence.php)
     - [string函数](http://php.net/ref.strings)
     - [array函数](http://php.net/manual/zh/ref.array.php)
+    - [math函数](http://php.net/manual/zh/ref.math.php)
     - [面向对象](http://php.net/manual/zh/language.oop5.php)
     - 版本新特性
 
@@ -37,7 +38,7 @@ fixing    | 查漏补缺修改中
       - [5.4](http://php.net/manual/zh/migration54.new-features.php)
       - [5.3](http://php.net/manual/zh/migration53.new-features.php)
 
-  - [工作中遇到的一些坑](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#工作中遇到的一些坑)
+  - [记一些坑](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#记一些坑)
 
 - Mysql(doing)
 

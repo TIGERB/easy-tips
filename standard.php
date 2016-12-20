@@ -1,7 +1,7 @@
 <?php
-namespace standard; // 顶部命名空间
+namespace Standard; // 顶部命名空间
 // 空一行
-use test\Test;//use引入类
+use Test\TestClass;//use引入类
 
 /**
  * 类描述
@@ -41,6 +41,15 @@ abstract class StandardExample // {}必须换行
    */
   public function __construct($value = '')// 成员方法必须添加public（不能省略）， private, protected修饰符
   {// {}必须换行
+
+    $this->nameTest = new TestClass();
+
+    // 链式操作
+    $this->nameTest->functionOne()
+                   ->functionTwo()
+                   ->functionThree();
+
+    // 一段代码逻辑执行完毕 换行
     // code...
   }
 
@@ -135,25 +144,29 @@ abstract class StandardExample // {}必须换行
     $valueSix   = '')// 参数过多换行
   {
     if ($valueOne === $valueTwo) {// 控制结构=>后加空格,同{一行，（右边和)左边不加空格
-      # code...
+      // code...
     }
 
     switch ($valueThree) {
       case 'value':
-        # code...
+        // code...
         break;
 
       default:
-        # code...
+        // code...
         break;
     }
 
     do {
-      # code...
+      // code...
     } while ($valueFour <= 10);
 
     while ($valueFive <= 10) {
-      # code...
+      // code...
+    }
+
+    for ($i=0; $i < $valueSix; $i++) {
+      // code...
     }
   }
 }
