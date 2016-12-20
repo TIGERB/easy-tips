@@ -30,7 +30,7 @@ abstract class StandardExample // {}必须换行
    *
    * @var string
    */
-  private $_privateNameTest = ''; // 类私有成员属性，建议下划线小写开头驼峰
+  private $_privateNameTest = ''; // 类私有成员属性，【个人建议】下划线小写开头驼峰
 
   /**
    * 构造函数.
@@ -77,7 +77,7 @@ abstract class StandardExample // {}必须换行
    *
    * @return 返回值类型        返回值描述
    */
-  private function _privateTestFunction($value = '')// 私有成员方法建议下划线小写开头驼峰
+  private function _privateTestFunction($value = '')// 私有成员方法【个人建议】下划线小写开头驼峰
   {
       // code...
   }
