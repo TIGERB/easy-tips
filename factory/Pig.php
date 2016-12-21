@@ -2,7 +2,7 @@
 namespace factory;
 
 /**
- * 实体鸡
+ * 实体猪
  *
  */
 class Pig implements AnimalInterface
