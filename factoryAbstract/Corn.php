@@ -2,7 +2,7 @@
 namespace factoryAbstract;
 
 /**
- * 实体鸡
+ * 实体玉米
  *
  */
 class Corn implements PlantInterface

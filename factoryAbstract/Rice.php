@@ -2,7 +2,7 @@
 namespace factoryAbstract;
 
 /**
- * 实体鸡
+ * 实体大米
  *
  */
 class Rice implements PlantInterface
