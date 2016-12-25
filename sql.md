@@ -75,7 +75,7 @@ DROP `column_name`;
 - 删除索引
 ```
 ALTER TABLE `your_table_name`
-ADD INDEX your_index_name(your_column_name);
+DROP INDEX your_index_name(your_column_name);
 ```
 
 
