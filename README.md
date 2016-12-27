@@ -155,3 +155,5 @@ fixing    | 查漏补缺修改中
 - @[fhefh2015](https://github.com/fhefh2015)
 - @[RJustice](https://github.com/RJustice)
 - @[ooing](https://github.com/ooing)
+- @[shellus](https://github.com/shellus)
+- @[entimm](https://github.com/entimm)
