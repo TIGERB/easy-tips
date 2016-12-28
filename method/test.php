@@ -3,14 +3,15 @@
  * php算法实战
  *
  * @author TIGERB <https://github.com/TIGERB>
+ * @example php
  */
 
 // 初始值
-$data = [11, 9, 3, 16, 6, 10, 45, 2, 32];
+$data = [11, 67, 3, 77, 6, 10, 45, 2, 19, 17, 99, 40, 3, 22];
 
 if (!isset($argv[1])) {
     echo "\n";
-    echo "参数有误，正确示例：php method.php bubble \n";
+    echo "参数有误，正确示例：php test.php bubble \n";
     echo "====================================== \n";
     echo "参数列表： \n";
     print_r([
@@ -23,19 +24,20 @@ if (!isset($argv[1])) {
     '合并有序数组' => 'merge-array',
     '归并排序' => 'merge',
     '堆排序'   => 'heap',
-    '希尔排序' => 'hill',
+    '希尔排序' => 'shell',
     '基数排序' => 'radix',
     '二分查找' => 'binary-search'
     ]);
     die;
 }
 $method = $argv[1];
+$path   = dirname($_SERVER['SCRIPT_FILENAME']);
 
 
 /*---------------------------- bubble ---------------------------------*/
 
 if ($method === 'bubble') {
-  require('./sort/bubble.php');
+  require($path . '/sort/bubble.php');
   echo "\n";
   echo "==========================冒泡排序========================= \n";
   echo "\n";
@@ -51,7 +53,7 @@ if ($method === 'bubble') {
 /*---------------------------- bubble better ---------------------------------*/
 
 if ($method === 'bubble-better') {
-  require('./sort/bubble.php');
+  require($path . '/sort/bubble.php');
   echo "\n";
   echo "==========================优化冒泡排序========================= \n";
   echo "\n";
@@ -67,7 +69,7 @@ if ($method === 'bubble-better') {
 /*---------------------------- quick ---------------------------------*/
 
 if ($method === 'quick') {
-  require('./sort/quick.php');
+  require($path . '/sort/quick.php');
   echo "\n";
   echo "==========================快速排序========================= \n";
   echo "\n";
@@ -83,7 +85,7 @@ if ($method === 'quick') {
 /*---------------------------- quick while版本 ---------------------------------*/
 
 if ($method === 'quick-while') {
-  require('./sort/quick.php');
+  require($path . '/sort/quick.php');
   echo "\n";
   echo "==========================快排while版========================= \n";
   echo "\n";
@@ -99,7 +101,7 @@ if ($method === 'quick-while') {
 /*---------------------------- select ---------------------------------*/
 
 if ($method === 'select') {
-  require('./sort/select.php');
+  require($path . '/sort/select.php');
   echo "\n";
   echo "==========================选择排序========================= \n";
   echo "\n";
@@ -115,7 +117,7 @@ if ($method === 'select') {
 /*---------------------------- insert ---------------------------------*/
 
 if ($method === 'insert') {
-  require('./sort/insert.php');
+  require($path . '/sort/insert.php');
   echo "\n";
   echo "==========================插入排序========================= \n";
   echo "\n";
@@ -131,7 +133,7 @@ if ($method === 'insert') {
 /*---------------------------- merge_array ---------------------------------*/
 
 if ($method === 'merge-array') {
-  require('./sort/merge.php');
+  require($path . '/sort/merge.php');
   echo "\n";
   echo "================合并两个有序数组为一个有序数组================== \n";
   echo "\n";
@@ -153,11 +155,11 @@ if ($method === 'merge-array') {
 /*---------------------------- merge ---------------------------------*/
 
 if ($method === 'merge') {
-  require('./sort/merge.php');
+  require($path . '/sort/merge.php');
   echo "\n";
   echo "==========================归并排序========================= \n";
   echo "看归并排序前，建议先看一下怎么合并两个有序数组为一个有序数据的逻辑 \n";
-  echo "执行 php method.php merge-array \n";
+  echo "执行 php test.php merge-array \n";
   echo "\n";
   print_r($data);
   echo "\n";
@@ -170,7 +172,7 @@ if ($method === 'merge') {
 /*---------------------------- heap ---------------------------------*/
 
 if ($method === 'heap') {
-  require('./sort/heap.php');
+  require($path . '/sort/heap.php');
   echo "\n";
   echo "==========================堆排序========================= \n";
   echo "\n";
@@ -182,10 +184,10 @@ if ($method === 'heap') {
   print_r(bubble($data));
 }
 
-/*---------------------------- hill ---------------------------------*/
+/*---------------------------- shell ---------------------------------*/
 
-if ($method === 'hill') {
-  require('./sort/hill.php');
+if ($method === 'shell') {
+  require($path . '/sort/shell.php');
   echo "\n";
   echo "==========================希尔排序========================= \n";
   echo "\n";
@@ -194,13 +196,13 @@ if ($method === 'hill') {
   echo "=========上为初始值==================下为排序后值============= \n";
   echo "\n";
   // run
-  print_r(bubble($data));
+  print_r(shell($data, floor(count($data)/2)));
 }
 
 /*---------------------------- radix ---------------------------------*/
 
 if ($method === 'radix') {
-  require('./sort/radix.php');
+  require($path . '/sort/radix.php');
   echo "\n";
   echo "==========================基数排序========================= \n";
   echo "\n";
@@ -209,5 +211,5 @@ if ($method === 'radix') {
   echo "=========上为初始值==================下为排序后值============= \n";
   echo "\n";
   // run
-  print_r(bubble($data));
+  print_r(radix($data));
 }
