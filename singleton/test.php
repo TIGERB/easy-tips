@@ -27,3 +27,13 @@ $instance->test();
 
 // clone对象试试
 $instanceClone = clone $instance;
+
+// 另一种方式
+function get_instance()
+{
+    static $instance;
+    if ($instance) return $instance;
+    // ... init $instance
+    return $instance;
+}
+$instance = get_instance();
