@@ -3,36 +3,19 @@
  * php算法实战
  *
  * @author TIGERB <https://github.com/TIGERB>
- * @example php
+ * @example php test.php
  */
 
 // 初始值
-$data = [11, 67, 3, 77, 6, 10, 45, 2, 19, 17, 99, 40, 3, 22];
+$data = [11, 67, 3, 121, 71, 6, 100, 45, 2, 19, 17, 99, 40, 3, 22];
 
-if (!isset($argv[1])) {
-    echo "\n";
-    echo "参数有误，正确示例：php test.php bubble \n";
-    echo "====================================== \n";
-    echo "参数列表： \n";
-    print_r([
-    '冒泡排序' => 'bubble',
-    '冒泡排序优化版' => 'bubble-better',
-    '快速排序' => 'quick',
-    '快速排序while版' => 'quick-while',
-    '选择排序' => 'select',
-    '插入排序' => 'insert',
-    '合并有序数组' => 'merge-array',
-    '归并排序' => 'merge',
-    '堆排序'   => 'heap',
-    '希尔排序' => 'shell',
-    '基数排序' => 'radix',
-    '二分查找' => 'binary-search'
-    ]);
-    die;
+
+// 参数
+$method = '';
+if (isset($argv[1])) {
+  $method = $argv[1];
 }
-$method = $argv[1];
 $path   = dirname($_SERVER['SCRIPT_FILENAME']);
-
 
 /*---------------------------- bubble ---------------------------------*/
 
@@ -47,6 +30,7 @@ if ($method === 'bubble') {
   echo "\n";
   // run
   print_r(bubble($data));
+  die;
 }
 
 
@@ -63,6 +47,7 @@ if ($method === 'bubble-better') {
   echo "\n";
   // run
   print_r(bubble_better($data));
+  die;
 }
 
 
@@ -79,6 +64,7 @@ if ($method === 'quick') {
   echo "\n";
   // run
   print_r(quick($data, 0, count($data) - 1));
+  die;
 }
 
 
@@ -95,6 +81,7 @@ if ($method === 'quick-while') {
   echo "\n";
   // run
   print_r(quick_while($data, 0, count($data) - 1));
+  die;
 }
 
 
@@ -111,6 +98,7 @@ if ($method === 'select') {
   echo "\n";
   // run
   print_r(select_sort($data));
+  die;
 }
 
 
@@ -127,6 +115,7 @@ if ($method === 'insert') {
   echo "\n";
   // run
   print_r(insert($data, 0));
+  die;
 }
 
 
@@ -149,6 +138,7 @@ if ($method === 'merge-array') {
     [1, 13,  22, 39],
     [2, 3, 6, 10, 16, 32, 66, 88, 99]
   ));
+  die;
 }
 
 
@@ -167,6 +157,7 @@ if ($method === 'merge') {
   echo "\n";
   // run
   print_r(merge($data, true));
+  die;
 }
 
 /*---------------------------- heap ---------------------------------*/
@@ -182,6 +173,7 @@ if ($method === 'heap') {
   echo "\n";
   // run
   print_r(bubble($data));
+  die;
 }
 
 /*---------------------------- shell ---------------------------------*/
@@ -197,19 +189,70 @@ if ($method === 'shell') {
   echo "\n";
   // run
   print_r(shell($data, floor(count($data)/2)));
+  die;
 }
 
-/*---------------------------- radix ---------------------------------*/
+/*---------------------------- radix lsd ---------------------------------*/
 
-if ($method === 'radix') {
+if ($method === 'radix-lsd') {
   require($path . '/sort/radix.php');
   echo "\n";
-  echo "==========================基数排序========================= \n";
+  echo "======================基数排序 最低位优先==================== \n";
   echo "\n";
   print_r($data);
   echo "\n";
   echo "=========上为初始值==================下为排序后值============= \n";
   echo "\n";
   // run
-  print_r(radix($data));
+  print_r(radix_lsd($data));
+  die;
 }
+
+/*---------------------------- radix msd ---------------------------------*/
+
+if ($method === 'radix-msd') {
+  require($path . '/sort/radix.php');
+  echo "\n";
+  echo "======================基数排序 最高位优先==================== \n";
+  echo "\n";
+  print_r($data);
+  echo "\n";
+  echo "=========上为初始值==================下为排序后值============= \n";
+  echo "\n";
+  // run
+  // 获取序列值最大位数
+  $max = 0;
+  foreach ($data as $v) {
+    $length = strlen((string)$v);
+    if ($length > $max) {
+      $max = $length;// 更新
+    }
+  }
+  unset($v);
+  print_r(radix_msd($data, $max, $max, count($data)));
+  die;
+}
+
+/*---------------------------- warning ---------------------------------*/
+
+echo "\n";
+echo "参数有误，正确示例：php {$path}/test.php bubble \n";
+echo "====================================== \n";
+echo "参数列表： \n";
+print_r([
+'冒泡排序' => 'bubble',
+'冒泡排序优化版' => 'bubble-better',
+'快速排序' => 'quick',
+'快速排序while版' => 'quick-while',
+'选择排序' => 'select',
+'插入排序' => 'insert',
+'合并有序数组' => 'merge-array',
+'归并排序' => 'merge',
+'希尔排序' => 'shell',
+'基数排序LSD' => 'radix-lsd',
+'基数排序MSD' => 'radix-msd',
+'堆排序'   => 'heap',
+'计数排序' => 'count',
+'桶排序'   => 'bucket',
+'二分查找' => 'binary-search'
+]);

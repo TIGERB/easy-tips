@@ -58,9 +58,7 @@ function shell(&$value = [], $increment)
     }
     ++$a;
   }
-
   // 递归
   shell($value, floor($increment/2));
-
   return $value;
 }
