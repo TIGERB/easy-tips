@@ -11,6 +11,7 @@
 状态        | 含义
 --------- | -------
 not-start | 当前未开始总结
+α         | 仅供参考未修正
 doing     | 总结中
 done      | 总结完毕
 fixing    | 查漏补缺修改中
@@ -93,7 +94,7 @@ fixing    | 查漏补缺修改中
     - [中介者器模式](https://github.com/TIGERB/easy-tips/blob/master/mediator/test.php)
     - [空对象模式](https://github.com/TIGERB/easy-tips/blob/master/nullObject/test.php)
 
-- 数据结构(not-start)
+- [数据结构(doing)](https://github.com/TIGERB/easy-tips/blob/master/data-structure.md)
 
   - 数组
   - 堆/栈
@@ -103,13 +104,23 @@ fixing    | 查漏补缺修改中
   - 图
   - 散列表
 
-- 算法(not-start)
+- 算法(doing)
 
   - 算法分析
 
     - 时间复杂度/空间复杂度/正确性/可读性/健壮性
 
   - 算法实战
+
+    - 排序算法(α)
+
+      - [冒泡排序](https://github.com/TIGERB/easy-tips/blob/master/methods/sort/bubble.php)
+      - [快速排序](https://github.com/TIGERB/easy-tips/blob/master/methods/sort/quick.php)
+      - [选择排序](https://github.com/TIGERB/easy-tips/blob/master/methods/sort/select.php)
+      - [插入排序](https://github.com/TIGERB/easy-tips/blob/master/methods/sort/insert.php)
+      - [归并排序](https://github.com/TIGERB/easy-tips/blob/master/methods/sort/merge.php)
+      - [希尔排序](https://github.com/TIGERB/easy-tips/blob/master/methods/sort/shell.php)
+      - [基数排序](https://github.com/TIGERB/easy-tips/blob/master/methods/sort/radix.php)
 
 - 网络基础(doing)
 
@@ -121,7 +132,11 @@ fixing    | 查漏补缺修改中
 
   - linux常用命令
 
-## 设计模式测试
+## 测试用例
+
+
+##### 设计模式
+
 
 运行脚本： php [文件夹名称]/test.php
 
@@ -138,6 +153,47 @@ fixing    | 查漏补缺修改中
 请求5850c8354b298: 签名校验通过～
 请求5850c8354b298: 权限校验通过～
 ```
+
+##### 算法
+
+
+运行脚本： php methods/test.php [算法名称｜空获取列表]
+
+```
+例如,
+
+测试冒泡排序： 运行 php methods/test.php　bubble
+
+运行结果：
+
+==========================冒泡排序=========================
+Array
+(
+    [0] => 11
+    [1] => 67
+    [2] => 3
+    [3] => 121
+    [4] => 71
+    [5] => 6
+    [6] => 100
+    [7] => 45
+    [8] => 2
+)
+=========上为初始值==================下为排序后值=============
+Array
+(
+    [0] => 2
+    [1] => 3
+    [2] => 6
+    [3] => 11
+    [4] => 45
+    [5] => 67
+    [6] => 71
+    [7] => 100
+    [8] => 121
+)
+```
+
 
 ## 纠错
 

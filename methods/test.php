@@ -251,8 +251,8 @@ print_r([
 '希尔排序' => 'shell',
 '基数排序LSD' => 'radix-lsd',
 '基数排序MSD' => 'radix-msd',
-'堆排序'   => 'heap',
-'计数排序' => 'count',
-'桶排序'   => 'bucket',
-'二分查找' => 'binary-search'
+// '堆排序'   => 'heap',
+// '计数排序' => 'count',
+// '桶排序'   => 'bucket',
+// '二分查找' => 'binary-search'
 ]);
