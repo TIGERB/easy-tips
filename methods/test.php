@@ -3,7 +3,7 @@
  * php算法实战
  *
  * @author TIGERB <https://github.com/TIGERB>
- * @example php test.php [method name]
+ * @example php test.php
  */
 
 // 初始值
