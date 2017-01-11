@@ -1,4 +1,10 @@
 <?php
+/**
+ * 符合psr-1,2的编程实例
+ *
+ * @author TIGERB <https://github.com/TIGERB>
+ */
+
 namespace Standard; // 顶部命名空间
 // 空一行
 use Test\TestClass;//use引入类

@@ -39,7 +39,7 @@ function radix_lsd(&$value = [])
     }
   }
   unset($v);
-  $splice = 1;// 取最小位 初始从左往右数第一位
+  $splice = 1;// 取最小位 初始从右往左数第一位
 
   while ($splice <= $max) {
     // 分配数字到桶中

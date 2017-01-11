@@ -11,8 +11,8 @@
 状态        | 含义
 --------- | -------
 not-start | 当前未开始总结
-α         | 仅供参考未修正
 doing     | 总结中
+α         | 仅供参考未修正
 done      | 总结完毕
 fixing    | 查漏补缺修改中
 
@@ -43,10 +43,10 @@ fixing    | 查漏补缺修改中
 
 - Mysql(doing)
 
-  - [常用sql语句](https://github.com/TIGERB/easy-tips/blob/master/sql.md)
+  - [常用sql语句](https://github.com/TIGERB/easy-tips/blob/master/mysql/sql.md)
   - 引擎
   - 索引
-  - 锁机制
+  - 锁
 
 - Redis(not-start)
 
@@ -55,6 +55,7 @@ fixing    | 查漏补缺修改中
 
     - 队列
     - 订阅/推送
+    - 锁
 
 - 设计模式(done/fixing)
 
@@ -199,7 +200,7 @@ Array
 
 如果大家发现有什么不对的地方，可以发起一个[issue](https://github.com/TIGERB/easy-tips/issues)或者[pull request](https://github.com/TIGERB/easy-tips),我会及时纠正，THX～
 
-> 补充:发起pull request的commit message请参考文章[Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
+> 补充:发起pull request的commit message请参考文章[Commit message编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
 
 ## 感谢
 
