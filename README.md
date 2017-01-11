@@ -26,7 +26,7 @@ fixing    | 查漏补缺修改中
 
     - [数据类型](http://php.net/manual/zh/language.types.php)
     - [运算符优先级](http://php.net/manual/zh/language.operators.precedence.php)
-    - [string函数](http://php.net/ref.strings)
+    - [string函数](http://php.net/ref.strings.php)
     - [array函数](http://php.net/manual/zh/ref.array.php)
     - [math函数](http://php.net/manual/zh/ref.math.php)
     - [面向对象](http://php.net/manual/zh/language.oop5.php)
@@ -55,11 +55,11 @@ fixing    | 查漏补缺修改中
 
     - 队列
     - 订阅/推送
-    - [锁](https://github.com/TIGERB/easy-tips/blob/master/redis.php)
+    - [锁](https://github.com/TIGERB/easy-tips/blob/master/redis/lock.php)
 
 - 设计模式(done/fixing)
 
-  - [概念](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#设计模式)
+  - [概念](https://github.com/TIGERB/easy-tips/blob/master/patterns/thought.md#设计模式)
 
   - 创建型模式实例
 
@@ -125,9 +125,14 @@ fixing    | 查漏补缺修改中
 
 - 网络基础(doing)
 
-  - [互联网协议概述](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#互联网协议)
-  - [client和nginx简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#client和nginx简易交互过程)
-  - [nginx和php-fpm简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#nginx和php简易交互过程)
+  - [互联网协议概述](https://github.com/TIGERB/easy-tips/blob/master/network/internet-protocol.md#互联网协议)
+  - [client和nginx简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/network/nginx.md#client和nginx简易交互过程)
+  - [nginx和php-fpm简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/network/nginx.md#nginx和php简易交互过程)
+  - http
+
+    - 常见状态status
+    - 方法method
+    - 缓存
 
 - 计算机基础(doing)
 
@@ -135,12 +140,9 @@ fixing    | 查漏补缺修改中
 
 ## 测试用例
 
-
-##### 设计模式
-
+### 设计模式
 
 运行脚本： php patterns/[文件夹名称]/test.php
-
 
 ```
 例如,
@@ -156,8 +158,7 @@ fixing    | 查漏补缺修改中
 请求5850c8354b298: 权限校验通过～
 ```
 
-##### 算法
-
+### 算法
 
 运行脚本： php methods/test.php [算法名称｜空获取列表]
 
@@ -195,7 +196,6 @@ Array
     [8] => 121
 )
 ```
-
 
 ## 纠错
 
