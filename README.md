@@ -48,14 +48,14 @@ fixing    | 查漏补缺修改中
   - 索引
   - 锁
 
-- Redis(not-start)
+- Redis(doing)
 
   - 常用命令
   - 常见使用场景实战
 
     - 队列
     - 订阅/推送
-    - 锁
+    - [锁](https://github.com/TIGERB/easy-tips/blob/master/redis.php)
 
 - 设计模式(done/fixing)
 
@@ -63,37 +63,37 @@ fixing    | 查漏补缺修改中
 
   - 创建型模式实例
 
-    - [单例模式](https://github.com/TIGERB/easy-tips/blob/master/singleton/test.php)
-    - [工厂模式](https://github.com/TIGERB/easy-tips/blob/master/factory/test.php)
-    - [抽象工厂模式](https://github.com/TIGERB/easy-tips/blob/master/factoryAbstract/test.php)
-    - [原型模式](https://github.com/TIGERB/easy-tips/blob/master/prototype/test.php)
-    - [建造者模式](https://github.com/TIGERB/easy-tips/blob/master/builder/test.php)
+    - [单例模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/singleton/test.php)
+    - [工厂模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/factory/test.php)
+    - [抽象工厂模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/factoryAbstract/test.php)
+    - [原型模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/prototype/test.php)
+    - [建造者模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/builder/test.php)
 
   - 结构型模式实例
 
-    - [桥接模式](https://github.com/TIGERB/easy-tips/blob/master/bridge/test.php)
-    - [享元模式](https://github.com/TIGERB/easy-tips/blob/master/flyweight/test.php)
-    - [外观模式](https://github.com/TIGERB/easy-tips/blob/master/facade/test.php)
-    - [适配器模式](https://github.com/TIGERB/easy-tips/blob/master/adapter/test.php)
-    - [装饰器模式](https://github.com/TIGERB/easy-tips/blob/master/decorator/test.php)
-    - [组合模式](https://github.com/TIGERB/easy-tips/blob/master/composite/test.php)
-    - [代理模式](https://github.com/TIGERB/easy-tips/blob/master/proxy/test.php)
-    - [过滤器模式](https://github.com/TIGERB/easy-tips/blob/master/filter/test.php)
+    - [桥接模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/bridge/test.php)
+    - [享元模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/flyweight/test.php)
+    - [外观模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/facade/test.php)
+    - [适配器模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/adapter/test.php)
+    - [装饰器模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/decorator/test.php)
+    - [组合模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/composite/test.php)
+    - [代理模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/proxy/test.php)
+    - [过滤器模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/filter/test.php)
 
   - 行为型模式实例
 
-    - [模板模式](https://github.com/TIGERB/easy-tips/blob/master/template/test.php)
-    - [策略模式](https://github.com/TIGERB/easy-tips/blob/master/strategy/test.php)
-    - [状态模式](https://github.com/TIGERB/easy-tips/blob/master/state/test.php)
-    - [观察者模式](https://github.com/TIGERB/easy-tips/blob/master/observer/test.php)
-    - [责任链模式](https://github.com/TIGERB/easy-tips/blob/master/chainOfResponsibility/test.php)
-    - [访问者模式](https://github.com/TIGERB/easy-tips/blob/master/visitor/test.php)
-    - [解释器模式](https://github.com/TIGERB/easy-tips/blob/master/interpreter/test.php)
-    - [备忘录模式](https://github.com/TIGERB/easy-tips/blob/master/memento/test.php)
-    - [命令模式](https://github.com/TIGERB/easy-tips/blob/master/command/test.php)
-    - [迭代器模式](https://github.com/TIGERB/easy-tips/blob/master/iterator/test.php)
-    - [中介者器模式](https://github.com/TIGERB/easy-tips/blob/master/mediator/test.php)
-    - [空对象模式](https://github.com/TIGERB/easy-tips/blob/master/nullObject/test.php)
+    - [模板模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/template/test.php)
+    - [策略模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/strategy/test.php)
+    - [状态模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/state/test.php)
+    - [观察者模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/observer/test.php)
+    - [责任链模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/chainOfResponsibility/test.php)
+    - [访问者模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/visitor/test.php)
+    - [解释器模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/interpreter/test.php)
+    - [备忘录模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/memento/test.php)
+    - [命令模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/command/test.php)
+    - [迭代器模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/iterator/test.php)
+    - [中介者器模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/mediator/test.php)
+    - [空对象模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/nullObject/test.php)
 
 - [数据结构(doing)](https://github.com/TIGERB/easy-tips/blob/master/data-structure.md)
 
@@ -129,9 +129,9 @@ fixing    | 查漏补缺修改中
   - [client和nginx简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#client和nginx简易交互过程)
   - [nginx和php-fpm简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#nginx和php简易交互过程)
 
-- 计算机基础(not-start)
+- 计算机基础(doing)
 
-  - linux常用命令
+  - [linux常用命令](https://github.com/TIGERB/easy-tips/blob/master/linux/command.md)
 
 ## 测试用例
 
@@ -139,12 +139,13 @@ fixing    | 查漏补缺修改中
 ##### 设计模式
 
 
-运行脚本： php [文件夹名称]/test.php
+运行脚本： php patterns/[文件夹名称]/test.php
+
 
 ```
 例如,
 
-测试责任链模式： 运行 php chainOfResponsibility/test.php
+测试责任链模式： 运行 php patterns/chainOfResponsibility/test.php
 
 运行结果：
 
