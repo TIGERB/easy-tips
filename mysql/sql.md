@@ -162,7 +162,8 @@ FROM `destination_table_name`;
 ### 附录：mysql常用命令
 - 登陆： mysql -h host -u username -p
 - 列出数据库：SHOW DATABESES;
-- 列出表：DESC TABLES;
+- 列出表:SHOW TABLES;
+- 列出表结构:DESC table_name
 - 使用一个数据库：USE database_name;
 - 导入：source 'file';
 - 导出：mysqldump -h 127.0.0.1 -u root -p "database_name" "table_name" --where="condition" > file_name.sql;
