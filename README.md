@@ -116,13 +116,13 @@ fixing    | 查漏补缺修改中
 
     - 排序算法(α)
 
-      - [冒泡排序](https://github.com/TIGERB/easy-tips/blob/master/methods/sort/bubble.php)
-      - [快速排序](https://github.com/TIGERB/easy-tips/blob/master/methods/sort/quick.php)
-      - [选择排序](https://github.com/TIGERB/easy-tips/blob/master/methods/sort/select.php)
-      - [插入排序](https://github.com/TIGERB/easy-tips/blob/master/methods/sort/insert.php)
-      - [归并排序](https://github.com/TIGERB/easy-tips/blob/master/methods/sort/merge.php)
-      - [希尔排序](https://github.com/TIGERB/easy-tips/blob/master/methods/sort/shell.php)
-      - [基数排序](https://github.com/TIGERB/easy-tips/blob/master/methods/sort/radix.php)
+      - [冒泡排序](https://github.com/TIGERB/easy-tips/blob/master/algorithm/sort/bubble.php)
+      - [快速排序](https://github.com/TIGERB/easy-tips/blob/master/algorithm/sort/quick.php)
+      - [选择排序](https://github.com/TIGERB/easy-tips/blob/master/algorithm/sort/select.php)
+      - [插入排序](https://github.com/TIGERB/easy-tips/blob/master/algorithm/sort/insert.php)
+      - [归并排序](https://github.com/TIGERB/easy-tips/blob/master/algorithm/sort/merge.php)
+      - [希尔排序](https://github.com/TIGERB/easy-tips/blob/master/algorithm/sort/shell.php)
+      - [基数排序](https://github.com/TIGERB/easy-tips/blob/master/algorithm/sort/radix.php)
 
 - 网络基础(doing)
 
@@ -131,9 +131,11 @@ fixing    | 查漏补缺修改中
   - [nginx和php-fpm简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/network/nginx.md#nginx和php简易交互过程)
   - http
 
-    - 常见状态status
+    - 常见13种状态码
     - 方法method
-    - 缓存
+    - 报文
+      - 报文头部
+      - 报文体
 
 - 计算机基础(doing)
 
@@ -161,12 +163,12 @@ fixing    | 查漏补缺修改中
 
 ### 算法
 
-运行脚本： php methods/test.php [算法名称｜空获取列表]
+运行脚本： php algorithm/test.php [算法名称｜空获取列表]
 
 ```
 例如,
 
-测试冒泡排序： 运行 php methods/test.php　bubble
+测试冒泡排序： 运行 php algorithm/test.php　bubble
 
 运行结果：
 
