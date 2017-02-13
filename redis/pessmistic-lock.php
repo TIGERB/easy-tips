@@ -2,10 +2,10 @@
 /**
  * redis实战
  *
- * 实现锁机制
+ * 实现悲观锁机制
  *
  * @author TIGERB <https://github.com/TIGERB>
- * @example php lock.php
+ * @example php pessmistic-lock.php
  */
 
 $timeout = 500;

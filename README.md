@@ -55,7 +55,8 @@ fixing    | 查漏补缺修改中
 
     - 队列
     - 订阅/推送
-    - [锁](https://github.com/TIGERB/easy-tips/blob/master/redis/lock.php)
+    - [悲观锁](https://github.com/TIGERB/easy-tips/blob/master/redis/pessmistic-lock.php)
+    - [乐观锁](https://github.com/TIGERB/easy-tips/blob/master/redis/optimistic-lock.php)
 
 - 设计模式(done/fixing)
 
