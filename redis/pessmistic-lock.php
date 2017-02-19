@@ -39,6 +39,10 @@ $count = $redis->get('count')? : 0;
 // file_put_contents('/var/log/count.log.1', ($count+1));
 
 // 业务逻辑
+echo "执行count加1操作～ \n\n";
 $redis->set('count', $count+1);
 // 删除锁
 $redis->del('lock.count');
+// 打印count值
+$count = $redis->get('count');
+echo "count值为：$count \n";

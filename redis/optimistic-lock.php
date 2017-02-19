@@ -21,8 +21,14 @@ $redis->multi();
 $time = time();
 $redis->set('count', $time);
 
-// redis-cli 执行 $redis->set('count', 'is simulate'); 模拟其他终端
+//-------------------------------
+/**
+ * 模拟并发下其他进程进行set count操作 请执行下面操作
+ *
+ * redis-cli 执行 $redis->set('count', 'is simulate'); 模拟其他终端
+ */
 sleep(10);
+//-------------------------------
 
 // 提交事务
 $res = $redis->exec();

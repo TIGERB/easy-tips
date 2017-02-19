@@ -12,7 +12,7 @@
 --------- | -------
 not-start | 当前未开始总结
 doing     | 总结中
-α         | 仅供参考未修正
+α         | 目前仅供参考未修正和发布
 done      | 总结完毕
 fixing    | 查漏补缺修改中
 
@@ -39,24 +39,45 @@ fixing    | 查漏补缺修改中
       - [5.4](http://php.net/manual/zh/migration54.new-features.php)
       - [5.3](http://php.net/manual/zh/migration53.new-features.php)
 
-  - [记一些坑](https://github.com/TIGERB/easy-tips/blob/master/tips-2016.md#记一些坑)
+  - [记一些坑](https://github.com/TIGERB/easy-tips/blob/master/pit.md#记一些坑)
 
 - Mysql(doing)
 
   - [常用sql语句](https://github.com/TIGERB/easy-tips/blob/master/mysql/sql.md)
   - 引擎
+    - InnoDB
+    - MyISAM
+    - Memory
+    - Archive\Blackhole\CSV\Federated\merge\NDB
+  - 事务隔离级别
+    - READ UNCOMMITTED:未提交读
+    - READ COMMITTED：提交读/不可重复读
+    - REPEATABLE READ：可重复读(MYSQL默认事务隔离级别)
+    - SERIALIZEABLE：可串行化
   - 索引
+    - B-Tree
+    - 哈希索引(hash index)
+    - 空间数据索引(R-Tree)
+    - 全文索引
   - 锁
+    - 悲观锁
+    - 乐观锁
+  - 分表
+    - 垂直分表
+    - 水平分表
+  - sql优化
+  - 主从配置
 
 - Redis(doing)
 
   - 常用命令
+  - 实现原理&与memcache区别
   - 常见使用场景实战
-
-    - 队列
-    - 订阅/推送
+    - [缓存](https://github.com/TIGERB/easy-tips/blob/master/redis/cache.php)
+    - [队列](https://github.com/TIGERB/easy-tips/blob/master/redis/queue.php)
     - [悲观锁](https://github.com/TIGERB/easy-tips/blob/master/redis/pessmistic-lock.php)
     - [乐观锁](https://github.com/TIGERB/easy-tips/blob/master/redis/optimistic-lock.php)
+    - [订阅/推送](https://github.com/TIGERB/easy-tips/blob/master/redis/subscribe-publish)
 
 - 设计模式(done/fixing)
 
@@ -130,16 +151,21 @@ fixing    | 查漏补缺修改中
   - [client和nginx简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/network/nginx.md#client和nginx简易交互过程)
   - [nginx和php-fpm简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/network/nginx.md#nginx和php简易交互过程)
   - http
-
-    - 常见13种状态码
-    - 方法method
     - 报文
       - 报文头部
       - 报文体
+    - 常见13种状态码
+    - 方法method
+    - https
+    - http2
+    - websocket
 
 - 计算机基础(doing)
 
   - [linux常用命令](https://github.com/TIGERB/easy-tips/blob/master/linux/command.md)
+  - shell
+
+- 高并发相关(not-start)
 
 ## 测试用例
 

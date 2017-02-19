@@ -93,32 +93,6 @@ ip2long函数
 
 ```
 
-```
-# redis发布订阅
-ini_set(‘default_socket_timeout’, -1);
-
-$redis = new \Redis();
-$redis->pconnect('127.0.0.1', 6379);
-
-//订阅
-$redis->subscribe(['msg'], 'callfun');
-
-function callfun($redis, $channel, $msg)
-{
-  var_dump([
-    'redis' => $redis,
-    'channel' => $channel,
-    'msg' => $msg
-  ]);
-}
-
-//发布
-$redis = new \Redis();
-$redis->connect('127.0.0.1', 6379);
-$redis->publish('msg', 'moon cake');
-$redis->close();
-```
-
 ###### 技巧
 
 - linux
@@ -132,18 +106,6 @@ $redis->close();
     + ubuntu中文支持：sudo apt-get install language-pack-zh-hant language-pack-zh-hans
     + debian使用lantern无法启动： 安装依赖apt-get install libappindicator3-1
     + 查看端口占用：lsof -i:[端口号] / netstat -a（显示所有选项，默认不显示LISTEN）p(显示关联的程序)n（不显示别名显示数字） | grep [端口号]
-
-- mysql
-    + 数据清理：TRUNCATE TABLE XXX
-    + 水平分表：MERGE关键字
-    + 完全克隆一张表：
-      * 克隆表结构：CREATE TABLE table_copy LIKE table_destination
-      * 克隆数据：INSERT INTO table_copy SELECT \* FORM table_destination
-    + 重命名字段：ALTER TABLE table_destination CHANGE column_destination new_name data_type
-    + 导出数据： mysqldump -h 127.0.0.1 -u root -p "database_name" "table_name" --where="condition" > file_name.sql
-    + 导入数据：source "flie"
-    + 储存过程：mysql5.0+的执行过程是先编译再执行，如果负载很大会存在性能问题，所以我们先把一些语句封装成函数再编译好之后只传递参数即可，
-    标准组件式编程，减少网络流量
 
 - php:
     + json_encode($data, JSON_UNESCAPED_UNICODE)
