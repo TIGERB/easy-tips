@@ -1,4 +1,30 @@
-# easy-tips
+<h1 align="center">Easy Tips</h1>
+
+<p align="center">
+<a href="https://github.com/TIGERB/easy-tips#目录">
+  <img src="https://img.shields.io/badge/php-done-brightgreen.svg" alt="php">
+</a>
+<a href="https://github.com/TIGERB/easy-tips/tree/master/mysql">
+  <img src="https://img.shields.io/badge/mysql-doing-blue.svg" alt="mysql">
+</a>
+<a href="https://github.com/TIGERB/easy-tips/tree/master/redis">
+  <img src="https://img.shields.io/badge/redis-doing-blue.svg" alt="redis">
+</a>
+<a href="https://github.com/TIGERB/easy-tips/tree/master/patterns">
+  <img src="https://img.shields.io/badge/patterns-done-brightgreen.svg" alt="patterns">
+</a>
+<a href="https://github.com/TIGERB/easy-tips/tree/master/algorithm">
+  <img src="https://img.shields.io/badge/algorithm-%CE%B1-yellowgreen.svg" alt="algorithm">
+</a>
+<a href="https://github.com/TIGERB/easy-tips/tree/master/data-structure">
+  <img src="https://img.shields.io/badge/data--structure-doing-blue.svg" alt="data-structure">
+</a>
+<a href="https://github.com/TIGERB/easy-tips/tree/master/network">
+  <img src="https://img.shields.io/badge/network-doing-blue.svg" alt="network">
+</a>
+</p>
+
+<br>
 
 > 一个php技术栈后端猿的知识储备大纲
 
@@ -226,6 +252,23 @@ Array
 )
 ```
 
+### 常见redis运用实现
+
+运行脚本： php redis/test.php [名称｜空获取列表]
+
+```
+例如,
+
+测试悲观锁： 运行 php redis/test.php p-lock
+
+运行结果：
+
+执行count加1操作～
+
+count值为：1
+
+```
+
 ## 纠错
 
 如果大家发现有什么不对的地方，可以发起一个[issue](https://github.com/TIGERB/easy-tips/issues)或者[pull request](https://github.com/TIGERB/easy-tips),我会及时纠正，THX～
@@ -244,3 +287,4 @@ Array
 - @[ooing](https://github.com/ooing)
 - @[shellus](https://github.com/shellus)
 - @[entimm](https://github.com/entimm)
+- @[jealone](https://github.com/jealone)
