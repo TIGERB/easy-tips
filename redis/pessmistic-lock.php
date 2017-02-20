@@ -27,7 +27,7 @@ do {
      continue;
    }
    // 抢锁
-   $previousTime = $redis->getset('lock.count', $microtime);
+   $previousTime = $redis->getset('lock.count', $microtimeout);
    if ($previousTime < $microtime) {
      break;
    }
