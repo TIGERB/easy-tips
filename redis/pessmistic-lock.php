@@ -20,15 +20,9 @@ do {
  // 上锁
  $isLock = $redis->setnx('lock.count', $microtimeout);
  if (!$isLock) {
-   // 超时判断
-   $lockTime = $redis->get('lock.count');
-   if (!$lockTime || $lockTime > $microtime) {
-     // 未超时
-     continue;
-   }
    // 抢锁
    $previousTime = $redis->getset('lock.count', $microtimeout);
-   if ($previousTime < $microtime) {
+   if ((int)$previousTime < $microtime) {
      break;
    }
  }
