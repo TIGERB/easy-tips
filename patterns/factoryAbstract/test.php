@@ -29,7 +29,7 @@ use factoryAbstract\FarmProducer;
 $farmProducer = new FarmProducer();
 
 // 成产一个动物农场
-$farmAnimail  = $farmProducer->produceFarm('animail');
+$farmAnimail  = $farmProducer->produceFarm('animal');
 // 生产一只猪
 $farmAnimail->produce('pig');
 
