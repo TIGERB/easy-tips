@@ -6,7 +6,7 @@ namespace factory;
  *
  * 生产动物
  */
-class Farm
+class Farm implements Factory
 {
   /**
    * 构造函数
