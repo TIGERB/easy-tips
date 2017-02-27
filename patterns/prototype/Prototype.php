@@ -5,14 +5,14 @@ namespace prototype;
  * 原型实体
  */
 class Prototype extends PrototypeAbstract
-{ 
+{
   /**
    * 构造函数
    *
    * @param  string $name 属性一
    * @return void
    */
-  public function __constuct($name='')
+  public function __construct($name='')
   {
     $this->_name = $name;
   }
