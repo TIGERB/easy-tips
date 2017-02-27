@@ -10,7 +10,7 @@ abstract class PrototypeAbstract
    * 名称
    * @var string
    */
-  private $_name;
+  protected $_name;
   
   /**
    * 打印对象名称
