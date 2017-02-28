@@ -1,6 +1,8 @@
 <?php
 namespace adapter;
 
+use Exception;
+
 /**
  * 高级播放器适配器
  */
