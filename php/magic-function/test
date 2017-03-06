@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# PHP5
+# 不使用魔术方法
+# sh test 10000 no_magic php5 [magic]
+# 使用魔术方法
+# sh test 10000 magic php5 [magic]
+#
+# PHP7
+# 不使用魔术方法
+# sh test 10000 no_magic php [magic]
+# 使用魔术方法
+# sh test 10000 magic php [magic]
+#
+# $1 脚本执行次数
+# $2 no_magic不使用魔术方法 magic使用魔术方法
+# $3 php版本 php5 php代表php7
+# $4 要测试的magic方法名称
+i=0
+times="$1"
+while [ "$i" -lt "$times" ]
+do
+    /usr/bin/"$3" ./__"$4".php "$2" >> ./logs/__"$4"_"$2"_"$3".log
+    i=$(($i+1))
+done

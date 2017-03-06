@@ -2,19 +2,19 @@
 namespace builder;
 
 /**
- * 手机接口
+ * 构建器接口
  */
-Interface PhoneInterface
+Interface BuilderInterface
 {
   /**
    * 硬件构建
    * @return void
    */
-  private function hardware();
+  public function hardware();
 
   /**
    * 构建软件
    * @return void
    */
-  private function software();
+  public function software();
 }

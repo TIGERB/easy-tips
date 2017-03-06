@@ -149,7 +149,7 @@ LIKE `destination_table_name`;
 
 6. 完全复制一张表：表结构+全部数据
 ```
-CREATE `your_table_name`
+CREATE TABLE `your_table_name`
 LIKE `destination_table_name`;
 
 INSERT INTO `your_table_name`

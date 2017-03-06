@@ -4,7 +4,7 @@ namespace builder;
 /**
  * 操作系统实体
  */
-class SoftWareOs implements Software
+class SoftwareOs implements Software
 {
   public function produce($os='android')
   {

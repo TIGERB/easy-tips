@@ -4,21 +4,15 @@ namespace builder;
 use builder\BuilderInterface;
 
 /**
- * 手机构建器
+ * Mp3构建器
  */
-class PhoneBuilder implements BuilderInterface
+class Mp3Builder implements BuilderInterface
 {
   /**
    * 名称
    * @var string
    */
   private $_name = '';
-
-  /**
-   * 屏幕
-   * @var string
-   */
-  private $_screen = '';
 
   /**
    * 处理器
@@ -39,12 +33,6 @@ class PhoneBuilder implements BuilderInterface
   private $_storage = '';
 
   /**
-   * 相机
-   * @var string
-   */
-  private $_camera = '';
-
-  /**
    * 系统
    * @var string
    */
@@ -52,6 +40,7 @@ class PhoneBuilder implements BuilderInterface
 
   /**
    * 构造函数
+   *
    * @param string $name     名称
    * @param array  $hardware 构建硬件
    * @param array  $software 构建软件
@@ -69,14 +58,12 @@ class PhoneBuilder implements BuilderInterface
 
   /**
    * 构建硬件
+   *
    * @param  array  $hardware 硬件参数
    * @return void
    */
   public function hardware($hardware=array())
   {
-    // 创建屏幕
-    $hardwareScreen  = new HardwareScreen();
-    $this->_screen   = $hardwareScreen->produce($hardware['screen']);
     // 创建cpu
     $hardwareCpu     = new HardwareCpu();
     $this->_cpu      = $hardwareCpu->produce($hardware['cpu']);
@@ -86,13 +73,11 @@ class PhoneBuilder implements BuilderInterface
     // 创建储存
     $hardwareStorage = new HardwareStorage();
     $this->_storage  = $hardwareStorage->produce($hardware['storage']);
-    // 创建摄像头
-    $hardwareCamera  = new HardwareCamera();
-    $this->_camera   = $hardwareCamera->produce($hardware['camera']);
   }
 
   /**
    * 构建软件
+   * 
    * @param  array  $software 软件参数
    * @return void
    */
