@@ -16,6 +16,21 @@
 例sublime, setting增加，"show_encoding" : true
 ```
 
+- 每行的字符数不超过 80 个字符
+
+```
+例，sublime
+"word_wrap": "true",
+"wrap_width": 80,
+```
+
+- tap键4个空格
+
+```
+例，sublime
+"tab_size": 4,
+```
+
 - PHP代码中应该只定义类(trait)/函数/常量/其他会产生副作用的操作（如：生成文件输出以及修改 .ini 配置文件等），只能选其一。
 
 ```
@@ -38,9 +53,6 @@ define('A', value);
 d.php
 ini_set('some_vars', value);
 ```
-
-- 命名空间以及类/trait必须符合 PSR 的自动加载规范：PSR-4 中的一个。
-
 
 - 类/trait/Interface的命名必须遵循 StudlyCaps 大写开头的驼峰命名规范。
 
@@ -155,14 +167,6 @@ class StudlyCaps
 $a = $b + $c;
 $a = $b . $c;
 
-```
-
-- 每行的字符数不超过 120 个字符
-
-```
-例，sublime
-"word_wrap": "true",
-"wrap_width": 120,
 ```
 
 - 每个 namespace 命名空间声明语句块 和 use 声明语句块后面，必须 插入一个空白行。
@@ -295,14 +299,6 @@ if ($valueOne === $valueTwo) {// 控制结构（右边和)左边不加空格
 - sql过长
 
 ```
-// 用链接符切割
-$sql = 'SELECT delivery_id'
-    . ' FROM d_test'
-    . ' WHERE delivery_id'
-    . ' IN (123,234)'
-    . ' GROUP BY delivery_id'
-    . ' HAVING SUM(send_number) <= 0';
-
 // heredoc语法
 $sql = <<<SQL
 SELECT delivery_id
@@ -348,8 +344,6 @@ $this->nameTest->functionOne()
                ->functionTwo()
                ->functionThree();
 ```
-
-- 声明多变量时，逐个声明
 
 - 数组php5.4以后，使用[]
 
@@ -437,6 +431,43 @@ try {
   // coding...
 }
 
+```
+
+- 连续调用多个方法(大于3个)使用foreach
+
+```
+// 改写doSome为doSomething
+class StandardExample
+{
+  /**
+   * 方法列表
+   *
+   * @var array
+   */
+  private $_functionList = [];
+
+  public function __construct($functionList = array())
+  {
+    $this->_functionList = $value;
+  }
+
+  public function doSome()
+  {
+    $this->functionOne();
+    $this->functionTwo();
+    $this->functionThree();
+    $this->functionFour();
+  }
+
+  public function doSomething()
+  {
+      foreach($this->_functionList as $function) {
+          $this->$function();
+      }
+  }
+
+  ...
+}
 ```
 
 - 文件顶部进行版权声明
