@@ -20,7 +20,7 @@ do {
  $isLock = $redis->setnx('lock.count', $microtimeout);
  if (!$isLock) {
      $getTime = $redis->get('lock.count');
-     if ($getTime < $microtime) {
+     if ($getTime > $microtime) {
         // 未超时继续等待
         continue;
      }
