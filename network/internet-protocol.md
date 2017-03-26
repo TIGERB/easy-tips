@@ -18,12 +18,24 @@
         * 过程复杂，实现困难，消耗资源
         ```
           tcp/ip connect: tcp/ip的三次握手
-                  syn握手信号
+                  标有syn的数据包
                   ------------->
-                  syn/ack确认字符
+                  标有syn/ack的数据包
           client  <-------------  server
-                  ack确认包
+                  标有ack的数据包
                   -------------->
+        ```
+
+        ```
+          tcp/ip finish: tcp/ip的四次握手
+                  fin
+                  <-------------
+                  ack
+        client    -------------> server
+                  fin
+                  ------------->
+                  ack
+                  <-------------
         ```
 
 - 网络层(主机到主机的通信):
@@ -34,6 +46,7 @@
             - IP数据包：标头Head+数据Data,放进以太网数据包的Data部分[HEAD [HEAD DATA]]
             - IP数据包的传递：
                 + 非同一网络：无法获得mac地址,发送数据到网关，网关处理
+                    - ARP(Address Resolation Protocol): 解析地址协议，通过ip解析mac地址
                 + 同一网络：mac地址填写FF:FF:FF:FF:FF:FF:FF，广播数据，对比ip，不符合丢包
 
 - 链接层：
