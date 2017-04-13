@@ -10,7 +10,6 @@ function autoload($class)
 
 /************************************* test *************************************/
 
-use common\Subject;
 use common\RealSubject;
 use common\Proxy;
 
