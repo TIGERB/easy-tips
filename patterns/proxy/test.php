@@ -24,7 +24,6 @@ function autoload($class)
 
 use proxy\Proxy;
 use proxy\ShoesSport;
-use proxy\ShoesSkateboard;
 
 try {
   echo "未加代理之前：\n";

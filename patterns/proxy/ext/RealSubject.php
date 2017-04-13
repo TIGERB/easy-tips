@@ -1,5 +1,5 @@
 <?php
-namespace proxy\common;
+namespace proxy\ext;
 
 
 class RealSubject implements Subject {

@@ -1,6 +1,6 @@
 <?php
 
-namespace proxy\common;
+namespace proxy\enforce;
 
 class Proxy implements Subject {
 
@@ -16,5 +16,11 @@ class Proxy implements Subject {
     public function doSomething() {
         $this->subject->doSomething();
     }
+
+    public function getProxy()
+    {
+        return $this;
+    }
+
 
 }
