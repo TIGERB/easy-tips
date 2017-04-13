@@ -10,8 +10,7 @@ function autoload($class)
 
 /************************************* test *************************************/
 
-use proxy\common\RealSubject;
-use proxy\common\Proxy;
+use proxy\enforce\RealSubject;
 
 
 try {
@@ -22,8 +21,8 @@ try {
 
     echo "\n--------------------\n";
 
-    echo "加代理：\n";
-    $proxy = new Proxy($subject);
+    echo "使用强制代理：\n";
+    $proxy = $subject->getProxy();
     // 代工厂生产运动鞋
     $proxy->doSomething();
 } catch (\Exception $e) {

@@ -1,5 +1,5 @@
 <?php
-namespace proxy\common;
+namespace proxy\ext;
 
 interface Subject {
     public function doSomething();
