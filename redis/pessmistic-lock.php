@@ -21,6 +21,8 @@ do {
  if (!$isLock) {
      $getTime = $redis->get('lock.count');
      if ($getTime > $microtime) {
+        // 睡眠 降低抢锁频率　缓解redis压力
+        usleep(5000);
         // 未超时继续等待
         continue;
      }
