@@ -12,9 +12,9 @@ class DecoratorBrand extends Decorator
   /**
    * 构造函数
    */
-  public function __construct(ShoesInterface $phone)
+  public function __construct(ShoesInterface $shoes)
   {
-    $this->phone = $phone;
+    $this->shoes = $shoes;
   }
 
   public function __set($name='', $value='')
@@ -27,7 +27,7 @@ class DecoratorBrand extends Decorator
    */
   public function product()
   {
-    $this->phone->product();
+    $this->shoes->product();
     $this->decorate($this->_brand);
   }
 
