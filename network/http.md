@@ -5,12 +5,12 @@ Hypertext Transfer Protocol, 超文本传输(转移)协议，是客户端和服�
 WWW: world wide web, 万维网
     
     - HTML: Hypertext Markup Language, 超文本标记语言
-    - HTTP: Hypertext Transfer Protocol, 超文本传输(转移)协议
+    - HTTP: Hypertext Transfer Protocol, 超文本传输(转移)协议 (HTTP是TCP/IP的应用层协议)
     - URL: Uniform Resource Locator, 统一资源定位符号 
 
 > URI: Uniform Resource Identitier, 统一资源标示符号，URL是URI的子集
 
-## 五层网络协议
+## TCP/IP
 
 ```
     应用层(http/https/websocket/ftp...) => 定义：文本传输协议
@@ -51,23 +51,38 @@ client(或server)    -------------> server(或client)
                     <-------------
 ```
 
-Keep-Alive: 
+## HTTP 报文
 
-HTTP协议初期每次连接结束后都会断开TCP连接，之后HEADER的connection字段定义Keep-Alive（HTTP 1.1 默认　持久连接），代表如果连接双方如果没有一方主动断开都不会断开TCP连接，减少了每次建立HTTP连接时进行TCP连接的消耗。
+HTTP 报文由三部分组成:
+- Start Line
+- Headers
+- Entity Body
 
-## HTTP Method
+HTTP 报文分为两类:
+- 请求报文
+- 响应报文
 
-+ get: 获取资源，url传参，大小2KB
+### 请求报文Start Line
+
+语法 : <方法> <请求URL> <版本>
+
+#### HTTP Method
+
++ get: 获取资源，不携带http body,支持查询参数，大小2KB
 + post: 传输资源，http body, 大小默认8M，1000个input variable
 + put: 传输资源，http body，资源更新
-+ delete: 删除资源
++ delete: 删除资源,不携带http body
 + patch: 传输资源，http body，存在的资源局部更新
-+ head: 获取http header
-+ options: 获取支持的method
-+ trace: 追踪，返回请求回环信息
++ head: 获取http header,不携带http body
++ options: 获取支持的method,不携带http body
++ trace: 追踪，返回请求回环信息,不携带http body
 + connect: 建立隧道通信
 
-## HTTP Status
+### 响应报文Start Line
+
+语法 : <方法> <状态码> <原因短语>
+
+#### HTTP Status Code
 
 + 200: ok
 + 301: 永久重定向
@@ -84,7 +99,7 @@ HTTP协议初期每次连接结束后都会断开TCP连接，之后HEADER的conn
 + 503: service unavailable，服务不可用
 + 504: gateway timeout，fastcgi响应超时
 
-## HTTP Header Fields
+### HTTP Header Fields
 
 常见通用头部
 
@@ -103,7 +118,7 @@ HTTP协议初期每次连接结束后都会断开TCP连接，之后HEADER的conn
 + Host: 目标主机域名
 + Referer: 请求从哪发起的原始资源URI
 + User-Agent: 创建请求的用户代理名称
-+ Cookie: cookie信息
++ Cookie: cookie信息  
 
 常见响应头
 
@@ -116,7 +131,9 @@ HTTP协议初期每次连接结束后都会断开TCP连接，之后HEADER的conn
   - domain: 指定发送cookie的域名
   - Secure: 指定之后只有https下才发送cookie
   - HostOnly: 指定之后javascript无法读取cookie
++ Keep-Alive: 
 
+HTTP协议初期每次连接结束后都会断开TCP连接，之后HEADER的connection字段定义Keep-Alive（HTTP 1.1 默认　持久连接），代表如果连接双方如果没有一方主动断开都不会断开TCP连接，减少了每次建立HTTP连接时进行TCP连接的消耗。
 
 ## Cookie/Session
 
