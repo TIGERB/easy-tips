@@ -52,3 +52,25 @@
  - 关机: halt
  - 关机: poweroff
  - 重启: shutdown -r now
+
+27. 我的常用tmux系列命令
+```
+新建一个会话：
+tmux new -s <会话名称>
+切到一个会话：
+tmux at  -t <会话名称>
+删除一个会话：
+tmux kill-session -t <会话名称>
+获取会话列表：
+tmux list
+临时切换一个窗口到最大或最小：
+prefix z
+推出tmux但是保存会话：
+prefix d
+创建一个窗口:
+prefix c
+垂直拆分一个窗口：
+prefix %
+水平拆分一个窗口：
+prefix "
+```
