@@ -46,10 +46,11 @@ fixing    | 查漏补缺修改中
 
 - PHP(doing)
 
-  - 符合PSR的PHP编程规范(含部分个人建议)
+  - 符合PSR的PHP编程规范(含个人建议)
 
     - [实例](https://github.com/TIGERB/easy-tips/blob/master/php/standard.php)
     - [文档](https://github.com/TIGERB/easy-tips/blob/master/php/standard.md)
+    - [经验](https://github.com/TIGERB/easy-tips/blob/master/php/artisan.md)
 
   - 基础知识[读(R)好(T)文(F)档(M)]
 
