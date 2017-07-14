@@ -46,7 +46,11 @@ fixing    | 查漏补缺修改中
 
 - PHP(doing)
 
-  - [符合PSR-1/PSR-2的PHP编程规范实例](https://github.com/TIGERB/easy-tips/blob/master/standard.php)
+  - 符合PSR的PHP编程规范(含个人建议)
+
+    - [实例](https://github.com/TIGERB/easy-tips/blob/master/php/standard.php)
+    - [文档](https://github.com/TIGERB/easy-tips/blob/master/php/standard.md)
+    - [经验](https://github.com/TIGERB/easy-tips/blob/master/php/artisan.md)
 
   - 基础知识[读(R)好(T)文(F)档(M)]
 
@@ -176,7 +180,7 @@ fixing    | 查漏补缺修改中
   - [互联网协议概述](https://github.com/TIGERB/easy-tips/blob/master/network/internet-protocol.md#互联网协议)
   - [client和nginx简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/network/nginx.md#client和nginx简易交互过程)
   - [nginx和php-fpm简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/network/nginx.md#nginx和php简易交互过程)
-  - http
+  - [http](https://github.com/TIGERB/easy-tips/blob/master/network/http.md)
     - 报文
       - 报文头部
       - 报文体
@@ -288,3 +292,4 @@ count值为：1
 - @[shellus](https://github.com/shellus)
 - @[entimm](https://github.com/entimm)
 - @[jealone](https://github.com/jealone)
+- @[cugblbs](https://github.com/cugblbs)

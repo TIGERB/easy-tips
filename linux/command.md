@@ -52,3 +52,108 @@
  - 关机: halt
  - 关机: poweroff
  - 重启: shutdown -r now
+
+27. 我的常用tmux系列命令
+
+```
+新建一个会话：
+tmux new -s <会话名称>
+切到一个会话：
+tmux at  -t <会话名称>
+删除一个会话：
+tmux kill-session -t <会话名称>
+获取会话列表：
+tmux list
+临时切换一个窗口到最大或最小：
+prefix z
+推出tmux但是保存会话：
+prefix d
+创建一个窗口:
+prefix c
+垂直拆分一个窗口：
+prefix %
+水平拆分一个窗口：
+prefix "
+```
+
+28. logrotate
+
+增加配置/etc/logrotate.d:
+
+nginx示例文件
+```
+/var/log/nginx/*.log {
+        # 打包日志频率 daily:每天 weekly:每周 monthly:每月
+        daily
+        # 打包文件添加日期后缀
+        dateext
+        # 找不到日志也ok
+        missingok
+        # 保存14份日志
+        rotate 14
+        # 压缩日志 默认gzip
+        compress
+        # 延时压缩到下次rotate
+        delaycompress
+        # 忽略空日志
+        notifempty
+        # ？
+        create 0640 www-data adm
+        # 执行完所有rotate再执行脚本
+        sharedscripts
+        # ?
+        prerotate
+                if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+                        run-parts /etc/logrotate.d/httpd-prerotate; \
+                fi \
+        endscript
+        # ？
+        postrotate
+                invoke-rc.d nginx rotate >/dev/null 2>&1
+        endscript
+}
+```
+
+#### 强制执行：
+logrotate -f /etc/logrotate.d/nginx
+
+
+#### 附录：shell 判断文件
+```
+-e 文件名	如果文件存在则为真
+-d 文件名	如果文件存在且为目录则为真
+```
+
+29. supervisor
+
+#### 安装 debian:
+sudo apt-get install supervisor
+
+#### 增加配置文件：
+cd /etc/supervisor/conf.d
+
+#### 配置文件示例：
+```
+[program:demo]
+# ？
+directory = yourpath
+# 启动进程的命令
+command = yourcommand
+# 启动supervisor时启动
+autostart = true
+# 进程exit自动重启
+autorestart = true
+# 执行命令的用户
+user = www-data
+# 日志路径
+stdout_logfile = /var/log/supervisor/demo.log
+# 这个no意思是启动例如nginx或者php-fpm时，由supervior接管守护
+daemonize = no
+```
+
+#### 启动或重启supervisor
+sudo service supervisor start
+sudo service supervisor restart
+
+#### 启动我们的进程
+sudo supervisorctl start demo
