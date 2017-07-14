@@ -48,3 +48,31 @@
 
     return $value;
   }
+
+  /**
+   * 插入排序 for循环版
+   *
+   * @param  array   $value 待排序数组
+   *
+   * @return array
+   */
+  function insert_for($arr=array())
+  {
+      $len = count($arr);
+      for($i = 1; $i < $len; $i++) {
+          $base = $arr[$i];
+          for($j = $i - 1; $j >= 0; $j--) {
+              if ($base < $arr[$j]) {
+                  $arr[$j + 1] = $arr[$j];
+                  if ($j === 0) {
+                      $arr[$j] = $base;
+                      break;
+                  }
+                  continue;
+              }
+              $arr[$j + 1] = $base;
+              break;
+          }
+      }
+      return $arr;
+  }

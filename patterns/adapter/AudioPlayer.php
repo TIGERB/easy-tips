@@ -1,6 +1,8 @@
 <?php
 namespace adapter;
 
+use Exception;
+
 /**
  * 音频设备实体
  */

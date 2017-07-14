@@ -8,23 +8,29 @@
  * @example php pessmistic-lock.php
  */
 
-$timeout = 500;
+$timeout = 5000;
 
 $redis = new \Redis();
 $redis->connect('127.0.0.1', 6379);
 
 do {
- $microtime = explode(' ', microtime());
- $microtime = (int)round(($microtime[1]+$microtime[0])*1000, 0);
+ $microtime = microtime(true) * 1000;
  $microtimeout = $microtime+$timeout+1;
  // 上锁
  $isLock = $redis->setnx('lock.count', $microtimeout);
  if (!$isLock) {
-   // 抢锁
-   $previousTime = $redis->getset('lock.count', $microtimeout);
-   if ((int)$previousTime < $microtime) {
-     break;
-   }
+     $getTime = $redis->get('lock.count');
+     if ($getTime > $microtime) {
+        // 睡眠 降低抢锁频率　缓解redis压力
+        usleep(5000);
+        // 未超时继续等待
+        continue;
+     }
+    // 超时,抢锁,可能有几毫秒级时间差可忽略
+    $previousTime = $redis->getset('lock.count', $microtimeout);
+    if ((int)$previousTime < $microtime) {
+        break;
+    }
  }
 } while (!$isLock);
 
