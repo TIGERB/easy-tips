@@ -4,7 +4,7 @@
  *
  * 排序算法-堆排序
  *
- * @author TIGERB <https://github.com/TIGERB>
+ * @author cugblbs <https://github.com/cugblbs>
  */
 
 /**
@@ -30,6 +30,7 @@ function heap(&$values = [])
         swap($values[$i], $values[0]);
         minHeapFixDown($values, 0, $i);
     }
+    return $values;
 }
 
 function swap(&$a, &$b) {
@@ -85,7 +86,3 @@ function minHeapFixDown(&$heap, $i, $n) {
     }
     $heap[$i] = $temp;
 }
-
-$data = [11, 67, 3, 121, 71, 6, 100, 45, 2, 19, 17, 99, 40, 3, 22];
-
-heap($data);

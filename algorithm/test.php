@@ -172,7 +172,7 @@ if ($method === 'heap') {
   echo "=========上为初始值==================下为排序后值============= \n";
   echo "\n";
   // run
-  print_r(bubble($data));
+  print_r(heap($data));
   die;
 }
 
@@ -233,6 +233,17 @@ if ($method === 'radix-msd') {
   die;
 }
 
+/*---------------------------- fibonacci ---------------------------------*/
+
+if ($method === 'fibonacci') {
+  require($path . '/fibonacci.php');
+  echo "\n";
+  echo "======================生成斐波拉耶数列==================== \n";
+  echo "\n";
+  print_r(recursion(16));
+  die;
+}
+
 /*---------------------------- warning ---------------------------------*/
 
 echo "\n";
@@ -251,7 +262,8 @@ print_r([
 '希尔排序' => 'shell',
 '基数排序LSD' => 'radix-lsd',
 '基数排序MSD' => 'radix-msd',
-// '堆排序'   => 'heap',
+'堆排序'   => 'heap',
+'斐波纳耶数列' => 'fibonacci',
 // '计数排序' => 'count',
 // '桶排序'   => 'bucket',
 // '二分查找' => 'binary-search'

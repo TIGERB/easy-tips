@@ -45,7 +45,11 @@
  - find [path] -user  [owername]
  - find [path] -group [groupname]
 24. 删除文件或者文件夹： rm [-r] [file/folder]
-25. 杀掉进程： kill [pid]
+25. 进程： 
+ - 杀掉进程：kill [pid]
+ - 查看进程
+        * 查看：ps -aux
+        * 查看父进程ID(ppid)：ps -ef
 26. 关机/重启
  - 关机：shutdown -h now
  - 关机: init 0
