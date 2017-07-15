@@ -52,3 +52,6 @@
  - 关机: halt
  - 关机: poweroff
  - 重启: shutdown -r now
+ 
+ #楼主总结得很到位，我增加一个我经常用的
+ 查找文件位置  whereis
