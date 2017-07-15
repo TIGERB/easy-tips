@@ -55,7 +55,7 @@
  - 关机: init 0
  - 关机: halt
  - 关机: poweroff
- - 重启: shutdown -r now
+ - 重启: shutdown -r now   reboot
 
 27. 我的常用tmux系列命令
 
