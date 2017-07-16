@@ -20,6 +20,7 @@
 11. 查看文件：
  - 输出文件内容：cat [filename]
  - tail [-f:实时输出文件内容] [filename]
+ - less
 12. 查找内容：
  - grep [正则]
  - awk
@@ -45,7 +46,7 @@
  - find [path] -user  [owername]
  - find [path] -group [groupname]
 24. 删除文件或者文件夹： rm [-r] [file/folder]
-25. 进程： 
+25. 进程：
  - 杀掉进程：kill [pid]
  - 查看进程
         * 查看：ps -aux
@@ -55,7 +56,7 @@
  - 关机: init 0
  - 关机: halt
  - 关机: poweroff
- - 重启: shutdown -r now   reboot
+ - 重启: shutdown -r now reboot
 
 27. 我的常用tmux系列命令
 
@@ -162,5 +163,5 @@ sudo service supervisor restart
 #### 启动我们的进程
 sudo supervisorctl start demo
 
-# 查找文件位置
+28. 查找文件位置
 whereis 文件名

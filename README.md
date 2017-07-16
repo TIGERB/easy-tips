@@ -279,6 +279,12 @@ count值为：1
 
 > 补充:发起pull request的commit message请参考文章[Commit message编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
 
+## 英文版
+
+因为国外开发者的要求和个人的时间有限，征集大家有兴趣的可以把本项目进行英文版翻译。希望国外的developer也可以受益于这个项目～
+
+翻译文件认领申请：<https://github.com/TIGERB/easy-tips/issues/36>
+
 ## 感谢
 
 感谢以下朋友的issue或pull request：
@@ -293,3 +299,4 @@ count值为：1
 - @[entimm](https://github.com/entimm)
 - @[jealone](https://github.com/jealone)
 - @[cugblbs](https://github.com/cugblbs)
+- @[CmderQ](https://github.com/CmderQ)
