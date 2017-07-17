@@ -98,8 +98,8 @@ ip2long函数
  否则中文会转义为Unicode编码。
  例如,
  ` `` <?php 
-    $arr = array('a'=>'只有所有者有读和写的权' ,'b'=>'所有者有读和写的权限，组用户只有读的权限');
-    echo json_encode($arr);
+>>>    $arr = array('a'=>'只有所有者有读和写的权' ,'b'=>'所有者有读和写的权限，组用户只有读的权限');
+ >>>   echo json_encode($arr);
 ?>
 ` `` 
 
