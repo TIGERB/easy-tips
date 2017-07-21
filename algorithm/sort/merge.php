@@ -241,97 +241,106 @@
 //
 //其实我是觉得可以不用递归作为分解,所以才写了这个东西
 
-function loopMerge($array){
-  $length = count($array);
+/**
+ * @DateTime  2017-07-22T00:35:16+0800
+ * @param     [array]                   待排序的数组
+ * @return    [array]                   排序完毕的数组
+ */
+  function loopMerge($array)
+  {
+    $length = count($array);
 
-  if($length < 2){
+    if ($length < 2) {
+      return $array;
+    }
+
+    // 左边区域的左边界
+    $leftMin = 0;
+
+    // 左边区域的右边界
+    $leftMax = 0;
+    
+    // 右边区域的左边界
+    $rightMin = 0;
+
+    // 右边区域的右边界
+    $rightMax = 0;
+
+    // 左边区域的移动标
+    $l = 0;
+
+    // 右边区域的移动标
+    $r = 0;
+
+    // 辅助数组
+    $tmp = array_fill(0, $length, 0);
+
+    // 辅助数组的移动标
+    $n = 0;
+
+    // 跨度
+    $group = 1;
+
+    while ($group < $length) {
+
+      $leftMin = 0;
+
+      while ($leftMin + $group < $length) {
+        $leftMax =  $leftMin + $group;
+        $rightMin = $leftMax;
+        if ($rightMin + $group > $length) {
+          $rightMax = $length;
+        } else {
+          $rightMax = $rightMin + $group;
+        }
+
+        $l = $leftMin;
+        $r = $rightMin;
+        $n = $leftMin;
+
+        // 这里是将左边区域的数值跟右边区域的数值进行比较,
+        // 并将小的数值放到辅助数组中
+        // 直到其中一边的区域的数值全部放到辅助数组中
+        while ($l < $leftMax && $r < $rightMax) {
+          if ($array[$l] > $array[$r]) {
+            $tmp[$n] = $array[$r];
+            $r++;
+          } else {
+            $tmp[$n] = $array[$l];
+            $l++;
+          }
+          $n++;
+        }
+
+        // 然后将两个区域内的所有数值全部放到辅助数组中
+        // -------------------------------------------
+        for (; $l < $leftMax; $l++,$n++) { 
+          $tmp[$n] = $array[$l];
+        }
+
+        for (; $r < $rightMax; $r++,$n++) { 
+          $tmp[$n] = $array[$r];
+        }
+        // -------------------------------------------
+
+        // 最后将辅助数组中的相关区域内的数组赋值到主数组中
+        for ($n = $leftMin; $n < $rightMax; $n++) { 
+          $array[$n] = $tmp[$n];
+        }
+
+        // 将区域向后移两个跨度
+        $leftMin += $group * 2 ;
+      }
+
+      // 跨度变成原来的2倍
+      $group *= 2;
+    }
+
     return $array;
   }
 
-  // 左边区域的左边界
-  $leftMin = 0;
-
-  // 左边区域的右边界
-  $leftMax = 0;
-  
-  // 右边区域的左边界
-  $rightMin = 0;
-
-  // 右边区域的右边界
-  $rightMax = 0;
-
-  // 左边区域的移动标
-  $l = 0;
-
-  // 右边区域的移动标
-  $r = 0;
-
-  // 辅助数组
-  $tmp = array_fill(0, $length, 0);
-
-  // 辅助数组的移动标
-  $n = 0;
-
-  // 跨度
-  $group = 1;
-
-  while($group < $length){
-
-    $leftMin = 0;
-
-    while($leftMin + $group < $length){
-      $leftMax =  $leftMin + $group;
-      $rightMin = $leftMax;
-      if($rightMin + $group > $length){
-        $rightMax = $length;
-      }else{
-        $rightMax = $rightMin + $group;
-      }
-
-      $l = $leftMin;
-      $r = $rightMin;
-      $n = $leftMin;
-
-      // 这里是将左边区域的数值跟右边区域的数值进行比较,
-      // 并将小的数值放到辅助数组中
-      // 直到其中一边的区域的数值全部放到辅助数组中
-      while($l < $leftMax && $r < $rightMax){
-        if($array[$l] > $array[$r]){
-          $tmp[$n] = $array[$r];
-          $r++;
-        }else{
-          $tmp[$n] = $array[$l];
-          $l++;
-        }
-        $n++;
-      }
-
-      while($l < $leftMax){
-        $tmp[$n] = $array[$l];
-        $l++;
-        $n++;
-      }
-
-      while($r < $rightMax){
-        $tmp[$n] = $array[$r];
-        $r++;
-        $n++;
-      }
-
-      for($n = $leftMin; $n < $rightMax; $n++){ 
-        $array[$n] = $tmp[$n];
-      }
-      $leftMin += $group * 2 ;
-    }
-
-    $group *= 2;
-  }
-
-  return $array;
-}
-
 $array = [];
-for($i = 0;$i < 100;$i++){
+for ($i = 0;$i < 100;$i++) {
   $array[] = $i;
 }
 shuffle($array);
