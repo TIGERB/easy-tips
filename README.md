@@ -93,7 +93,7 @@ fixing    | 查漏补缺修改中
     - 悲观锁
     - 乐观锁
     - [悲观锁和乐观锁原理的介绍](https://yq.aliyun.com/articles/6899?comefrom=http://blogread.cn/news/)<br/>
-  - 分表
+  - 分表
     - 垂直分表
     - 水平分表
   - sql优化
