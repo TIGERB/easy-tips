@@ -105,7 +105,7 @@ fixing    | 查漏补缺修改中
   - 常见使用场景实战
     - [缓存](https://github.com/TIGERB/easy-tips/blob/master/redis/cache.php)
     - [队列](https://github.com/TIGERB/easy-tips/blob/master/redis/queue.php)
-    - [悲观锁](https://github.com/TIGERB/easy-tips/blob/master/redis/pessmistic-lock.php)
+    - [悲观锁](easy-tips/blob/master/redis/pessmistic-lock.php)
     - [乐观锁](https://github.com/TIGERB/easy-tips/blob/master/redis/optimistic-lock.php)
     - [订阅/推送](https://github.com/TIGERB/easy-tips/blob/master/redis/subscribe-publish)
 
