@@ -97,7 +97,7 @@ fixing    | 查漏补缺修改中
     - 垂直分表
     - 水平分表<br/>
   [基于MySQL分表的三种方法](http://blog.51yip.com/mysql/949.html) <br/>
-  - sql优化
+ - sql优化
   - 主从配置
 
 - Redis(doing)
