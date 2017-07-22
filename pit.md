@@ -103,6 +103,8 @@ ip2long函数
 当不加JSON_UNESCAPED_UNICODE时,结果为：{"a":"\u53ea\u6709\u6240\u6709\u8005\u6709\u8bfb\u548c\u5199\u7684\u6743","b":"\u6240\u6709\u8005\u6709\u8bfb\u548c\u5199\u7684\u6743\u9650\uff0c\u7ec4\u7528\u6237\u53ea\u6709\u8bfb\u7684\u6743\u9650"}
 加了JSON_UNESCAPED_UNICODE时,结果为： {"a":"只有所有者有读和写的权","b":"所有者有读和写的权限，组用户只有读的权限"}
 
+```
+
 ###### 技巧
 
 - linux
