@@ -95,8 +95,9 @@ fixing    | 查漏补缺修改中
   [悲观锁和乐观锁原理的介绍](https://yq.aliyun.com/articles/6899?comefrom=http://blogread.cn/news/)<br/>
   - 分表
     - 垂直分表
-    - 水平分表
-  - sql优化
+    - 水平分表<br/>
+  [基于MySQL分表的三种方法](http://blog.51yip.com/mysql/949.html) 
+  - sql优化
   - 主从配置
 
 - Redis(doing)
