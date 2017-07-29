@@ -59,15 +59,17 @@ if ($method === 'pub') {
 
 echo "\n";
 echo "参数有误，正确示例：php {$path}/test.php p-lock \n";
+echo "param invalid，correct example：php {$path}/test.php p-lock \n";
 echo "====================================== \n";
 echo "参数列表： \n";
+echo "Params list： \n";
 print_r([
-  '缓存'   => 'cache',
-  '队列'   => 'queue',
-  '悲观锁' => 'p-lock',
-  '乐观锁' => 'o-lock',
-  '消息订阅/推送' => [
-      '订阅' => 'sub',
-      '推送' => 'pub'
+  '缓存/Cache'   => 'cache',
+  '队列/Queue'   => 'queue',
+  '悲观锁/Pessimistic lock' => 'p-lock',
+  '乐观锁/Optimism lock' => 'o-lock',
+  '消息订阅/推送/Subscription & Push' => [
+      '订阅/Subscription' => 'sub',
+      '推送/Push' => 'pub'
   ],
 ]);
