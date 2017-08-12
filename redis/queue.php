@@ -10,9 +10,10 @@
  * @example php cache.php
  */
 
-$redis = new \Redis();
-$redis->connect('127.0.0.1', 6379);
-
+//redis连接到数据库
+require_once 'redis_connect.php';
+//实例化redis对象
+$redis = RedisConnect::getRedisInstance();
 // 进队列
 // push data to queue
 $userId = mt_rand(000000, 999999);

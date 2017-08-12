@@ -8,10 +8,12 @@
  * @example php pessmistic-lock.php
  */
 
-$timeout = 5000;
+//redis连接到数据库
+require_once 'redis_connect.php';
+//实例化redis对象
+$redis = RedisConnect::getRedisInstance();
 
-$redis = new \Redis();
-$redis->connect('127.0.0.1', 6379);
+$timeout = 5000;
 
 do {
  $microtime = microtime(true) * 1000;

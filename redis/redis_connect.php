@@ -1,24 +1,108 @@
 <?php
 /**
- * redis 连接数据库
+ * redis 连接数据库类
  */
 
-//实例化对象
-$redis = new \Redis();
+class RedisConnect
+{
+    /**
+     * Redis的ip
+     *
+     * @var string
+     */
+    const REDISHOSTNAME = "127.0.0.1";
 
-//连接客户端ip以及端口
-$redis->connect('127.0.0.1', '6379');
+    /**
+     * Redis的port
+     *
+     * @var int
+     */
+    const REDISPORT = 6379;
 
-//第三部：配置连接密码 检测redis服务器连接状态
-//连接失败直接结束 并输出
-$auth = $redis->auth('auth')  or die("redis 服务器连接失败");
+    /**
+     * Redis的超时时间
+     *
+     * @var int
+     */
+    const REDISTIMEOUT = 0;
 
-//判断是否连接成功
-if(!$auth){
-    die('连接失败!');
-}
+    /**
+     * Redis的password
+     *
+     * @var unknown_type
+     */
+    const REDISPASSWORD = "auth";
 
-//判断可用
-if ($redis->ping() != "+PONG") {
-   die('redis 服务器不可用');
+    /**
+     * Redis的DBname
+     *
+     * @var int
+     */
+    const REDISDBNAME = 12;
+
+    /**
+     * 类单例
+     *
+     * @var object
+     */
+    private static $instance;
+
+    /**
+     * Redis的连接句柄
+     *
+     * @var object
+     */
+    private $redis;
+
+    /**
+     * 私有化构造函数，防止类外实例化
+     *
+     * @param unknown_type $dbnumber
+     */
+    private function __construct ()
+    {
+        // 链接数据库
+        $this->redis = new Redis();
+        $this->redis->connect(self::REDISHOSTNAME, self::REDISPORT, self::REDISTIMEOUT);
+        $this->redis->auth(self::REDISPASSWORD);
+        $this->redis->select(self::REDISDBNAME);
+    }
+
+    /**
+     * 私有化克隆函数，防止类外克隆对象
+     */
+    private function __clone ()
+    {}
+
+    /**
+     * 类的唯一公开静态方法，获取类单例的唯一入口
+     *
+     * @return object
+     */
+    public static function getRedisInstance ()
+    {
+        if (! (self::$instance instanceof self)) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    /**
+     * 获取redis的连接实例
+     *
+     * @return Redis
+     */
+    public function getRedisConn ()
+    {
+        return $this->redis;
+    }
+
+    /**
+     * 需要在单例切换的时候做清理工作
+     */
+    public function __destruct ()
+    {
+        self::$instance->redis->close();
+        self::$instance = NULL;
+    }
 }
