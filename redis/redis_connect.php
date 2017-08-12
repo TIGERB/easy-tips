@@ -1,4 +1,7 @@
 <?php
+/**
+ * redis 连接数据库
+ */
 
 //实例化对象
 $redis = new \Redis();
