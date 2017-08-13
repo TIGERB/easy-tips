@@ -55,9 +55,7 @@ class RedisConnect
     private $redis;
 
     /**
-     * 私有化构造函数，防止类外实例化
-     *
-     * @param unknown_type $dbnumber
+     * RedisConnect constructor.
      */
     private function __construct ()
     {

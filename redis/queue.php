@@ -17,11 +17,11 @@ $redis = RedisConnect::getRedisInstance();
 // 进队列
 // push data to queue
 $userId = mt_rand(000000, 999999);
-$redis->rpush('QUEUE_NAME',json_encode(['user_id' => $userId]));
+$redis->rpush('QUEUE_NAME', json_encode(['user_id' => $userId]));
 $userId = mt_rand(000000, 999999);
-$redis->rpush('QUEUE_NAME',json_encode(['user_id' => $userId]));
+$redis->rpush('QUEUE_NAME', json_encode(['user_id' => $userId]));
 $userId = mt_rand(000000, 999999);
-$redis->rpush('QUEUE_NAME',json_encode(['user_id' => $userId]));
+$redis->rpush('QUEUE_NAME', json_encode(['user_id' => $userId]));
 echo "数据进队列成功 \n";
 echo "push data to queue success \n";
 

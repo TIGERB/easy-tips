@@ -20,8 +20,8 @@ $redis = RedisConnect::getRedisInstance();
  * cache data
  */
 $redis->set('cache-key', json_encode([
-  'data-list' => '这是个缓存数据～',
-  'data-list-en' => 'This a data of cache~',
+    'data-list' => '这是个缓存数据～',
+    'data-list-en' => 'This a data of cache~',
 
 ]), JSON_UNESCAPED_UNICODE);
 echo "字符串缓存成功～ \n\n";
@@ -34,4 +34,4 @@ echo "String cache success \n\n";
 $data = $redis->get('cache-key');
 echo "读取缓存数据为： \n";
 echo "The cache data is: \n";
-print_r(json_decode($data,true));
+print_r(json_decode($data, true));

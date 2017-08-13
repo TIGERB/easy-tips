@@ -12,7 +12,7 @@
 require_once '../redis_connect.php';
 //实例化redis对象
 $redis = RedisConnect::getRedisInstance();
-  //发布
+//发布
 $redis->publish('msg', '来自msg频道的推送');
 echo "msg频道消息推送成功～ \n";
 $redis->close();
