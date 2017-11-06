@@ -11,9 +11,11 @@
  * @example php optimistic-lock.php
  */
 
-$redis = new \Redis();
-$redis->connect('127.0.0.1', 6379);
-
+//redis连接到数据库
+require_once 'redis_connect.php';
+//实例化redis对象
+$redis = RedisConnect::getRedisInstance();
+$redis = $redis->getRedisConn();
 // 监视 count 值
 // monitor count value
 $redis->watch('count');
@@ -43,9 +45,9 @@ sleep(10);
 $res = $redis->exec();
 
 if ($res) {
-  // 成功...
-  echo 'success:' . $time . "\n";
-  return;
+    // 成功...
+    echo 'success:' . $time . "\n";
+    return;
 }
 
 // 失败...

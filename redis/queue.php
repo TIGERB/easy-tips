@@ -10,17 +10,18 @@
  * @example php cache.php
  */
 
-$redis = new \Redis();
-$redis->connect('127.0.0.1', 6379);
-
+//redis连接到数据库
+require_once 'redis_connect.php';
+//实例化redis对象
+$redis = RedisConnect::getRedisInstance();
 // 进队列
 // push data to queue
 $userId = mt_rand(000000, 999999);
-$redis->rpush('QUEUE_NAME',json_encode(['user_id' => $userId]));
+$redis->rpush('QUEUE_NAME', json_encode(['user_id' => $userId]));
 $userId = mt_rand(000000, 999999);
-$redis->rpush('QUEUE_NAME',json_encode(['user_id' => $userId]));
+$redis->rpush('QUEUE_NAME', json_encode(['user_id' => $userId]));
 $userId = mt_rand(000000, 999999);
-$redis->rpush('QUEUE_NAME',json_encode(['user_id' => $userId]));
+$redis->rpush('QUEUE_NAME', json_encode(['user_id' => $userId]));
 echo "数据进队列成功 \n";
 echo "push data to queue success \n";
 
