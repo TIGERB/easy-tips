@@ -12,6 +12,21 @@
 - 不可重复读：一个事务内连续读了两次数据，中间另一个事务修改了这个数据，导致第一个事务前后两次读的数据不一致；
 - 更新丢失：一个事务内变更了数据，另一个事务修改了这个数据，最后前一个事务commit导致另一个事务的变更丢失；
 
+### 事务隔离级别
+
+- Read Uncommitted（读取未提交内容）
+- Read Committed（读取提交内容）
+- Repeatable Read（可重读）Mysql默认
+- Serializable（可串行化）
+
+
+| 隔离级别 | 脏读 | 不可重复读 | 幻读 |
+| --- | --- | --- | --- |
+| Read Uncommitted | √ | √  | √ |
+| Read Committed | × | √ | √ |
+| Repeatable Read | × | × | √ |
+| Serializable | × | × | × |
+
 
 ### 索引
 
