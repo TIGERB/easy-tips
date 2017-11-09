@@ -163,7 +163,7 @@ sudo service supervisor restart
 #### 启动我们的进程
 sudo supervisorctl start demo
 
- 30. 查找命名  
+ 30. 查找文件命令  
 
  #### 查找文件位置  
  whereis 文件名   或者是 find / -name 文件名  
