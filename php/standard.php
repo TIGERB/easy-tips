@@ -16,7 +16,7 @@ use Test\TestClass;//use引入类
  */
 abstract class StandardExample // {}必须换行
 {
-    /**
+  /**
    *  常量描述.
    *
    * @var string
