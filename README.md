@@ -24,6 +24,8 @@
 </a>
 </p>
 
+<p align="center"><a href="README-EN.md" >English</a></p>
+
 <br>
 
 > 一个php技术栈后端猿的知识储备仓库
