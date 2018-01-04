@@ -240,7 +240,6 @@
 // |  1  |  2  |  3  |  4  |  5  |
 //
 //其实我是觉得可以不用递归作为分解,所以才写了这个东西
-
 function loopMerge($array){
   $length = count($array);
 
@@ -253,7 +252,6 @@ function loopMerge($array){
 
   // 左边区域的右边界
   $leftMax = 0;
-  
   // 右边区域的左边界
   $rightMin = 0;
 
@@ -318,7 +316,7 @@ function loopMerge($array){
         $n++;
       }
 
-      for($n = $leftMin; $n < $rightMax; $n++){ 
+      for($n = $leftMin; $n < $rightMax; $n++){
         $array[$n] = $tmp[$n];
       }
       $leftMin += $group * 2 ;
@@ -329,11 +327,3 @@ function loopMerge($array){
 
   return $array;
 }
-
-$array = [];
-for($i = 0;$i < 100;$i++){
-  $array[] = $i;
-}
-shuffle($array);
-var_dump($array);
-var_dump(loopMerge($array));
