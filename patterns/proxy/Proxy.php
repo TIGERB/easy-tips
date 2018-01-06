@@ -6,7 +6,7 @@ use Exception;
 /**
  * 代理工厂
  */
-class Proxy
+class Proxy implements ShoesInterface
 {
   /**
    * 产品生产线对象
