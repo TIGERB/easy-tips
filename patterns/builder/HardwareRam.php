@@ -6,7 +6,7 @@ namespace builder;
  */
 class HardwareRam implements Hardware
 {
-  public function produce($size=6)
+  public function __construct($size=6)
   {
     echo "内存大小：" . $size . "G\n";
   }

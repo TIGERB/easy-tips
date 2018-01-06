@@ -1,12 +1,12 @@
 <?php
 namespace builder;
 
-use builder\BuilderInterface;
+use builder\ProductInterface;
 
 /**
  * 手机构建器
  */
-class PhoneBuilder implements BuilderInterface
+class Phone implements ProductInterface
 {
   /**
    * 名称

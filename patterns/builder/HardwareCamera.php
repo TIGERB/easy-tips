@@ -6,7 +6,7 @@ namespace builder;
  */
 class HardwareCamera implements Hardware
 {
-  public function produce($pixel=32)
+  public function __construct($pixel=32)
   {
     echo "摄像头像素：" . $pixel . "像素\n";
   }
