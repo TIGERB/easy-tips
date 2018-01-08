@@ -6,7 +6,7 @@ namespace builder;
  */
 class HardwareStorage implements Hardware
 {
-  public function produce($size=32)
+  public function __construct($size=32)
   {
     echo "储存大小：" . $size . "G\n";
   }

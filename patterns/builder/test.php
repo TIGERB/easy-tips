@@ -21,6 +21,8 @@
  * 硬件 => cpu, 内存， 储存
  * // 软件又由以下构成
  * 软件 => mp3 os
+ * 
+ * builder 导演类
  *
  * @author  TIGERB <https://github.com/TIGERB>
  * @example 运行 php test.php
@@ -37,25 +39,34 @@ function autoload($class)
 
 /************************************* test *************************************/
 
-use builder\PhoneBuilder;
-use builder\Mp3Builder;
+use builder\ProductBuilder;
 
-// 创建一个PhoneBuilder生产一款旗舰android手机
-$builder = new PhoneBuilder('某米8s', [
-    'screen'  => '5.0',
-    'cpu'     => 16,
-    'ram'     => 8,
-    'storage' => 64,
-    'camera'  => '2000w'
-  ],['os' => 'android 6.0']);
+$builder = new ProductBuilder();
+
+// 生产一款mp3
+$builder->getMp3([
+  'name' => '某族MP3',
+  'hardware' => [
+    'cpu'     => 1,
+    'ram'     => 1,
+    'storage' => 128,
+  ],
+  'software' => ['os' => 'mp3 os']
+]);
 
 echo "\n";
 echo "----------------\n";
 echo "\n";
 
-// 创建一个Mp3Builder生产一款mp3
-$builder = new Mp3Builder('某族MP3', [
-    'cpu'     => 1,
-    'ram'     => 1,
+// 生产一款手机
+$builder->getPhone([
+  'name' => '某米8s',
+  'hardware' => [
+    'screen'  => '5.8',
+    'camera'  => '2600w',
+    'cpu'     => 4,
+    'ram'     => 8,
     'storage' => 128,
-  ],['os' => 'mp3 os']);
+  ],
+  'software' => ['os' => 'android 6.0']
+]);

@@ -1,12 +1,12 @@
 <?php
 namespace builder;
 
-use builder\BuilderInterface;
+use builder\ProductInterface;
 
 /**
  * Mp3构建器
  */
-class Mp3Builder implements BuilderInterface
+class Mp3 implements ProductInterface
 {
   /**
    * 名称

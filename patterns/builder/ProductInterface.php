@@ -4,7 +4,7 @@ namespace builder;
 /**
  * 构建器接口
  */
-Interface BuilderInterface
+Interface ProductInterface
 {
   /**
    * 硬件构建
