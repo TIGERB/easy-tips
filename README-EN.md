@@ -130,7 +130,7 @@ fixing    | fix
     - [factory pattern](https://github.com/TIGERB/easy-tips/blob/master/patterns/factory/test.php)
     - [abstract factory pattern](https://github.com/TIGERB/easy-tips/blob/master/patterns/factoryAbstract/test.php)
     - [prototype pattern](https://github.com/TIGERB/easy-tips/blob/master/patterns/prototype/test.php)
-    - [builder pattern](https://github.com/TIGERB/easy-tips/blob/master/patterns/builder/test.php)
+    - [produce pattern](https://github.com/TIGERB/easy-tips/blob/master/patterns/produce/test.php)
 
   - Construction Pattern
 
@@ -306,3 +306,4 @@ Thanks for the issue and pull request, as follows:
 - @[neetdai](https://github.com/neetdai)
 - @[yangqiphp](https://github.com/yangqiphp)
 - @[akmumu](https://github.com/akmumu)
+- @[DukeAnn](https://github.com/DukeAnn)
