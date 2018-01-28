@@ -1,6 +1,6 @@
 ### 引擎
-- InnoDB: 事务、行锁、非聚簇索引
-- MyISAM：表锁、聚簇索引、无法安全恢复
+- InnoDB: 事务、行锁、聚簇索引
+- MyISAM：表锁、非聚簇索引、无法安全恢复
 - Memory: 基于内存、表锁、每行长度固定不支持blob\text
 - Archive: 只支持select、insert
 - Blackhole\CSV\Federated\merge\NDB

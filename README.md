@@ -136,7 +136,7 @@ fixing    | 查漏补缺修改中
     - [工厂模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/factory/test.php)
     - [抽象工厂模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/factoryAbstract/test.php)
     - [原型模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/prototype/test.php)
-    - [建造者模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/builder/test.php)
+    - [建造者模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/produce/test.php)
 
   - 结构型模式实例
 
@@ -324,3 +324,5 @@ count值为：1
 - @[neetdai](https://github.com/neetdai)
 - @[yangqiphp](https://github.com/yangqiphp)
 - @[akmumu](https://github.com/akmumu)
+- @[DukeAnn](https://github.com/DukeAnn)
+- @[onlyshow](https://github.com/onlyshow)
