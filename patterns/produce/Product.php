@@ -11,7 +11,7 @@ class Product
 {
   /**
    * 名称
-   * @var array
+   * @var string
    */
   private $name = '';
 
