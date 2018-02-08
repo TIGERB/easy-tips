@@ -64,15 +64,14 @@ class Mp3 implements ProductInterface
    */
   public function hardware($hardware=array())
   {
-    // 创建cpu
-    $hardwareCpu     = new HardwareCpu();
-    $this->_cpu      = $hardwareCpu->produce($hardware['cpu']);
-    // 创建内存
-    $hardwareRam     = new HardwareRam();
-    $this->_ram      = $hardwareRam->produce($hardware['ram']);
-    // 创建储存
-    $hardwareStorage = new HardwareStorage();
-    $this->_storage  = $hardwareStorage->produce($hardware['storage']);
+        // 创建 CPU
+        $this->_cpu = new HardwareCpu($hardware['cpu']);
+
+        // 创建内存
+        $this->_ram = new HardwareRam($hardware['ram']);
+
+        // 创建存储
+        $this->_storage = new HardwareStorage($hardware['storage']);
   }
 
   /**
