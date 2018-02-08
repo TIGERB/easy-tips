@@ -35,8 +35,8 @@ class Product
   public function __construct($name='')
   {
     // 名称
-    $this->_name = $name;
-    echo $this->_name . " 配置如下：\n";
+    $this->name = $name;
+    echo $this->name . " 配置如下：\n";
   }
 
   /**
