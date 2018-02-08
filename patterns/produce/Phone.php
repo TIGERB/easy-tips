@@ -74,21 +74,16 @@ class Phone implements ProductInterface
    */
   public function hardware($hardware=array())
   {
-    // 创建屏幕
-    $hardwareScreen  = new HardwareScreen();
-    $this->_screen   = $hardwareScreen->produce($hardware['screen']);
-    // 创建cpu
-    $hardwareCpu     = new HardwareCpu();
-    $this->_cpu      = $hardwareCpu->produce($hardware['cpu']);
-    // 创建内存
-    $hardwareRam     = new HardwareRam();
-    $this->_ram      = $hardwareRam->produce($hardware['ram']);
-    // 创建储存
-    $hardwareStorage = new HardwareStorage();
-    $this->_storage  = $hardwareStorage->produce($hardware['storage']);
-    // 创建摄像头
-    $hardwareCamera  = new HardwareCamera();
-    $this->_camera   = $hardwareCamera->produce($hardware['camera']);
+        // 创建屏幕
+        $this->_screen  = new HardwareScreen($hardware['screen']);
+        // 创建cpu
+        $this->_cpu     = new HardwareCpu($hardware['cpu']);
+        // 创建内存
+        $this->_ram     = new HardwareRam($hardware['ram']);
+        // 创建储存
+        $this->_storage = new HardwareStorage($hardware['storage']);
+        // 创建摄像头
+        $this->_camera  = new HardwareCamera($hardware['camera']);
   }
 
   /**
