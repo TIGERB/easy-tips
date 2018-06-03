@@ -24,7 +24,7 @@
 </a>
 </p>
 
-<p align="center"><a href="README-EN.md" >English</a></p>
+<p align="center"><a href="README-EN.md" >English Version</a></p>
 
 <br>
 
@@ -55,8 +55,8 @@ fixing    | 查漏补缺修改中
     - [经验](https://github.com/TIGERB/easy-tips/blob/master/php/artisan.md)
 
   - 基础知识[读(R)好(T)文(F)档(M)]
-
     - [数据类型](http://php.net/manual/zh/language.types.php)
+
     - [运算符优先级](http://php.net/manual/zh/language.operators.precedence.php)
     - [string函数](http://php.net/ref.strings.php)
     - [array函数](http://php.net/manual/zh/ref.array.php)

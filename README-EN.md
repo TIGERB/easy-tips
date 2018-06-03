@@ -1,5 +1,4 @@
 <h1 align="center">Easy Tips</h1>
-
 <p align="center">
 <a href="https://github.com/TIGERB/easy-tips#目录">
   <img src="https://img.shields.io/badge/php-done-brightgreen.svg" alt="php">
@@ -308,3 +307,4 @@ Thanks for the issue and pull request, as follows:
 - @[akmumu](https://github.com/akmumu)
 - @[DukeAnn](https://github.com/DukeAnn)
 - @[onlyshow](https://github.com/onlyshow)
+- @[JimChenWYU](https://github.com/JimChenWYU)

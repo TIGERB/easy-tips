@@ -1,22 +1,26 @@
 <?php
 /**
  * php算法实战.
- *
+ * php algorithm's practice
+ * 
  * 排序算法-堆排序
- *
+ * sort algorithm - heap sort algorithm
+ * 
  * @author cugblbs <https://github.com/cugblbs>
  */
 
 /**
  * 堆排序.
+ * heap sort algorithm.
  *
- * @param array $value 待排序数组
+ * @param array $value 待排序数组 the array that is waiting for sorting
  *
  * @return array
  */
 function heap(&$values = [])
 {
     //堆化数组
+    // the array that is simulated a heap
     $heap = [];
     foreach ($values as $i=>$v) {
         $heap[$i] = $v;
@@ -25,6 +29,7 @@ function heap(&$values = [])
     $values = $heap;
 
     //堆排序
+    //heap sort algorithm
     $n = count($values);
     for ($i = $n-1; $i>=1; $i--) {
         swap($values[$i], $values[0]);
@@ -41,6 +46,8 @@ function swap(&$a, &$b) {
 
 /**
  * 堆插入数据
+ * the method that is used to insert data to a heap 
+ * 
  * @param $values
  * @param $i
  * @return mixed
@@ -65,6 +72,8 @@ function minHeapFixUp($values, $i) {
 
 /**
  * 调整堆,可用于删除堆节点
+ * to adjust heap, it can be used to remove a node of heap.
+ * 
  * @param $heap
  * @param $i
  * @param $n
