@@ -91,7 +91,7 @@ fixing    | fix
       * Index
       * Union index
         - Left match principle
-    + Cluster
+    + Cluster
       * Cluster index
       * Non-Cluster index
     + Datastruct

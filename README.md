@@ -1,4 +1,4 @@
-<h1 align="center">Easy Tips</h1>
+<h1 align="center">《温故知新PHP》1.0</h1>
 
 <p align="center">
 <a href="https://github.com/TIGERB/easy-tips#目录">
@@ -32,7 +32,7 @@
 
 ## 前言
 
-为什么把php,mysql,redis放在前三位？因为php/mysql/redis基础是一个当代phper的根基。
+基础不牢，地动山摇，谨以此句提醒自己。
 
 ## 备注
 
@@ -46,7 +46,7 @@ fixing    | 查漏补缺修改中
 
 ## 目录
 
-- PHP(doing)
+- PHP基础学习(done)
 
   - 符合PSR的PHP编程规范(含个人建议)
 
@@ -73,6 +73,15 @@ fixing    | 查漏补缺修改中
 
   - [记一些坑](https://github.com/TIGERB/easy-tips/blob/master/pit.md#记一些坑)
 
+- PHP内核学习(doing)
+  - 生命周期
+  - 垃圾回收
+  - 扩展开发
+
+- 问题排查(doing)
+  - nginx/php/业务日志
+  - 问题排查实例分析
+  
 - Mysql(doing)
 
   - [常用sql语句](https://github.com/TIGERB/easy-tips/blob/master/mysql/sql.md)
@@ -119,12 +128,13 @@ fixing    | 查漏补缺修改中
 
   - 常用命令
   - 实现原理&与memcache区别
-  - 常见使用场景实战
+  - 常见使用场景实现
     - [缓存](https://github.com/TIGERB/easy-tips/blob/master/redis/cache.php)
     - [队列](https://github.com/TIGERB/easy-tips/blob/master/redis/queue.php)
     - [悲观锁](https://github.com/TIGERB/easy-tips/blob/master/redis/pessmistic-lock.php)
     - [乐观锁](https://github.com/TIGERB/easy-tips/blob/master/redis/optimistic-lock.php)
     - [订阅/推送](https://github.com/TIGERB/easy-tips/blob/master/redis/subscribe-publish)
+  - 常见业务实际使用
 
 - 设计模式(done/fixing)
 
