@@ -22,6 +22,9 @@
 <a href="https://github.com/TIGERB/easy-tips/tree/master/network">
   <img src="https://img.shields.io/badge/network-doing-blue.svg" alt="network">
 </a>
+<a href="https://github.com/TIGERB/easy-tips/tree/master/docker">
+  <img src="https://img.shields.io/badge/docker-doing-blue.svg" alt="docker">
+</a>
 </p>
 
 <p align="center"><a href="README-EN.md" >English Version</a></p>
@@ -135,6 +138,11 @@ fixing    | 查漏补缺修改中
     - [乐观锁](https://github.com/TIGERB/easy-tips/blob/master/redis/optimistic-lock.php)
     - [订阅/推送](https://github.com/TIGERB/easy-tips/blob/master/redis/subscribe-publish)
   - 常见业务实际使用
+
+- Docker
+  - [redis主从搭建](https://github.com/TIGERB/easy-tips/blob/master/docker/redis-master-slave/README.md)
+  - mysql主从搭建
+  - codis环境
 
 - 设计模式(done/fixing)
 

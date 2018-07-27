@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  redis-master:
+      image: redis:4-alpine
+      build: ./
+      volumes:
+        - ./redis.master.conf:/home/redis/redis.conf
+      ports:
+        - "60370:6379"
+      command: redis-server /home/redis/redis.conf
+  redis-slave_1:
+      image: redis:4-alpine
+      build: ./
+      volumes:
+        - ./redis.slave.conf:/home/redis/redis.conf
+      ports:
+        - "60371:6379"
+      command: redis-server /home/redis/redis.conf
+  redis-slave_2:
+      image: redis:4-alpine
+      build: ./
+      volumes:
+        - ./redis.slave.conf:/home/redis/redis.conf
+      ports:
+        - "60372:6379"
+      command: redis-server /home/redis/redis.conf
