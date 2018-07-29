@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  mysql-master:
+      image: mysql:5.7
+      build: ./
+      volumes:
+        - ./master-conf/:/etc/mysql
+        - ./master-conf/master.sh:/docker-entrypoint-initdb.d/master.sh
+      ports:
+        - "33006:3306"
+      environment: 
+        MYSQL_ROOT_PASSWORD: mysql-master
+      privileged: true
+      networks: 
+        - default
+  mysql-slave:
+      image: mysql:5.7
+      build: ./
+      volumes:
+        - ./slave-conf/:/etc/mysql
+        - ./slave-conf/slave.sh:/docker-entrypoint-initdb.d/slave.sh
+      ports:
+        - "33007:3306"
+      environment: 
+        MYSQL_ROOT_PASSWORD: mysql-slave
+      privileged: true
+      networks: 
+        - default
+# networks: 
+#   default:
+#     external: 
+#       name: mysql_default
