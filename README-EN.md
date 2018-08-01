@@ -124,8 +124,8 @@ fixing    | fix
 
 - Docker
   - [The master and slave for redis](https://github.com/TIGERB/easy-tips/blob/master/docker/redis-master-slave/README.md)
-  - The master and slave for mysql
-  - codis
+  - [The master and slave for mysql](https://github.com/TIGERB/easy-tips/blob/master/docker/mysql-master-slave/README.md)
+  - [codis](https://github.com/TIGERB/easy-tips/blob/master/docker/codis/README.md)
 
 - Design Pattern(done/fixing)
 

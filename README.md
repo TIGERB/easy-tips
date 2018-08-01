@@ -141,8 +141,10 @@ fixing    | 查漏补缺修改中
 
 - Docker
   - [redis主从搭建](https://github.com/TIGERB/easy-tips/blob/master/docker/redis-master-slave/README.md)
-  - mysql主从搭建
-  - codis环境
+  - [mysql主从搭建](https://github.com/TIGERB/easy-tips/blob/master/docker/mysql-master-slave/README.md)
+  - [codis环境](https://github.com/TIGERB/easy-tips/blob/master/docker/codis/README.md)
+  - mysql多主环境
+  - 我所理想的架构
 
 - 设计模式(done/fixing)
 
