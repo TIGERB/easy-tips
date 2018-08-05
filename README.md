@@ -76,10 +76,18 @@ fixing    | 查漏补缺修改中
 
   - [记一些坑](https://github.com/TIGERB/easy-tips/blob/master/pit.md#记一些坑)
 
-- PHP内核学习(doing)
+- PHP深入学习(doing)
+  - 理解yield
+  - php的协程
   - 生命周期
   - 垃圾回收
   - 扩展开发
+
+- 网络编程(doing)
+    - php实现web服务器
+    - go实现web服务器
+    - c实现web服务器
+    - php扩展实现web服务器
 
 - 问题排查(doing)
   - nginx/php/业务日志
@@ -138,12 +146,19 @@ fixing    | 查漏补缺修改中
     - [乐观锁](https://github.com/TIGERB/easy-tips/blob/master/redis/optimistic-lock.php)
     - [订阅/推送](https://github.com/TIGERB/easy-tips/blob/master/redis/subscribe-publish)
   - 常见业务实际使用
+  - redis的基础数据结构
 
 - Docker
   - [redis主从搭建](https://github.com/TIGERB/easy-tips/blob/master/docker/redis-master-slave/README.md)
   - [mysql主从搭建](https://github.com/TIGERB/easy-tips/blob/master/docker/mysql-master-slave/README.md)
   - [codis环境](https://github.com/TIGERB/easy-tips/blob/master/docker/codis/README.md)
   - mysql多主环境
+  - kafka的环境搭建和使用
+  - rabbitMQ的环境搭建和使用
+  - zookeeper的环境搭建和使用
+  - etcd的环境搭建和使用
+  - ELK的环境搭建和使用
+  - 网关服务kong的环境搭建和使用
   - 我所理想的架构
 
 - 设计模式(done/fixing)
@@ -322,27 +337,59 @@ count值为：1
 
 翻译文件认领申请：<https://github.com/TIGERB/easy-tips/issues/36>
 
-## 赞赏
-
-<img src="money-qrcode.jpg" width="300px">
-
 ## 感谢
 
 感谢以下朋友的issue或pull request：
 
-- @[faynwol](https://github.com/faynwol)
-- @[whahuzhihao](https://github.com/whahuzhihao)
-- @[snriud](https://github.com/snriud)
-- @[fhefh2015](https://github.com/fhefh2015)
-- @[RJustice](https://github.com/RJustice)
-- @[ooing](https://github.com/ooing)
-- @[shellus](https://github.com/shellus)
-- @[entimm](https://github.com/entimm)
-- @[jealone](https://github.com/jealone)
-- @[cugblbs](https://github.com/cugblbs)
-- @[CmderQ](https://github.com/CmderQ)
-- @[neetdai](https://github.com/neetdai)
-- @[yangqiphp](https://github.com/yangqiphp)
-- @[akmumu](https://github.com/akmumu)
-- @[DukeAnn](https://github.com/DukeAnn)
-- @[onlyshow](https://github.com/onlyshow)
+<p>
+  <a href="https://github.com/faynwol">
+    <img src="https://avatars1.githubusercontent.com/u/2764772?s=460&v=4" width="50px" style="border-radius: 25px !important;;">
+  </a>
+  <a href="https://github.com/whahuzhihao">
+    <img src="https://avatars3.githubusercontent.com/u/2089083?s=460&v=4" width="50px" style="border-radius: 25px !important;;">
+  </a>
+  <a href="https://github.com/snriud">
+    <img src="https://avatars1.githubusercontent.com/u/2269679?s=460&v=4" width="50px" style="border-radius: 25px !important;;">
+  </a>
+  <a href="https://github.com/fhefh2015">
+    <img src="https://avatars1.githubusercontent.com/u/14891797?s=460&v=4" width="50px" style="border-radius: 25px !important;;">
+  </a>
+  <a href="https://github.com/RJustice">
+    <img src="https://avatars1.githubusercontent.com/u/2288594?s=460&v=4" width="50px" style="border-radius: 25px !important;;">
+  </a>
+  <a href="https://github.com/ooing">
+    <img src="https://avatars1.githubusercontent.com/u/5188151?s=460&v=4" width="50px" style="border-radius: 25px !important;;">
+  </a>
+  <a href="https://github.com/entimm">
+    <img src="https://avatars0.githubusercontent.com/u/1958077?s=460&v=4" width="50px" style="border-radius: 25px !important;;">
+  </a>
+  <a href="https://github.com/jealone">
+    <img src="https://avatars0.githubusercontent.com/u/3907286?s=460&v=4" width="50px" style="border-radius: 25px !important;;">
+  </a>
+  <a href="https://github.com/cugblbs">
+    <img src="https://avatars1.githubusercontent.com/u/8310816?s=460&v=4" width="50px" style="border-radius: 25px !important;;">
+  </a>
+  <a href="https://github.com/CmderQ">
+    <img src="https://avatars3.githubusercontent.com/u/9278467?s=460&v=4" width="50px" style="border-radius: 25px !important;;">
+  </a>
+  <a href="https://github.com/neetdai">
+    <img src="https://avatars3.githubusercontent.com/u/17525313?s=460&v=4" width="50px" style="border-radius: 25px !important;;">
+  </a>
+  <a href="https://github.com/yangqiphp">
+    <img src="https://avatars3.githubusercontent.com/u/14936391?s=460&v=4" width="50px" style="border-radius: 25px !important;;">
+  </a>
+  <a href="https://github.com/akmumu">
+    <img src="https://avatars2.githubusercontent.com/u/3242526?s=460&v=4" width="50px" style="border-radius: 25px !important;;">
+  </a>
+  <a href="https://github.com/DukeAnn">
+    <img src="https://avatars2.githubusercontent.com/u/15902491?s=460&v=4" width="50px" style="border-radius: 25px !important;;">
+  </a>
+  <a href="https://github.com/onlyshow">
+    <img src="https://avatars2.githubusercontent.com/u/12505832?s=460&v=4" width="50px" style="border-radius: 25px !important;">
+  </a>
+  
+</p>
+
+## 赞赏
+
+<img src="money-qrcode.jpg" width="300px">
