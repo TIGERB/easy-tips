@@ -25,6 +25,12 @@
 <a href="https://github.com/TIGERB/easy-tips/tree/master/docker">
   <img src="https://img.shields.io/badge/docker-doing-blue.svg" alt="docker">
 </a>
+<a href="#backers" alt="sponsors on Open Collective">
+<img src="https://opencollective.com/easy-tips/backers/badge.svg" />
+</a> 
+<a href="#sponsors" alt="Sponsors on Open Collective">
+<img src="https://opencollective.com/easy-tips/sponsors/badge.svg" />
+</a> 
 </p>
 
 <p align="center"><a href="README-EN.md" >English Version</a></p>
@@ -393,3 +399,33 @@ count值为：1
 ## 赞赏
 
 <img src="money-qrcode.jpg" width="300px">
+
+## Contributors
+
+This project exists thanks to all the people who contribute. 
+<a href="graphs/contributors"><img src="https://opencollective.com/easy-tips/contributors.svg?width=890&button=false" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/easy-tips#backer)]
+
+<a href="https://opencollective.com/easy-tips#backers" target="_blank"><img src="https://opencollective.com/easy-tips/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/easy-tips#sponsor)]
+
+<a href="https://opencollective.com/easy-tips/sponsor/0/website" target="_blank"><img src="https://opencollective.com/easy-tips/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/easy-tips/sponsor/1/website" target="_blank"><img src="https://opencollective.com/easy-tips/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/easy-tips/sponsor/2/website" target="_blank"><img src="https://opencollective.com/easy-tips/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/easy-tips/sponsor/3/website" target="_blank"><img src="https://opencollective.com/easy-tips/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/easy-tips/sponsor/4/website" target="_blank"><img src="https://opencollective.com/easy-tips/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/easy-tips/sponsor/5/website" target="_blank"><img src="https://opencollective.com/easy-tips/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/easy-tips/sponsor/6/website" target="_blank"><img src="https://opencollective.com/easy-tips/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/easy-tips/sponsor/7/website" target="_blank"><img src="https://opencollective.com/easy-tips/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/easy-tips/sponsor/8/website" target="_blank"><img src="https://opencollective.com/easy-tips/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/easy-tips/sponsor/9/website" target="_blank"><img src="https://opencollective.com/easy-tips/sponsor/9/avatar.svg"></a>
+
+
