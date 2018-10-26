@@ -28,3 +28,16 @@ function i($arg = 0)
     return $arg;
 }
 ```
+
+## 常见linxu信号
+
+信号|数字(LINUX)|含义
+------|------|------
+SIGKILL|9|force kill
+SIGINT|2|interrupt
+SIGQUIT|3|quit graceful
+SIGTERM|15|terminate
+SIGHUP|1|hang up
+SIGUSR1|10|user defined
+SIGUSR2|12|user defined
+
