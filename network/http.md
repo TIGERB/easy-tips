@@ -193,3 +193,21 @@ client(内置证书机构证书) <---------------------------   证书机构
 + 必须https://
 + 头部压缩
 + 二进制传输
+
+# 一次网络请求过程
+
+```
+domain
+|
+dns -> ip
+|
+http  -> http(headers[common{request url/request method/status code/remote address}/request{accetp/accept-encoding/accept-language/connection/cookie/host/pragma/user-agent/referer}/response{cache-control/expires/content-type/connection/keep-alive/server}]/body[]) -> headers\r\n隔开、headers和body\r\n\r\n隔开 -> 所以实现http协议\r\n\r\n分割可以得到headers和body，headers\r\分割可以得到头的各个信息
+|
+tcp -> 建立连接(三次握手[syn/syn&ack/ack]) -> 断开链接(四次握手[fin/ack/fin/ack])
+|
+ip -> 找到远程机器
+|
+内网
+|
+ARP -> mac地址
+```

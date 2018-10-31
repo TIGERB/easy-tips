@@ -2,40 +2,124 @@
 
 // 创建一个socket(tcp/ip)
 $server = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+if (! $server) {
+    // exception
+    throw new Exception('', 500);
+}
 
 // 绑定ip/port
-socket_bind($server, '127.0.0.1', '8889');
+if (! socket_bind($server, '127.0.0.1', '8889')) {
+    // exception
+    throw new Exception('', 500);
+}
 
 // 监听端口
 socket_listen($server);
 
-// 接受一个客户连接
+$shareMemoryId = null;
+$shmopSize = 0;
+
+// 创建共享内存
+// $shamKey = ftok(__FILE__, 't');
+// // var_dump($shamKey);
+// // die;
+// $shmopSize = 6; // byte
+
+// $shareMemoryId = shmop_open($shamKey, 'c', 0777, $shmopSize);
+// shmop_delete($shareMemoryId);
+
+// if (! $shareMemoryId = shmop_open($shamKey, 'c', 0777, $shmopSize)) {
+//     // exception
+//     throw new Exception('', 500);
+// }
+
+// shmop_write($shareMemoryId, "000000", 0);
+// var_dump(shmop_write($shareMemoryId, "11111111", 0));
+// var_dump(shmop_read($shareMemoryId, 0, $shmopSize));
+// die;
+
+foreach (range(1, 2) as $v) {
+    forkWorker($server, $shareMemoryId, $shmopSize);
+}
+
+// 主进程挂起
 while (true) {
-    $client = socket_accept($server);
-    if (! $client) {
-        continue;
-    }
-    $request = '';
-    $buffer = '';
-    while (empty($buffer)) {
-        $buffer = socket_read($client, 1024);
-        if ($buffer) {
-            $request .= $buffer;
+
+    echo pcntl_wait($status) . "\n";
+    echo $status . "\n";
+    // usleep(100000);
+}
+
+function forkWorker($server, $shareMemoryId, $shmopSize)
+{
+    $pid = pcntl_fork();
+
+    if ($pid == 0) {
+        $currentPid = posix_getpid();
+        // $len = strlen($currentPid);
+        // if ($len < 6) {
+        //     foreach (range(1, 6-$len) as $v) {
+        //         $currentPid .= '0';
+        //     }
+        // }
+        while (true) {
+            // 抢锁
+            // usleep(100000);
+            // $mutexPid = shmop_read($shareMemoryId, 0, $shmopSize);
+            // if ($mutexPid === false) {
+            //     continue;
+            // }
+            // if ($mutexPid !== '000000' && $mutexPid !== $currentPid) {
+            //     continue;
+            // }
+            // $wRes = shmop_write($shareMemoryId, (string)$currentPid, 0);
+            // if ($wRes === false) {
+            //     continue;
+            // }
+            // $mutexPid = shmop_read($shareMemoryId, 0, $shmopSize);
+            // if ($mutexPid !== $currentPid) {
+            //     continue;
+            // }
+            // echo "{$currentPid} 抢锁成功" . "\n";
+
+            // accept
+            $client = socket_accept($server);
+            if (! $client) {
+                continue;
+            }
+            $request = '';
+            $buf = '';
+            // $i = 0;
+            do {
+                // $i++;
+                $res = socket_recv($client, $buf, 1024, MSG_DONTWAIT);
+                if ($buf) {
+                    $request .= $buf;
+                }
+                // var_dump($currentPid, $i, $res);
+            } while ($res && $res == 1024);
+
+            $http = new HttpProtocol;
+            $http->originRequestContentString = $request;
+            $http->request($request);
+
+            $filename = dirname(__DIR__) . '/index.html';
+            $f = fopen($filename, 'r');
+            $data = fread($f, filesize($filename));
+            fclose($f);
+
+            $http->response($data);
+            socket_write($client, $http->responseData);
+            socket_close($client);
+            echo socket_strerror(socket_last_error($server)) . "\n";
+
+            // shmop_write($shareMemoryId, "000000", 0);
+            // echo "{$currentPid} 释放锁成功" . "\n";
         }
+        return;
+    } else {
+        
     }
-
-    $http = new HttpProtocol;
-    $http->originRequestContentString = $request;
-    $http->request($request);
-
-    $filename = dirname(__DIR__) . '/index.html';
-    $f = fopen($filename, 'r');
-    $data = fread($f, filesize($filename));
-    fclose($f);
-
-    $http->response($data);
-    socket_write($client, $http->responseData);
-    socket_close($client);
 }
 
 // 实现http协议
@@ -48,7 +132,8 @@ class HttpProtocol
     private $responseHead = [
         'http'         => 'HTTP/1.1 200 OK',
         'content-type' => 'Content-Type: text/html',
-        'server'       => 'Server: php/0.0.1'
+        'server'       => 'Server: php/0.0.1',
+        'pid'          => 'Pid: '
     ];
     private $responseBody = '';
     public  $responseData = '';
@@ -56,12 +141,12 @@ class HttpProtocol
     public function request($content = '')
     {
         if (empty($content)) {
-            // 异常
+            // exception
         
         }
         $this->originRequestContentList = explode("\r\n", $this->originRequestContentString);
         if (empty($this->originRequestContentList)) {
-            // 异常
+            // exception
 
         }
         foreach ($this->originRequestContentList as $k => $v) {
@@ -85,6 +170,7 @@ class HttpProtocol
     public function response($data)
     {
         $count = count($this->responseHead);
+        $this->responseHead['pid'] .= posix_getpid();
         $finalHead = '';
         foreach ($this->responseHead as $v) {
             $finalHead .= $v . "\r\n";
