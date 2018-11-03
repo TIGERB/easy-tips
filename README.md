@@ -145,7 +145,7 @@ fixing    | 查漏补缺修改中
 
   - 常用命令
   - 实现原理&与memcache区别
-  - 常见使用场景实现
+  - 常见用途
     - [缓存](https://github.com/TIGERB/easy-tips/blob/master/redis/cache.php)
     - [队列](https://github.com/TIGERB/easy-tips/blob/master/redis/queue.php)
     - [悲观锁](https://github.com/TIGERB/easy-tips/blob/master/redis/pessmistic-lock.php)
@@ -254,6 +254,153 @@ fixing    | 查漏补缺修改中
   - shell
 
 - 高并发相关(not-start)
+
+---
+
+## PHP基础学习
+
+### 符合PSR的PHP编程规范(含个人建议)
+
+#### [实例](https://github.com/TIGERB/easy-tips/blob/master/php/standard.php)
+
+#### [文档](https://github.com/TIGERB/easy-tips/blob/master/php/standard.md)
+
+#### [经验](https://github.com/TIGERB/easy-tips/blob/master/php/artisan.md)
+
+#### [记一些坑](https://github.com/TIGERB/easy-tips/blob/master/pit.md#记一些坑)
+
+## Mysql
+
+### [常用sql语句](https://github.com/TIGERB/easy-tips/blob/master/mysql/sql.md)
+
+### [引擎](https://github.com/TIGERB/easy-tips/blob/master/mysql/base.md#引擎)
+
+### [事务](https://github.com/TIGERB/easy-tips/blob/master/mysql/base.md#事务)
+
+### [索引](https://github.com/TIGERB/easy-tips/blob/master/mysql/base.md#索引)
+
+### [锁](https://github.com/TIGERB/easy-tips/blob/master/mysql/base.md#锁)
+
+## Redis
+
+### 常见用途
+
+#### [缓存](https://github.com/TIGERB/easy-tips/blob/master/redis/cache.php)
+
+#### [队列](https://github.com/TIGERB/easy-tips/blob/master/redis/queue.php)
+
+#### [悲观锁](https://github.com/TIGERB/easy-tips/blob/master/redis/pessmistic-lock.php)
+
+#### [乐观锁](https://github.com/TIGERB/easy-tips/blob/master/redis/optimistic-lock.php)
+
+#### [订阅/推送](https://github.com/TIGERB/easy-tips/blob/master/redis/subscribe-publish)
+
+## Docker
+
+### [redis主从搭建](https://github.com/TIGERB/easy-tips/blob/master/docker/redis-master-slave/README.md)
+
+### [mysql主从搭建](https://github.com/TIGERB/easy-tips/blob/master/docker/mysql-master-slave/README.md)
+
+### [codis环境](https://github.com/TIGERB/easy-tips/blob/master/docker/codis/README.md)
+
+## 设计模式
+
+### [概念](https://github.com/TIGERB/easy-tips/blob/master/patterns/thought.md#设计模式)
+
+#### [单例模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/singleton/test.php)
+
+
+#### [工厂模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/factory/test.php)
+
+
+#### [抽象工厂模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/factoryAbstract/test.php)
+
+
+#### [原型模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/prototype/test.php)
+
+
+#### [建造者模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/produce/test.php)
+
+### 结构型模式实例
+
+#### [桥接模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/bridge/test.php)
+
+#### [享元模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/flyweight/test.php)
+
+#### [外观模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/facade/test.php)
+
+#### [适配器模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/adapter/test.php)
+
+#### [装饰器模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/decorator/test.php)
+
+#### [组合模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/composite/test.php)
+
+#### [代理模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/proxy/test.php)
+
+#### [过滤器模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/filter/test.php)
+
+
+### 行为型模式实例
+
+#### [模板模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/template/test.php)
+
+#### [策略模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/strategy/test.php)
+
+#### [状态模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/state/test.php)
+
+#### [观察者模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/observer/test.php)
+
+#### [责任链模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/chainOfResponsibility/test.php)
+
+#### [访问者模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/visitor/test.php)
+
+#### [解释器模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/interpreter/test.php)
+
+#### [备忘录模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/memento/test.php)
+
+#### [命令模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/command/test.php)
+
+#### [迭代器模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/iterator/test.php)
+
+#### [中介者器模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/mediator/test.php)
+
+#### [空对象模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/nullObject/test.php)
+
+## [数据结构(doing)](https://github.com/TIGERB/easy-tips/blob/master/data-structure.md)
+
+## 算法
+
+### 排序算法
+
+#### [冒泡排序](https://github.com/TIGERB/easy-tips/blob/master/algorithm/sort/bubble.php)
+
+#### [快速排序](https://github.com/TIGERB/easy-tips/blob/master/algorithm/sort/quick.php)
+
+#### [选择排序](https://github.com/TIGERB/easy-tips/blob/master/algorithm/sort/select.php)
+
+#### [插入排序](https://github.com/TIGERB/easy-tips/blob/master/algorithm/sort/insert.php)
+
+#### [归并排序](https://github.com/TIGERB/easy-tips/blob/master/algorithm/sort/merge.php)
+
+#### [希尔排序](https://github.com/TIGERB/easy-tips/blob/master/algorithm/sort/shell.php)
+
+#### [基数排序](https://github.com/TIGERB/easy-tips/blob/master/algorithm/sort/radix.php)
+
+## 网络基础
+
+### [互联网协议概述](https://github.com/TIGERB/easy-tips/blob/master/network/internet-protocol.md#互联网协议)
+
+### [client和nginx简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/network/nginx.md#client和nginx简易交互过程)
+
+### [nginx和php-fpm简易交互过程](https://github.com/TIGERB/easy-tips/blob/master/network/nginx.md#nginx和php简易交互过程)
+
+### [http](https://github.com/TIGERB/easy-tips/blob/master/network/http.md)
+
+## 计算机基础
+
+### [linux常用命令](https://github.com/TIGERB/easy-tips/blob/master/linux/command.md)
+
+---
 
 ## 测试用例
 
