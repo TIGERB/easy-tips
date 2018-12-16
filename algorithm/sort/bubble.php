@@ -62,7 +62,7 @@
           $value[$i+1] = $tmp;
         }
       }
-      $index = $last;
+      $index = !$flag ? : $last;
     }
 
     return $value;
