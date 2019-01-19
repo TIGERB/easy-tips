@@ -39,6 +39,10 @@
 
 > 一个php技术栈后端猿的知识储备仓库
 
+<p align="center">
+  <img src="http://cdn.tigerb.cn/wechat-blog-qrcode.jpg" width="200px">
+</p>
+
 ## 前言
 
 基础不牢，地动山摇，谨以此句提醒自己。
@@ -255,7 +259,9 @@ fixing    | 查漏补缺修改中
 
 - 高并发相关(not-start)
 
----
+----------------------------------
+
+> 索引目录 方便Dash等文档工具快速查找内容
 
 ## PHP基础学习
 
