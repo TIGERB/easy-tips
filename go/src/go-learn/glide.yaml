@@ -1,2 +1,6 @@
 package: go-learn
-import: []
+import:
+- package: github.com/gomodule/redigo
+  version: ~2.0.0
+  subpackages:
+  - redis
