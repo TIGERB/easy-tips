@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  mysql-master:
+      container_name: nginx-http2
+      build: ./
+      volumes:
+        - ./cert:/etc/nginx/conf.d/cert
+        - ./http2.tigerb.cn.conf:/etc/nginx/conf.d/http2.tigerb.cn.conf
+      ports:
+        - "80:80"
+        - "443:443"
+      privileged: true
