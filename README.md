@@ -40,7 +40,7 @@
 > 一个php技术栈后端猿的知识储备仓库
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/wechat-blog-qrcode.jpg" width="200px">
+  <img src="http://cdn.tigerb.cn/wechat-blog-qrcode.jpg?imageMogr2/thumbnail/260x260!/format/webp/blur/1x0/quality/90|imageslim" width="200px">
 </p>
 
 ## 前言
