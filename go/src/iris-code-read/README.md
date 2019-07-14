@@ -181,10 +181,10 @@ type PreStartupHandler func()
 // 比如校验用户是否登陆逻辑
 type PreRequestHandler func()
 
-// PostRequestHandler 
+// AfterRequestHandler 
 // 后置**请求**handler 
 // 可以定义一些接口请求的后置逻辑(同步或异步任务或同步+异步) 比如对一致性要求不高的 异步刷新缓存到db
-type PostRequestHandler func()
+type AfterRequestHandler func()
 
 type BusinessHandler func()
 
@@ -192,9 +192,9 @@ type BusinessHandler func()
 type EasyRouter struct  {
     Method string
     Path string
-    PreStartupHandles  []PreStartupHandler
-    PreRequestHandles  []PreRequestHandler
-    PostRequestHandles []PostRequestHandler
+    PreStartupHandles   []PreStartupHandler
+    PreRequestHandles   []PreRequestHandler
+    AfterRequestHandles []AfterRequestHandler
     BusinessHandle BusinessHandler
 }
 
