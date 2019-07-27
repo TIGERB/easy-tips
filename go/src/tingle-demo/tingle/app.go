@@ -1,14 +1,14 @@
 package tingle
 
 import (
-	"fmt"
 	"net/http"
+	"strings"
 	"sync"
 )
 
 const (
 	// DefalutPort 默认端口
-	DefalutPort = "6666"
+	DefalutPort = "8088"
 )
 
 // Tingle Golang Framework
@@ -18,6 +18,7 @@ type Tingle struct {
 	logger      *Logger
 	server      *http.Server
 	contextPool *sync.Pool
+	middlewares []Handler
 }
 
 // Handle 注册用户路由请求
@@ -26,6 +27,11 @@ type Tingle struct {
 // handle UserHandler
 func (tingle *Tingle) Handle(method string, path string, handles ...*UserHandler) {
 	tingle.router.Add(method, path, handles)
+}
+
+// RegisterMW 注册中间件
+func (tingle *Tingle) RegisterMW(handlers ...Handler) {
+	tingle.middlewares = append(tingle.middlewares, handlers...)
 }
 
 // Run 启动框架
@@ -40,7 +46,6 @@ func (tingle *Tingle) Run(addr string) {
 
 // ServeHTTP 实现http.handler接口
 func (tingle *Tingle) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("1")
 	context := tingle.contextPool.Get().(*Context)
 	context.Request = r
 	context.Response = w
@@ -49,11 +54,26 @@ func (tingle *Tingle) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 // handleHTTPRequest
 func (tingle *Tingle) handleHTTPRequest(context *Context) {
-	tree, ok := tingle.router.Trees[context.Request.Method+"-"+context.Request.URL.Path]
-	fmt.Println(*tree)
+	key := strings.ToLower(context.Request.Method) + "-" + context.Request.URL.Path
+	tree, ok := tingle.router.Trees[key]
 	if !ok {
-		context.Response.Header().Set("Status Code", "404 Not Found")
+		context.Response.WriteHeader(404)
 	}
+
+	// 执行中间件
+	var nullHandler Handler
+	if len(tingle.middlewares) == 0 {
+		panic("middlewares is empty")
+	}
+	for k, handler := range tingle.middlewares {
+		if k == 0 {
+			nullHandler = handler
+			continue
+		}
+		tingle.middlewares[k-1].SetNext(handler)
+	}
+	nullHandler.Run(&Context{})
+
 	for _, h := range tree.UserHandles {
 		(*h)(context)
 	}
@@ -72,5 +92,17 @@ func New() *Tingle {
 	t.contextPool.New = func() interface{} {
 		return new(Context)
 	}
+	return t
+}
+
+// NewWithDefaultMW 创建Tingle框架实例并注册默认的中间件
+// 1. 默认注册goroutine panic recover中间件
+// 2. 默认注册请求访问日志(access log)中间件
+func NewWithDefaultMW() *Tingle {
+	t := New()
+	t.RegisterMW(
+		&NullHandler{},
+		&RecoverHandler{},
+		&AccessLogHandler{})
 	return t
 }

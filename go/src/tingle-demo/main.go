@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"tingle-demo/tingle"
 )
 
@@ -10,8 +9,7 @@ func main() {
 	ping = func(c *tingle.Context) {
 		c.JSON("hello tingle!")
 	}
-	t := tingle.New()
+	t := tingle.NewWithDefaultMW()
 	t.Handle("get", "/ping", &ping)
-	t.Run(":6666")
-	fmt.Println("aaa")
+	t.Run(":8088")
 }

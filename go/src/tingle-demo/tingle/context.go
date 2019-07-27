@@ -14,5 +14,6 @@ type Context struct {
 func (context *Context) JSON(content string) {
 	context.Response.Header().Set("Content-Type", "Application/json")
 	context.Response.Header().Set("Charset", "utf-8")
+	context.Response.WriteHeader(200)
 	context.Response.Write([]byte(content))
 }
