@@ -227,9 +227,9 @@
   + [linux常用命令](https://github.com/TIGERB/easy-tips/blob/master/linux/command.md)
   + shell
 - Docker
-  + [redis主从搭建](https://github.com/TIGERB/easy-tips/blob/master/docker/redis-master-slave/README.md)
-  + [mysql主从搭建](https://github.com/TIGERB/easy-tips/blob/master/docker/mysql-master-slave/README.md)
-  + [codis环境](https://github.com/TIGERB/easy-tips/blob/master/docker/codis/README.md)
+  + [redis主从搭建](https://github.com/TIGERB/easy-tips/blob/master/docker-file/redis-master-slave/README.md)
+  + [mysql主从搭建](https://github.com/TIGERB/easy-tips/blob/master/docker-file/mysql-master-slave/README.md)
+  + [codis环境](https://github.com/TIGERB/easy-tips/blob/master/docker-file/codis/README.md)
   + mysql多主环境
   + kafka的环境搭建和使用
   + rabbitMQ的环境搭建和使用
