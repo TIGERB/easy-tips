@@ -47,20 +47,31 @@ func (productList *ProductList) MakeData(c *Context) (interface{}, error) {
 	return productList, nil
 }
 
-func main() {
-	c := &Context{
-		URI: "cart/list",
-	}
-	var pageObject PageInterface
-	switch c.URI {
+// PageFactory 构建页面对象的简单工厂
+type PageFactory struct {
+	Ctx *Context
+}
+
+// Get 获取对象
+func (p *PageFactory) Get() PageInterface {
+	switch p.Ctx.URI {
 	case CartListConst:
-		pageObject = &CartList{}
+		return &CartList{}
 	case ProductListConst:
-		pageObject = &ProductList{}
+		return &ProductList{}
 
 	default:
 		panic("不支持的页面")
 	}
+}
 
-	pageObject.MakeData(c)
+// 客户端使用示例
+func main() {
+	ctx := &Context{
+		URI: "cart/list",
+	}
+	pageFactory := &PageFactory{
+		Ctx: ctx,
+	}
+	pageFactory.Get().MakeData(ctx)
 }
