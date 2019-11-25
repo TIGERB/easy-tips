@@ -1,5 +1,11 @@
 package main
 
+//---------------
+//叼叼的设计模式(Go享版)
+//策略模式
+//@auhtor TIGERB<https://github.com/TIGERB>
+//---------------
+
 import "fmt"
 
 // SmsServiceInterface SmsServiceInterface

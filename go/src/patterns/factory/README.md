@@ -19,10 +19,10 @@ package main
 import "fmt"
 
 const (
-	// CartListConst 购物车列表页面
-	CartListConst = "cart/list"
-	// ProductListConst 商品列表页面
-	ProductListConst = "product/list"
+	// CartConst 购物车列表页面
+	CartConst = "cart/list"
+	// ProductConst 商品列表页面
+	ProductConst = "product/list"
 )
 
 // Context 请求上下文
@@ -35,32 +35,32 @@ type PageInterface interface {
 	MakeData(c *Context) (interface{}, error)
 }
 
-// CartList 购物车页面数据对象
-type CartList struct {
+// Cart 购物车页面数据对象
+type Cart struct {
 	header      interface{}
-	cartSkuList interface{}
+	
 	footer      interface{}
 }
 
 // MakeData 构建数据对象
-func (cartList *CartList) MakeData(c *Context) (interface{}, error) {
+func (Cart *Cart) MakeData(c *Context) (interface{}, error) {
 	// 构建数据的页面代码...
-	fmt.Println("生成购物车页面数据...")
-	return cartList, nil
+	fmt.Println("生成购物车静态页面数据对象...")
+	return Cart, nil
 }
 
-// ProductList 购物车页面数据对象
-type ProductList struct {
+// Product Spu页面数据对象
+type Product struct {
 	header  interface{}
-	SpuList interface{}
+	
 	footer  interface{}
 }
 
 // MakeData 构建数据对象
-func (productList *ProductList) MakeData(c *Context) (interface{}, error) {
+func (Product *Product) MakeData(c *Context) (interface{}, error) {
 	// 构建数据的页面代码...
-	fmt.Println("生成spu列表数据...")
-	return productList, nil
+	fmt.Println("生成spu详情静态页面数据对象...")
+	return Product, nil
 }
 
 func main() {
@@ -69,10 +69,10 @@ func main() {
 	}
 	var pageObject PageInterface
 	switch c.URI {
-	case CartListConst:
-		pageObject = &CartList{}
-	case ProductListConst:
-		pageObject = &ProductList{}
+	case CartConst:
+		pageObject = &Cart{}
+	case ProductConst:
+		pageObject = &Product{}
 
 	default:
 		panic("不支持的页面")
@@ -94,10 +94,10 @@ package main
 import "fmt"
 
 const (
-	// CartListConst 购物车列表页面
-	CartListConst = "cart/list"
-	// ProductListConst 商品列表页面
-	ProductListConst = "product/list"
+	// CartConst 购物车列表页面
+	CartConst = "cart/list"
+	// ProductConst 商品列表页面
+	ProductConst = "product/list"
 )
 
 // Context 请求上下文
@@ -110,32 +110,32 @@ type PageInterface interface {
 	MakeData(c *Context) (interface{}, error)
 }
 
-// CartList 购物车页面数据对象
-type CartList struct {
+// Cart 购物车页面数据对象
+type Cart struct {
 	header      interface{}
-	cartSkuList interface{}
+	
 	footer      interface{}
 }
 
 // MakeData 构建数据对象
-func (cartList *CartList) MakeData(c *Context) (interface{}, error) {
+func (Cart *Cart) MakeData(c *Context) (interface{}, error) {
 	// 构建数据的页面代码...
-	fmt.Println("生成购物车页面数据...")
-	return cartList, nil
+	fmt.Println("生成购物车静态页面数据对象...")
+	return Cart, nil
 }
 
-// ProductList 购物车页面数据对象
-type ProductList struct {
+// Product Spu页面数据对象
+type Product struct {
 	header  interface{}
-	SpuList interface{}
+	
 	footer  interface{}
 }
 
 // MakeData 构建数据对象
-func (productList *ProductList) MakeData(c *Context) (interface{}, error) {
+func (Product *Product) MakeData(c *Context) (interface{}, error) {
 	// 构建数据的页面代码...
-	fmt.Println("生成spu列表数据...")
-	return productList, nil
+	fmt.Println("生成spu详情静态页面数据对象...")
+	return Product, nil
 }
 
 type PageFactory struct{}
