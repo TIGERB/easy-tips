@@ -9,8 +9,8 @@ import (
 
 // 定时往桶里放n枚令牌
 
-// Bucket Bucket
-type Bucket struct {
+// TokenBucket TokenBucket
+type TokenBucket struct {
 	interval time.Duration
 	buf      int64
 	incre    int64
@@ -22,7 +22,7 @@ type Bucket struct {
 }
 
 // GetToken GetToken
-func (b *Bucket) GetToken() error {
+func (b *TokenBucket) GetToken() error {
 	atomic.AddInt64(&b.qps, 1)
 	if b.buf <= b.min {
 		return errors.New("no token")
@@ -33,8 +33,8 @@ func (b *Bucket) GetToken() error {
 }
 
 func main() {
-	bucket := &Bucket{
-		interval: time.Duration(100) * time.Millisecond,
+	bucket := &TokenBucket{
+		interval: time.Duration(2000) * time.Millisecond,
 		buf:      0,
 		incre:    10,
 		max:      100,
@@ -44,7 +44,7 @@ func main() {
 	go (func() {
 		ticker := time.NewTicker(bucket.interval)
 		for v := range ticker.C {
-			fmt.Println(fmt.Sprintf("push token into the buckek %s", v.Format("2006-01-02 15:04:05")))
+			fmt.Println(fmt.Sprintf("push token into the bucket %s", v.Format("2006-01-02 15:04:05")))
 			if bucket.buf >= bucket.max {
 				fmt.Println("overflow and throw token")
 				continue
@@ -61,10 +61,10 @@ func main() {
 			now := time.Now()
 			if prev.Unix() == now.Unix() {
 				atomic.AddInt64(&qps, 1)
-				// fmt.Printf("qps %d \n", qps)
+				fmt.Printf("qps %d \n", qps)
 			} else {
 				qps = 1
-				// fmt.Printf("qps %d \n", qps)
+				fmt.Printf("qps %d \n", qps)
 			}
 			surplus := now.Sub(prev)
 			prev = now
