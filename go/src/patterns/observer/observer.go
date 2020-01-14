@@ -1,10 +1,10 @@
 package main
 
-//---------------
+//------------------------------------------------------------
 //叼叼的设计模式(Go享版)
 //观察者模式
 //@auhtor TIGERB<https://github.com/TIGERB>
-//---------------
+//------------------------------------------------------------
 
 import "fmt"
 
@@ -127,8 +127,7 @@ func (Observable *ObservableOrderCreate) Notify() error {
 func main() {
 	// 具体使用
 	(&ObservableOrderCreate{}).Init(&Request{}).
-		// 观察者观察被观察者
-		Attach(
+		Attach( // 观察者观察被观察者
 			&Param{},
 			&Address{},
 			&Check{},
@@ -137,6 +136,5 @@ func main() {
 			&Address{},
 			&Log{},
 		).
-		// 被观察者通知观察者
-		Notify()
+		Notify() // 被观察者通知观察者
 }

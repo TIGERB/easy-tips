@@ -5,11 +5,11 @@ import (
 	"runtime"
 )
 
-//---------------
+//------------------------------------------------------------
 //叼叼的设计模式(Go享版)
 //模板模式
 //@auhtor TIGERB<https://github.com/TIGERB>
-//---------------
+//------------------------------------------------------------
 
 // Context 上下文
 type Context struct {
@@ -86,6 +86,8 @@ type Lottery struct {
 
 // Run 抽奖算法
 func (lottery *Lottery) Run(ctx *Context) (err error) {
+	// 参数校验
+	// 获取活动信息
 	if err := lottery.ConcreteBehavior.Check(ctx); err != nil {
 		return err
 	}
