@@ -196,7 +196,7 @@ function format() {
 }
 ```
 
-上面这样的写法没有任何的问题，最小单元化我们的代码片段，但是如果这个format函数或者方法只是doSomething使用呢？我通常会像下面这么写，为什么？因为我认为在这种上下文的环境中format和doSomething的一个子集。
+上面这样的写法没有任何的问题，最小单元化我们的代码片段，但是如果这个format函数或者方法只是doSomething使用呢？我通常会像下面这么写，为什么？因为我认为在这种上下文的环境中format是doSomething的一个子集。
 
 ```
 function doSomething() {
