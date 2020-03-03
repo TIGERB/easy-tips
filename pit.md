@@ -2,13 +2,17 @@
 
 ```
 //phpfpm配置
-
+# pm = static 时
 pm.max_children = 最大并发数
+# pm = dynamic 时
+pm.max_spare_servers = 最大并发数
 
 详细的答案：
-pm.max_children 表示 php-fpm 能启动的子进程的最大数量。
+pm.max_children 表示 php-fpm 在 static 模式下能启动的子进程的最大数量。
+pm.max_spare_servers 表示 php-fpm 在 dynamic 模式下能启动的子进程的最大数量。
 因为 php-fpm 是多进程单线程同步模式，即一个子进程同时最多处理一个请求，所以子进程数等于最大并发数。
-但是实际使用中一般不用考虑，因为php默认配置为动态均衡的子进程管理，不用手动设置这些配置。
+
+但是实际使用中一般不用考虑，因为 php 默认配置为 dynamic 的子进程管理，默认的 pm.max_spare_servers 配置通常够用了，不用手动设置这些配置。
 ```
 
 ```
@@ -60,7 +64,7 @@ if (class_exists('\CURLFile')) {
 反序列化：把字符串转成原变量
 
 函数：
-序列化：serialize, json_encode(不能序列化对象)
+序列化：serialize, json_encode(不能序列化对象的方法，序列化对象时只能序列化对象的 public 属性)
 反序列化：unserialize, json_decode
 ```
 
