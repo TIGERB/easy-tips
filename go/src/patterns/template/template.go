@@ -6,159 +6,223 @@ import (
 )
 
 //------------------------------------------------------------
-//叼叼的设计模式(Go享版)
+//我的代码没有`else`系列
 //模板模式
 //@auhtor TIGERB<https://github.com/TIGERB>
 //------------------------------------------------------------
 
 // Context 上下文
 type Context struct {
+	ActInfo *ActInfo
 }
 
-// BehaviorInterface 抽奖算法的抽象算法
+// ActInfo 上下文
+type ActInfo struct {
+	// 活动抽奖类型1: 按时间抽奖 2: 按抽奖次数抽奖 3:按数额范围区间抽奖
+	ActivityType int32
+	// 其他字段略
+}
+
+// BehaviorInterface 不同抽奖类型的行为差异的抽象接口
 type BehaviorInterface interface {
-	Check(ctx *Context) error
-	GetNodeByRule(ctx *Context) error
-	CheckJoinLimit(ctx *Context) error
-	ConsumePoints(ctx *Context) error
+	// 其他参数校验(不同活动类型实现不同)
+	CheckParams(ctx *Context) error
+	// 获取node奖品信息(不同活动类型实现不同)
+	GetPrizesByNode(ctx *Context) error
 }
 
-// OrderPriceBehavior 具体抽奖行为
-// 订单金额刮奖
-type OrderPriceBehavior struct{}
+// TimeDraw 具体抽奖行为
+// 按时间抽奖类型 比如红包雨
+type TimeDraw struct{}
 
-// Check Check
-func (orderPrice *OrderPriceBehavior) Check(ctx *Context) error {
-	fmt.Println(runFuncName())
-	return nil
+// CheckParams 其他参数校验(不同活动类型实现不同)
+func (draw TimeDraw) CheckParams(ctx *Context) (err error) {
+	fmt.Println(runFuncName(), "按时间抽奖类型:特殊参数校验...")
+	return
 }
 
-// GetNodeByRule GetNodeByRule
-func (orderPrice *OrderPriceBehavior) GetNodeByRule(ctx *Context) error {
-	fmt.Println(runFuncName())
-	return nil
+// GetPrizesByNode 获取node奖品信息(不同活动类型实现不同)
+func (draw TimeDraw) GetPrizesByNode(ctx *Context) (err error) {
+	fmt.Println(runFuncName(), "do nothing(抽取该场次的奖品即可，无需其他逻辑)...")
+	return
 }
 
-// CheckJoinLimit CheckJoinLimit
-func (orderPrice *OrderPriceBehavior) CheckJoinLimit(ctx *Context) error {
-	fmt.Println(runFuncName())
-	return nil
+// TimesDraw 具体抽奖行为
+// 按抽奖次数抽奖类型 比如答题闯关
+type TimesDraw struct{}
+
+// CheckParams 其他参数校验(不同活动类型实现不同)
+func (draw TimesDraw) CheckParams(ctx *Context) (err error) {
+	fmt.Println(runFuncName(), "按抽奖次数抽奖类型:特殊参数校验...")
+	return
 }
 
-// ConsumePoints ConsumePoints
-func (orderPrice *OrderPriceBehavior) ConsumePoints(ctx *Context) error {
-	fmt.Println(runFuncName())
-	return nil
+// GetPrizesByNode 获取node奖品信息(不同活动类型实现不同)
+func (draw TimesDraw) GetPrizesByNode(ctx *Context) (err error) {
+	fmt.Println(runFuncName(), "1. 判断是该用户第几次抽奖...")
+	fmt.Println(runFuncName(), "2. 获取对应node的奖品信息...")
+	fmt.Println(runFuncName(), "3. 复写原所有奖品信息(抽取该node节点的奖品)...")
+	return
 }
 
-// TimesBehavior 具体抽奖行为
-// 按抽奖次数抽奖
-type TimesBehavior struct{}
+// AmountDraw 具体抽奖行为
+// 按数额范围区间抽奖 比如订单金额刮奖
+type AmountDraw struct{}
 
-// Check Check
-func (times *TimesBehavior) Check(ctx *Context) error {
-	fmt.Println(runFuncName())
-	return nil
+// CheckParams 其他参数校验(不同活动类型实现不同)
+func (draw *AmountDraw) CheckParams(ctx *Context) (err error) {
+	fmt.Println(runFuncName(), "按数额范围区间抽奖:特殊参数校验...")
+	return
 }
 
-// GetNodeByRule GetNodeByRule
-func (times *TimesBehavior) GetNodeByRule(ctx *Context) error {
-	fmt.Println(runFuncName())
-	return nil
-}
-
-// CheckJoinLimit CheckJoinLimit
-func (times *TimesBehavior) CheckJoinLimit(ctx *Context) error {
-	fmt.Println(runFuncName())
-	return nil
-}
-
-// ConsumePoints ConsumePoints
-func (times *TimesBehavior) ConsumePoints(ctx *Context) error {
-	fmt.Println(runFuncName())
-	return nil
+// GetPrizesByNode 获取node奖品信息(不同活动类型实现不同)
+func (draw *AmountDraw) GetPrizesByNode(ctx *Context) (err error) {
+	fmt.Println(runFuncName(), "1. 判断属于哪个数额区间...")
+	fmt.Println(runFuncName(), "2. 获取对应node的奖品信息...")
+	fmt.Println(runFuncName(), "3. 复写原所有奖品信息(抽取该node节点的奖品)...")
+	return
 }
 
 // Lottery 抽奖模板
 type Lottery struct {
-	ConcreteBehavior BehaviorInterface
+	// 不同抽奖类型的抽象行为
+	concreteBehavior BehaviorInterface
 }
 
 // Run 抽奖算法
 func (lottery *Lottery) Run(ctx *Context) (err error) {
-	// 参数校验
-	// 获取活动信息
-	if err := lottery.ConcreteBehavior.Check(ctx); err != nil {
+	// 具体方法：校验活动编号(serial_no)是否存在、并获取活动信息
+	if err = lottery.checkSerialNo(ctx); err != nil {
 		return err
 	}
-	if err := lottery.GetRule(ctx); err != nil {
+
+	// 获取当前抽奖类型的具体行为
+	switch ctx.ActInfo.ActivityType {
+	case 1:
+		// 按时间抽奖
+		lottery.concreteBehavior = &TimeDraw{}
+	case 2:
+		// 按抽奖次数抽奖
+		lottery.concreteBehavior = &TimesDraw{}
+	case 3:
+		// 按数额范围区间抽奖
+		lottery.concreteBehavior = &AmountDraw{}
+	default:
+		return fmt.Errorf("不存在的活动类型")
+	}
+
+	// 具体方法：校验活动、场次是否正在进行
+	if err = lottery.checkStatus(ctx); err != nil {
 		return err
 	}
-	if err := lottery.ConcreteBehavior.GetNodeByRule(ctx); err != nil {
+
+	// 抽象方法：其他参数校验
+	if err = lottery.concreteBehavior.CheckParams(ctx); err != nil {
 		return err
 	}
-	if err := lottery.CheckTimes(ctx); err != nil {
+
+	// 具体方法：活动抽奖次数校验(同时扣减)
+	if err = lottery.checkTimesByAct(ctx); err != nil {
 		return err
 	}
-	if err := lottery.ConcreteBehavior.CheckJoinLimit(ctx); err != nil {
+
+	// 具体方法：活动是否需要消费积分
+	if err = lottery.consumePointsByAct(ctx); err != nil {
 		return err
 	}
-	if err := lottery.ConcreteBehavior.ConsumePoints(ctx); err != nil {
+
+	// 具体方法：场次抽奖次数校验(同时扣减)
+	if err = lottery.checkTimesBySession(ctx); err != nil {
 		return err
 	}
-	if err := lottery.GetPrize(ctx); err != nil {
+
+	// 具体方法：获取场次奖品信息
+	if err = lottery.getPrizesBySession(ctx); err != nil {
 		return err
 	}
-	if err := lottery.Draw(ctx); err != nil {
+
+	// 抽象方法：获取node奖品信息
+	if err = lottery.concreteBehavior.GetPrizesByNode(ctx); err != nil {
 		return err
 	}
-	if err := lottery.PackagePrizeInfo(ctx); err != nil {
+
+	// 具体方法：抽奖
+	if err = lottery.drawPrizes(ctx); err != nil {
 		return err
 	}
-	fmt.Println(runFuncName())
-	return nil
+
+	// 具体方法：奖品数量判断
+	if err = lottery.checkPrizesStock(ctx); err != nil {
+		return err
+	}
+
+	// 具体方法：组装奖品信息
+	if err = lottery.packagePrizeInfo(ctx); err != nil {
+		return err
+	}
+	return
 }
 
-// GetRule GetRule
-func (lottery *Lottery) GetRule(ctx *Context) error {
-	fmt.Println(runFuncName())
-	return nil
+// checkSerialNo 校验活动编号(serial_no)是否存在
+func (lottery *Lottery) checkSerialNo(ctx *Context) (err error) {
+	fmt.Println(runFuncName(), "校验活动编号(serial_no)是否存在、并获取活动信息...")
+	// 获取活动信息伪代码
+	ctx.ActInfo = &ActInfo{
+		ActivityType: 2,
+	}
+	return
 }
 
-// CheckTimes CheckTimes
-func (lottery *Lottery) CheckTimes(ctx *Context) error {
-	fmt.Println(runFuncName())
-	return nil
+// checkStatus 校验活动、场次是否正在进行
+func (lottery *Lottery) checkStatus(ctx *Context) (err error) {
+	fmt.Println(runFuncName(), "校验活动、场次是否正在进行...")
+	return
 }
 
-// GetPrize GetPrize
-func (lottery *Lottery) GetPrize(ctx *Context) error {
-	fmt.Println(runFuncName())
-	return nil
+// checkTimesByAct 活动抽奖次数校验
+func (lottery *Lottery) checkTimesByAct(ctx *Context) (err error) {
+	fmt.Println(runFuncName(), "活动抽奖次数校验...")
+	return
 }
 
-// Draw Draw
-func (lottery *Lottery) Draw(ctx *Context) error {
-	fmt.Println(runFuncName())
-	return nil
+// consumePointsByAct 活动是否需要消费积分
+func (lottery *Lottery) consumePointsByAct(ctx *Context) (err error) {
+	fmt.Println(runFuncName(), "活动是否需要消费积分...")
+	return
 }
 
-// PackagePrizeInfo PackagePrizeInfo
-func (lottery *Lottery) PackagePrizeInfo(ctx *Context) error {
-	fmt.Println(runFuncName())
-	return nil
+// checkTimesBySession 活动抽奖次数校验
+func (lottery *Lottery) checkTimesBySession(ctx *Context) (err error) {
+	fmt.Println(runFuncName(), "活动抽奖次数校验...")
+	return
+}
+
+// getPrizesBySession 获取场次奖品信息
+func (lottery *Lottery) getPrizesBySession(ctx *Context) (err error) {
+	fmt.Println(runFuncName(), "获取场次奖品信息...")
+	return
+}
+
+// drawPrizes 抽奖
+func (lottery *Lottery) drawPrizes(ctx *Context) (err error) {
+	fmt.Println(runFuncName(), "抽奖...")
+	return
+}
+
+// checkPrizesStock 奖品数量判断
+func (lottery *Lottery) checkPrizesStock(ctx *Context) (err error) {
+	fmt.Println(runFuncName(), "奖品数量判断...")
+	return
+}
+
+// packagePrizeInfo 组装奖品信息
+func (lottery *Lottery) packagePrizeInfo(ctx *Context) (err error) {
+	fmt.Println(runFuncName(), "组装奖品信息...")
+	return
 }
 
 func main() {
-	// 订单金额刮奖
-	(&Lottery{
-		ConcreteBehavior: &OrderPriceBehavior{},
-	}).Run(&Context{})
-
-	// 按抽奖次数抽奖
-	(&Lottery{
-		ConcreteBehavior: &TimesBehavior{},
-	}).Run(&Context{})
+	(&Lottery{}).Run(&Context{})
 }
 
 // 获取正在运行的函数名
