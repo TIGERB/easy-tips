@@ -42,7 +42,9 @@ type BehaviorInterface interface {
 
 // TimeDraw 具体抽奖行为
 // 按时间抽奖类型 比如红包雨
-type TimeDraw struct{}
+type TimeDraw struct {
+	Lottery
+}
 
 // checkParams 其他参数校验(不同活动类型实现不同)
 func (draw TimeDraw) checkParams(ctx *Context) (err error) {
@@ -58,7 +60,9 @@ func (draw TimeDraw) getPrizesByNode(ctx *Context) (err error) {
 
 // TimesDraw 具体抽奖行为
 // 按抽奖次数抽奖类型 比如答题闯关
-type TimesDraw struct{}
+type TimesDraw struct {
+	Lottery
+}
 
 // checkParams 其他参数校验(不同活动类型实现不同)
 func (draw TimesDraw) checkParams(ctx *Context) (err error) {
@@ -76,7 +80,9 @@ func (draw TimesDraw) getPrizesByNode(ctx *Context) (err error) {
 
 // AmountDraw 具体抽奖行为
 // 按数额范围区间抽奖 比如订单金额刮奖
-type AmountDraw struct{}
+type AmountDraw struct {
+	Lottery
+}
 
 // checkParams 其他参数校验(不同活动类型实现不同)
 func (draw *AmountDraw) checkParams(ctx *Context) (err error) {
@@ -95,11 +101,10 @@ func (draw *AmountDraw) getPrizesByNode(ctx *Context) (err error) {
 // Lottery 抽奖模板
 type Lottery struct {
 	// 不同抽奖类型的抽象行为
-	concreteBehavior BehaviorInterface
+	ConcreteBehavior BehaviorInterface
 }
 
 // Run 抽奖算法
-
 func (lottery *Lottery) Run(ctx *Context) (err error) {
 	// 具体方法：校验活动编号(serial_no)是否存在、并获取活动信息
 	if err = lottery.checkSerialNo(ctx); err != nil {
@@ -111,7 +116,7 @@ func (lottery *Lottery) Run(ctx *Context) (err error) {
 		return err
 	}
 
-	// “抽象方法”：其他参数校验
+	// ”抽象方法“：其他参数校验
 	if err = lottery.checkParams(ctx); err != nil {
 		return err
 	}
@@ -136,7 +141,7 @@ func (lottery *Lottery) Run(ctx *Context) (err error) {
 		return err
 	}
 
-	// “抽象方法”：获取node奖品信息
+	// ”抽象方法“：获取node奖品信息
 	if err = lottery.getPrizesByNode(ctx); err != nil {
 		return err
 	}
@@ -161,26 +166,6 @@ func (lottery *Lottery) Run(ctx *Context) (err error) {
 // checkSerialNo 校验活动编号(serial_no)是否存在
 func (lottery *Lottery) checkSerialNo(ctx *Context) (err error) {
 	fmt.Println(runFuncName(), "校验活动编号(serial_no)是否存在、并获取活动信息...")
-	// 获取活动信息伪代码
-	ctx.ActInfo = &ActInfo{
-		// 假设当前的活动类型为按抽奖次数抽奖
-		ActivityType: ConstActTypeTimes,
-	}
-
-	// 获取当前抽奖类型的具体行为
-	switch ctx.ActInfo.ActivityType {
-	case 1:
-		// 按时间抽奖
-		lottery.concreteBehavior = &TimeDraw{}
-	case 2:
-		// 按抽奖次数抽奖
-		lottery.concreteBehavior = &TimesDraw{}
-	case 3:
-		// 按数额范围区间抽奖
-		lottery.concreteBehavior = &AmountDraw{}
-	default:
-		return fmt.Errorf("不存在的活动类型")
-	}
 	return
 }
 
@@ -194,7 +179,7 @@ func (lottery *Lottery) checkStatus(ctx *Context) (err error) {
 // 不同场景变化的算法 转化为依赖抽象
 func (lottery *Lottery) checkParams(ctx *Context) (err error) {
 	// 实际依赖的接口的抽象方法
-	return lottery.concreteBehavior.checkParams(ctx)
+	return lottery.ConcreteBehavior.checkParams(ctx)
 }
 
 // checkTimesByAct 活动抽奖次数校验
@@ -225,7 +210,7 @@ func (lottery *Lottery) getPrizesBySession(ctx *Context) (err error) {
 // 不同场景变化的算法 转化为依赖抽象
 func (lottery *Lottery) getPrizesByNode(ctx *Context) (err error) {
 	// 实际依赖的接口的抽象方法
-	return lottery.concreteBehavior.getPrizesByNode(ctx)
+	return lottery.ConcreteBehavior.getPrizesByNode(ctx)
 }
 
 // drawPrizes 抽奖
@@ -247,7 +232,29 @@ func (lottery *Lottery) packagePrizeInfo(ctx *Context) (err error) {
 }
 
 func main() {
-	(&Lottery{}).Run(&Context{})
+	ctx := &Context{
+		ActInfo: &ActInfo{
+			ActivityType: ConstActTypeAmount,
+		},
+	}
+
+	switch ctx.ActInfo.ActivityType {
+	case ConstActTypeTime: // 按时间抽奖类型
+		instance := &TimeDraw{}
+		instance.ConcreteBehavior = instance
+		instance.Run(ctx)
+	case ConstActTypeTimes: // 按抽奖次数抽奖
+		instance := &TimesDraw{}
+		instance.ConcreteBehavior = instance
+		instance.Run(ctx)
+	case ConstActTypeAmount: // 按数额范围区间抽奖
+		instance := &AmountDraw{}
+		instance.ConcreteBehavior = instance
+		instance.Run(ctx)
+	default:
+		// 报错
+		return
+	}
 }
 
 // 获取正在运行的函数名
