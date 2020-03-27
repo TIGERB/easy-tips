@@ -19,6 +19,7 @@
 抽象类里定义好**算法的执行步骤**和**具体算法**，以及可能发生变化的算法定义为**抽象方法**。不同的子类继承该抽象类，并实现父类的抽象方法。
 
 模板模式的优势：
+
 - 不变的算法被继承复用：不变的部分高度封装、复用。
 - 变化的算法子类继承并具体实现：变化的部分子类只需要具体实现抽象的部分即可，方便扩展，且可无限扩展。
 
@@ -78,6 +79,7 @@
 > 注：流程不一定完全准确
 
 结论：
+
 - `主逻辑`是稳定不变的
 - `其他参数校验`和`获取node奖品信息`的算法是可变的
 
@@ -90,6 +92,7 @@
 #### 代码建模
 
 通过上面的分析我们可以得到：
+
 ```
 一个抽象类
 - 具体共有方法`Run`，里面定义了算法的执行步骤
@@ -110,6 +113,7 @@
 ```
 
 但是golang里面没有继承的概念，我们就把对抽象类里抽象方法的依赖转化成对接口`interface`里抽想方法的依赖，同时也可以利用`合成复用`的方式“继承”模板:
+
 ```
 抽象行为的接口`BehaviorInterface`(包含如下需要实现的方法)
 - 其他参数校验的方法`checkParams`
@@ -243,57 +247,57 @@ type Lottery struct {
 func (lottery *Lottery) Run(ctx *Context) (err error) {
 	// 具体方法：校验活动编号(serial_no)是否存在、并获取活动信息
 	if err = lottery.checkSerialNo(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// 具体方法：校验活动、场次是否正在进行
 	if err = lottery.checkStatus(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// ”抽象方法“：其他参数校验
 	if err = lottery.checkParams(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// 具体方法：活动抽奖次数校验(同时扣减)
 	if err = lottery.checkTimesByAct(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// 具体方法：活动是否需要消费积分
 	if err = lottery.consumePointsByAct(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// 具体方法：场次抽奖次数校验(同时扣减)
 	if err = lottery.checkTimesBySession(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// 具体方法：获取场次奖品信息
 	if err = lottery.getPrizesBySession(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// ”抽象方法“：获取node奖品信息
 	if err = lottery.getPrizesByNode(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// 具体方法：抽奖
 	if err = lottery.drawPrizes(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// 具体方法：奖品数量判断
 	if err = lottery.checkPrizesStock(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// 具体方法：组装奖品信息
 	if err = lottery.packagePrizeInfo(ctx); err != nil {
-		return err
+	return err
 	}
 	return
 }
@@ -303,23 +307,23 @@ func (lottery *Lottery) checkSerialNo(ctx *Context) (err error) {
 	fmt.Println(runFuncName(), "校验活动编号(serial_no)是否存在、并获取活动信息...")
 	// 获取活动信息伪代码
 	ctx.ActInfo = &ActInfo{
-		// 假设当前的活动类型为按抽奖次数抽奖
-		ActivityType: ConstActTypeTimes,
+	// 假设当前的活动类型为按抽奖次数抽奖
+	ActivityType: ConstActTypeTimes,
 	}
 
 	// 获取当前抽奖类型的具体行为
 	switch ctx.ActInfo.ActivityType {
 	case 1:
-		// 按时间抽奖
-		lottery.concreteBehavior = &TimeDraw{}
+	// 按时间抽奖
+	lottery.concreteBehavior = &TimeDraw{}
 	case 2:
-		// 按抽奖次数抽奖
-		lottery.concreteBehavior = &TimesDraw{}
+	// 按抽奖次数抽奖
+	lottery.concreteBehavior = &TimesDraw{}
 	case 3:
-		// 按数额范围区间抽奖
-		lottery.concreteBehavior = &AmountDraw{}
+	// 按数额范围区间抽奖
+	lottery.concreteBehavior = &AmountDraw{}
 	default:
-		return fmt.Errorf("不存在的活动类型")
+	return fmt.Errorf("不存在的活动类型")
 	}
 	return
 }
@@ -538,57 +542,57 @@ type Lottery struct {
 func (lottery *Lottery) Run(ctx *Context) (err error) {
 	// 具体方法：校验活动编号(serial_no)是否存在、并获取活动信息
 	if err = lottery.checkSerialNo(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// 具体方法：校验活动、场次是否正在进行
 	if err = lottery.checkStatus(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// ”抽象方法“：其他参数校验
 	if err = lottery.checkParams(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// 具体方法：活动抽奖次数校验(同时扣减)
 	if err = lottery.checkTimesByAct(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// 具体方法：活动是否需要消费积分
 	if err = lottery.consumePointsByAct(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// 具体方法：场次抽奖次数校验(同时扣减)
 	if err = lottery.checkTimesBySession(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// 具体方法：获取场次奖品信息
 	if err = lottery.getPrizesBySession(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// ”抽象方法“：获取node奖品信息
 	if err = lottery.getPrizesByNode(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// 具体方法：抽奖
 	if err = lottery.drawPrizes(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// 具体方法：奖品数量判断
 	if err = lottery.checkPrizesStock(ctx); err != nil {
-		return err
+	return err
 	}
 
 	// 具体方法：组装奖品信息
 	if err = lottery.packagePrizeInfo(ctx); err != nil {
-		return err
+	return err
 	}
 	return
 }
@@ -663,27 +667,27 @@ func (lottery *Lottery) packagePrizeInfo(ctx *Context) (err error) {
 
 func main() {
 	ctx := &Context{
-		ActInfo: &ActInfo{
-			ActivityType: ConstActTypeAmount,
-		},
+	ActInfo: &ActInfo{
+	ActivityType: ConstActTypeAmount,
+	},
 	}
 
 	switch ctx.ActInfo.ActivityType {
 	case ConstActTypeTime: // 按时间抽奖类型
-		instance := &TimeDraw{}
-		instance.ConcreteBehavior = instance
-		instance.Run(ctx)
+	instance := &TimeDraw{}
+	instance.ConcreteBehavior = instance
+	instance.Run(ctx)
 	case ConstActTypeTimes: // 按抽奖次数抽奖
-		instance := &TimesDraw{}
-		instance.ConcreteBehavior = instance
-		instance.Run(ctx)
+	instance := &TimesDraw{}
+	instance.ConcreteBehavior = instance
+	instance.Run(ctx)
 	case ConstActTypeAmount: // 按数额范围区间抽奖
-		instance := &AmountDraw{}
-		instance.ConcreteBehavior = instance
-		instance.Run(ctx)
+	instance := &AmountDraw{}
+	instance.ConcreteBehavior = instance
+	instance.Run(ctx)
 	default:
-		// 报错
-		return
+	// 报错
+	return
 	}
 }
 
@@ -698,6 +702,7 @@ func runFuncName() string {
 ```
 
 以下是代码执行结果:
+
 ```
 [Running] go run ".../easy-tips/go/src/patterns/template/templateOther.go"
 main.(*Lottery).checkSerialNo 校验活动编号(serial_no)是否存在、并获取活动信息...
