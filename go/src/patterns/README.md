@@ -1,7 +1,9 @@
 # 《我的代码没有else系列》
 
 <p align="center">
-    <img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-red" alt="Lisense">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-Hans">
+        <img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-red" alt="Lisense">
+    </a>
 </p>
 
 ![](http://cdn.tigerb.cn/20200328195357.jpg)
@@ -10,15 +12,14 @@
 - 未经版权所有者明确授权，禁止发行本手册及其被实质上修改的版本。 
 - 未经版权所有者事先授权，禁止将此作品及其衍生作品以标准（纸质）书籍形式发行。  
 
-目标：
+# 目标
 - 重读《大话设计模式》
 - 温故知新
 - Golang设计模式实战，完全结合真实的业务场景去运用设计模式
 - 简化大家对设计模式的理解
 - 本系列争取今年**10篇文章**左右
 - [x] 三月份备3篇，四月发2篇
-- [x] 四月份备3篇
-- [x] ...
+- [x] 四月份备2篇
 
 # 前言
 
