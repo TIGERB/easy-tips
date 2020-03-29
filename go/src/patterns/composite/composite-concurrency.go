@@ -31,6 +31,8 @@ type Component interface {
 type BaseComponent struct {
 	// 子组件列表
 	ChildComponents []Component
+	// 并发子组件列表
+	ChildConcurrencyComponents []Component
 }
 
 // Mount 挂载一个子组件
@@ -40,6 +42,16 @@ func (bc *BaseComponent) Mount(c Component, components ...Component) (err error)
 		return
 	}
 	bc.ChildComponents = append(bc.ChildComponents, components...)
+	return
+}
+
+// MountConcurrency 挂载一个并发子组件
+func (bc *BaseComponent) MountConcurrency(c Component, components ...Component) (err error) {
+	bc.ChildConcurrencyComponents = append(bc.ChildConcurrencyComponents, c)
+	if len(components) == 0 {
+		return
+	}
+	bc.ChildConcurrencyComponents = append(bc.ChildConcurrencyComponents, components...)
 	return
 }
 
@@ -97,18 +109,37 @@ func (bc *CheckoutPageComponent) Do(ctx *Context) (err error) {
 type AddressComponent struct {
 	// 合成复用基础组件
 	BaseComponent
+	// AddressInfo
+	AddressInfo *AddressInfo
+	resChan     chan *AddressInfo
+}
+
+// AddressInfo 地址信息
+type AddressInfo struct {
+	AddressID  int64
+	FristName  string
+	SecondName string
 }
 
 // Do 执行组件&子组件
 func (bc *AddressComponent) Do(ctx *Context) (err error) {
 	// 当前组件的业务逻辑写这
-	fmt.Println(runFuncName(), "地址组件...")
-
-	// 执行子组件
-	bc.ChildsDo(ctx)
-
-	// 当前组件的业务逻辑写这
-
+	bc.resChan = make(chan *AddressInfo, 1)
+	go func(ctx *Context, resChan chan<- *AddressInfo) {
+		fmt.Println(runFuncName(), "获取地址信息 ing...")
+		addressInfo := &AddressInfo{
+			AddressID:  9931831,
+			FristName:  "hei",
+			SecondName: "heihei",
+		}
+		resChan <- addressInfo
+		fmt.Println(runFuncName(), "获取地址信息 成功...")
+	}(ctx, bc.resChan)
+	res := <-bc.resChan
+	if res == nil {
+		return fmt.Errorf("获取地址信息失败")
+	}
+	bc.AddressInfo = res
 	return
 }
 
@@ -328,8 +359,6 @@ func main() {
 		&GiftCardComponent{},
 		&OrderComponent{},
 	)
-
-	// checkoutPage.Remove(storeComponent)
 
 	// 开始构建页面组件数据
 	checkoutPage.Do(&Context{})

@@ -186,10 +186,14 @@
       - [中介者器模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/mediator/test.php)
       - [空对象模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/nullObject/test.php)
   + Go版本 🚗
-    * 创建型模式实例
-      - 工厂模式
-    * 行为型模式实例
-      - 策略模式
+    * [我的代码没有else系列](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns)
+      - [代码模板 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/template)
+      - [链式调用 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/responsibility)
+      - 代码组件 | 我的代码没有else
+      - 订阅通知 | 我的代码没有else
+      - 客户决策 | 我的代码没有else
+      - 状态变换 | 我的代码没有else
+      - ...
 - [数据结构 🚗](https://github.com/TIGERB/easy-tips/blob/master/data-structure.md)
   + 数组
   + 堆/栈
