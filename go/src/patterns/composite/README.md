@@ -585,3 +585,11 @@ main.(*OrderComponent).Do 订单金额详细信息组件...
 2. 本系列的一些设计模式的概念可能和原概念存在差异，因为会结合实际使用，取其精华，适当改变，灵活使用。
 ```
 
+# 文章列表
+
+- [代码模板 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/template)
+- [链式调用 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/responsibility)
+- [代码组件 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/composite)
+- [订阅通知 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/observer)
+
+> [我的代码没有else系列 更多文章 点击此处查看](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns)

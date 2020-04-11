@@ -19,7 +19,7 @@ type Observable interface {
 	Notify() error
 }
 
-// ObservableConcrete 一个具体的 创建订单的被观察者
+// ObservableConcrete 一个具体的 订单状态变化的被观察者
 type ObservableConcrete struct {
 	observerList []ObserverInterface
 }
@@ -67,7 +67,7 @@ type ObserverInterface interface {
 type OrderStatus struct {
 }
 
-// Do 参数校验
+// Do 具体业务
 func (observer *OrderStatus) Do(o Observable) (err error) {
 	// code...
 	fmt.Println(runFuncName(), "修改订单状态...")
@@ -78,7 +78,7 @@ func (observer *OrderStatus) Do(o Observable) (err error) {
 type OrderStatusLog struct {
 }
 
-// Do 参数校验
+// Do 具体业务
 func (observer *OrderStatusLog) Do(o Observable) (err error) {
 	// code...
 	fmt.Println(runFuncName(), "记录订单状态变更日志...")
@@ -89,7 +89,7 @@ func (observer *OrderStatusLog) Do(o Observable) (err error) {
 type CouponRefund struct {
 }
 
-// Do 参数校验
+// Do 具体业务
 func (observer *CouponRefund) Do(o Observable) (err error) {
 	// code...
 	fmt.Println(runFuncName(), "退优惠券...")
@@ -100,7 +100,7 @@ func (observer *CouponRefund) Do(o Observable) (err error) {
 type PromotionRefund struct {
 }
 
-// Do 参数校验
+// Do 具体业务
 func (observer *PromotionRefund) Do(o Observable) (err error) {
 	// code...
 	fmt.Println(runFuncName(), "还优惠活动资格...")
@@ -111,7 +111,7 @@ func (observer *PromotionRefund) Do(o Observable) (err error) {
 type StockRefund struct {
 }
 
-// Do 参数校验
+// Do 具体业务
 func (observer *StockRefund) Do(o Observable) (err error) {
 	// code...
 	fmt.Println(runFuncName(), "还库存...")
@@ -122,7 +122,7 @@ func (observer *StockRefund) Do(o Observable) (err error) {
 type GiftCardRefund struct {
 }
 
-// Do 参数校验
+// Do 具体业务
 func (observer *GiftCardRefund) Do(o Observable) (err error) {
 	// code...
 	fmt.Println(runFuncName(), "还礼品卡...")
@@ -133,7 +133,7 @@ func (observer *GiftCardRefund) Do(o Observable) (err error) {
 type WalletRefund struct {
 }
 
-// Do 参数校验
+// Do 具体业务
 func (observer *WalletRefund) Do(o Observable) (err error) {
 	// code...
 	fmt.Println(runFuncName(), "退钱包余额...")
@@ -144,7 +144,7 @@ func (observer *WalletRefund) Do(o Observable) (err error) {
 type DeliverBillStatus struct {
 }
 
-// Do 参数校验
+// Do 具体业务
 func (observer *DeliverBillStatus) Do(o Observable) (err error) {
 	// code...
 	fmt.Println(runFuncName(), "修改发货单状态...")
@@ -155,7 +155,7 @@ func (observer *DeliverBillStatus) Do(o Observable) (err error) {
 type DeliverBillStatusLog struct {
 }
 
-// Do 参数校验
+// Do 具体业务
 func (observer *DeliverBillStatusLog) Do(o Observable) (err error) {
 	// code...
 	fmt.Println(runFuncName(), "记录发货单状态变更日志...")
@@ -166,7 +166,7 @@ func (observer *DeliverBillStatusLog) Do(o Observable) (err error) {
 type Refund struct {
 }
 
-// Do 参数校验
+// Do 具体业务
 func (observer *Refund) Do(o Observable) (err error) {
 	// code...
 	fmt.Println(runFuncName(), "生成退款单...")
@@ -177,7 +177,7 @@ func (observer *Refund) Do(o Observable) (err error) {
 type Invoice struct {
 }
 
-// Do 参数校验
+// Do 具体业务
 func (observer *Invoice) Do(o Observable) (err error) {
 	// code...
 	fmt.Println(runFuncName(), "生成发票-红票...")
@@ -188,7 +188,7 @@ func (observer *Invoice) Do(o Observable) (err error) {
 type Email struct {
 }
 
-// Do 参数校验
+// Do 具体业务
 func (observer *Email) Do(o Observable) (err error) {
 	// code...
 	fmt.Println(runFuncName(), "发邮件...")
@@ -199,7 +199,7 @@ func (observer *Email) Do(o Observable) (err error) {
 type Sms struct {
 }
 
-// Do 参数校验
+// Do 具体业务
 func (observer *Sms) Do(o Observable) (err error) {
 	// code...
 	fmt.Println(runFuncName(), "发短信...")
@@ -210,7 +210,7 @@ func (observer *Sms) Do(o Observable) (err error) {
 type WechatNotify struct {
 }
 
-// Do 参数校验
+// Do 具体业务
 func (observer *WechatNotify) Do(o Observable) (err error) {
 	// code...
 	fmt.Println(runFuncName(), "发微信消息...")

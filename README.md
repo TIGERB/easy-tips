@@ -189,8 +189,8 @@
     * [我的代码没有else系列](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns)
       - [代码模板 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/template)
       - [链式调用 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/responsibility)
-      - 代码组件 | 我的代码没有else
-      - 订阅通知 | 我的代码没有else
+      - [代码组件 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/composite)
+      - [订阅通知 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/observer)
       - 客户决策 | 我的代码没有else
       - 状态变换 | 我的代码没有else
       - ...

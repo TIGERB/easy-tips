@@ -6,6 +6,8 @@
     </a>
 </p>
 
+> 嗯，我的代码没有`else`系列，一个设计模式业务真实使用的golang系列。
+
 ![](http://cdn.tigerb.cn/20200328215543.jpg)
 
 # 版权申明
@@ -20,19 +22,21 @@
 - [ ] 本系列争取今年**10篇文章**左右
 - [x] 三月份备3篇(3/3)
 - [x] 三月发1篇(1/1)
-- [ ] 四月发3篇(0/3)
-- [ ] 四月份备3篇(0/3)
+- [ ] 四月发3篇(2/3)
+- [ ] 四月份备3篇(1/3)
 
 # 前言
 
-开启之旅：[面向对象的设计过程](http://tigerb.cn/2019/10/11/oop/)
+开启之旅。
 
-# 静待首次更新...
+> [面向对象的设计过程](http://tigerb.cn/2019/10/11/oop/)
+
+# 文章列表
 
 - [代码模板 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/template)
 - [链式调用 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/responsibility)
 - [代码组件 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/composite)
-- 订阅通知 | 我的代码没有else
+- [订阅通知 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/observer)
 - 客户决策 | 我的代码没有else
 - 状态变换 | 我的代码没有else
 - ...
