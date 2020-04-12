@@ -16,19 +16,15 @@
 
 ## 什么是「策略模式」？
 
-策略模式的优势：
-- 
-- 
+> 
+
 
 ## 什么真实业务场景可以用「策略模式」？
 
-满足如下要求的所有场景:
-
 > 
 
-怎么理解，举个例子：
-
 > 我们有哪些真实业务场景可以用「策略模式」呢？
+
 
 ## 怎么用「策略模式」？
 
@@ -41,22 +37,32 @@
 
 #### 业务梳理
 
-步骤|逻辑
--------|-------
--|-
 
 
-> 注：流程不一定完全准确
+> 注：流程不一定完全准确。
 
 结论：
+
+- 
+
 
 #### 业务流程图
 
 我们通过梳理的文本业务流程得到了如下的业务流程图：
 
+
 ![]()
 
 #### 代码建模
+
+「策略模式」的核心是两个接口：
+
+
+伪代码如下：
+
+```
+
+```
 
 同时得到了我们的UML图：
 
@@ -64,11 +70,35 @@
 
 #### 代码demo
 
+```go
+
+```
+
+代码运行结果：
+
+```
+
+
+```
+
 ## 结语
+
+最后总结下，「策略模式」抽象过程的核心是：
+
+- 
 
 ```
 特别说明：
 1. 我的代码没有`else`，只是一个在代码合理设计的情况下自然而然无限接近或者达到的结果，并不是一个硬性的目标，务必较真。
 2. 本系列的一些设计模式的概念可能和原概念存在差异，因为会结合实际使用，取其精华，适当改变，灵活使用。
 ```
+
+# 文章列表
+
+- [代码模板 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/template)
+- [链式调用 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/responsibility)
+- [代码组件 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/composite)
+- [订阅通知 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/observer)
+
+> [我的代码没有else系列 更多文章 点击此处查看](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns)
 
