@@ -32,7 +32,7 @@ func (b *TokenBucket) GetToken() error {
 	return nil
 }
 
-func main() {
+func token() {
 	bucket := &TokenBucket{
 		interval: time.Duration(2000) * time.Millisecond,
 		buf:      0,
