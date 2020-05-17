@@ -89,8 +89,6 @@
     * [Go框架解析-iris](http://tigerb.cn/2019/06/29/go-iris/)
     * [Go框架解析-gin](http://tigerb.cn/2019/07/06/go-gin/)
     * [Go框架解析-echo](http://tigerb.cn/2019/07/13/go-echo/)
-    * Go框架解析-revel
-    * Go框架解析-Martini
   + go常用包解析
     * go常用包解析-fasthttp
 - 高并发相关 🚗
@@ -156,6 +154,15 @@
 - 设计模式
   + [概念](https://github.com/TIGERB/easy-tips/blob/master/patterns/thought.md#设计模式)
   + [面向对象的设计过程](http://tigerb.cn/2019/10/11/oop/)
+  + Go版本 🚗
+    * [我的代码没有else系列](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns)
+      - [模板模式](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/template)
+      - [责任链模式](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/responsibility)
+      - [组合模式](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/composite)
+      - [观察者模式](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/observer)
+      - [策略模式](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/strategy)
+      - 状态模式
+      - ...
   + PHP版本 ✅
     * 创建型模式实例
       - [单例模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/singleton/test.php)
@@ -185,15 +192,6 @@
       - [迭代器模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/iterator/test.php)
       - [中介者器模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/mediator/test.php)
       - [空对象模式](https://github.com/TIGERB/easy-tips/blob/master/patterns/nullObject/test.php)
-  + Go版本 🚗
-    * [我的代码没有else系列](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns)
-      - [代码模板 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/template)
-      - [链式调用 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/responsibility)
-      - [代码组件 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/composite)
-      - [订阅通知 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/observer)
-      - 客户决策 | 我的代码没有else
-      - 状态变换 | 我的代码没有else
-      - ...
 - [数据结构 🚗](https://github.com/TIGERB/easy-tips/blob/master/data-structure.md)
   + 数组
   + 堆/栈
