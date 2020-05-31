@@ -15,22 +15,23 @@
 - 未经版权所有者事先授权，禁止将此作品及其衍生作品以标准（纸质）书籍形式发行。  
 
 # 目标
+
 - 重读设计模式，温故知新
 - Golang设计模式实战，完全结合真实的业务场景去运用设计模式
 - 简化大家对设计模式的理解
-- 本系列争取今年**8篇文章**(4/8)左右
+- 本系列争取今年**10篇文章**(6/10)左右
 
 TODO List:
 
 - 三月
-    + [x] 备3篇(3/3)
+    + [x] 备2篇(2/2)
     + [x] 发1篇(1/1)
 - 四月
-    + [ ] 备3篇(1/3)
-    + [ ] 发3篇(2/3)
+    + [x] 备3篇(3/3)
+    + [x] 发4篇(4/4)
 - 五月
-    + [ ] 备2篇(0/2)
-    + [ ] 发2篇(0/2)
+    + [x] 备1篇(1/1)
+    + [x] 发1篇(1/1)
 
 # 文章列表
 
@@ -39,5 +40,5 @@ TODO List:
 - [代码组件 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/composite)
 - [订阅通知 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/observer)
 - [客户决策 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/strategy)
-- 状态变换 | 我的代码没有else
+- [状态变换 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/state)
 - ...

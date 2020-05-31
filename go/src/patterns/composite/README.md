@@ -592,5 +592,6 @@ main.(*OrderComponent).Do 订单金额详细信息组件...
 - [代码组件 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/composite)
 - [订阅通知 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/observer)
 - [客户决策 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/strategy)
+- [状态变换 | 我的代码没有else](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/state)
 
 > [我的代码没有else系列 更多文章 点击此处查看](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns)
