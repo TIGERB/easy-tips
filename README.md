@@ -1,4 +1,8 @@
-<h1 align="center">《温故知新后端猿PHP/Go》V1.01</h1>
+<h1 align="center">《PHPer、Gopher成长之路》V1.10</h1>
+
+<p align="center">「全原创系列」</p>
+
+> 记录我在成为一名PHPer、Gopher路上的学习过程
 
 <p align="center">
 <a href="https://github.com/TIGERB/easy-tips#目录">
@@ -33,10 +37,6 @@
 - 未经版权所有者明确授权，禁止发行本手册及其被实质上修改的版本。 
 - 未经版权所有者事先授权，禁止将此作品及其衍生作品以标准（纸质）书籍形式发行。  
 
-<br>
-
-> 一个PHP/Go技术栈后端猿的知识储备仓库
-
 <p align="center">
   <img src="http://cdn.tigerb.cn/wechat-blog-qrcode.jpg?imageMogr2/thumbnail/260x260!/format/webp/blur/1x0/quality/90|imageslim" width="200px">
 </p>
@@ -62,27 +62,7 @@
     * [实例](https://github.com/TIGERB/easy-tips/blob/master/php/standard.php)
     * [文档](https://github.com/TIGERB/easy-tips/blob/master/php/standard.md)
     * [经验](https://github.com/TIGERB/easy-tips/blob/master/php/artisan.md)
-  + 基础知识[读(R)好(T)文(F)档(M)]
-    * [数据类型](http://php.net/manual/zh/language.types.php)
-    * [运算符优先级](http://php.net/manual/zh/language.operators.precedence.php)
-    * [string函数](http://php.net/ref.strings.php)
-    * [array函数](http://php.net/manual/zh/ref.array.php)
-    * [math函数](http://php.net/manual/zh/ref.math.php)
-    * [面向对象](http://php.net/manual/zh/language.oop5.php)
-  + 版本新特性
-    * [7.1](http://php.net/manual/zh/migration71.new-features.php)
-    * [7.0](http://php.net/manual/zh/migration70.new-features.php)
-    * [5.6](http://php.net/manual/zh/migration56.new-features.php)
-    * [5.5](http://php.net/manual/zh/migration55.new-features.php)
-    * [5.4](http://php.net/manual/zh/migration54.new-features.php)
-    * [5.3](http://php.net/manual/zh/migration53.new-features.php)
-  + [记一些坑](https://github.com/TIGERB/easy-tips/blob/master/pit.md#记一些坑)
-- PHP深入学习 🚗
-  + 理解yield
-  + php的协程
-  + 生命周期
-  + 垃圾回收
-  + 扩展开发
+  + [记一些PHP的坑](https://github.com/TIGERB/easy-tips/blob/master/pit.md#记一些坑)
 - Go基础学习 🚗
   + Go框架源码阅读&解析
     * [Go框架解析-beego](http://tigerb.cn/2018/12/06/beego/)
@@ -93,15 +73,16 @@
     * go常用包解析-fasthttp
 - 高并发相关 🚗
   + [处理高并发的一般思路](http://tigerb.cn/2019/04/18/top-qps-experience/)
+  + [秒杀系统设计](http://tigerb.cn/2020/05/05/skrshop/seckill/)
 - 网络编程 🚗
-  + php实现web服务器
+  + [php实现web服务器](http://tigerb.cn/2018/11/24/php-network-programming/)
   + go实现web服务器
   + c实现web服务器
   + php扩展实现web服务器
 - 问题排查 🚗
   + nginx/php/业务日志
   + 问题排查实例分析
-- Mysql 🚗
+- MySQL 🚗
   + [常用sql语句](https://github.com/TIGERB/easy-tips/blob/master/mysql/sql.md)
   + [引擎](https://github.com/TIGERB/easy-tips/blob/master/mysql/base.md#引擎)
     * InnoDB
@@ -141,16 +122,13 @@
   + sql优化
   + 主从配置
 - Redis 🚗
-  + 常用命令
-  + 实现原理&与memcache区别
   + 常见用途
     * [缓存](https://github.com/TIGERB/easy-tips/blob/master/redis/cache.php)
     * [队列](https://github.com/TIGERB/easy-tips/blob/master/redis/queue.php)
     * [悲观锁](https://github.com/TIGERB/easy-tips/blob/master/redis/pessmistic-lock.php)
     * [乐观锁](https://github.com/TIGERB/easy-tips/blob/master/redis/optimistic-lock.php)
     * [订阅/推送](https://github.com/TIGERB/easy-tips/blob/master/redis/subscribe-publish)
-  + 常见业务实际使用
-  + redis的基础数据结构
+  + Redis的基础数据结构
 - 设计模式
   + [概念](https://github.com/TIGERB/easy-tips/blob/master/patterns/thought.md#设计模式)
   + [面向对象的设计过程](http://tigerb.cn/2019/10/11/oop/)
@@ -161,7 +139,7 @@
       - [组合模式](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/composite)
       - [观察者模式](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/observer)
       - [策略模式](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/strategy)
-      - 状态模式
+      - [状态模式](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/state)
       - ...
   + PHP版本 ✅
     * 创建型模式实例
@@ -245,7 +223,7 @@
 
 ## 测试用例
 
-### 设计模式PHP版本
+### PHP设计模式
 
 运行脚本： php patterns/[文件夹名称]/test.php
 
@@ -263,7 +241,7 @@
 请求5850c8354b298: 权限校验通过～
 ```
 
-### 算法
+### PHP算法
 
 运行脚本： php algorithm/test.php [算法名称｜空获取列表]
 
