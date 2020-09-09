@@ -27,6 +27,7 @@ package main
 // 链接：https://leetcode-cn.com/problems/top-k-frequent-elements
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
+//  解法一：快排
 func topKFrequent(nums []int, k int) []int {
 	res := []int{}
 	if len(nums) == 0 || k == 0 {
