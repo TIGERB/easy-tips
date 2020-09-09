@@ -6,13 +6,16 @@
 
 <p align="center">
 <a href="https://github.com/TIGERB/easy-tips#目录">
-  <img src="https://img.shields.io/badge/php-✅-brightgreen.svg" alt="php">
+  <img src="https://img.shields.io/badge/PHP-✅-brightgreen.svg" alt="php">
 </a>
 <a href="https://github.com/TIGERB/easy-tips/tree/master/mysql">
-  <img src="https://img.shields.io/badge/mysql-🚗-blue.svg" alt="mysql">
+  <img src="https://img.shields.io/badge/Go-🚗-blue.svg" alt="mysql">
+</a>
+<a href="https://github.com/TIGERB/easy-tips/tree/master/mysql">
+  <img src="https://img.shields.io/badge/MySQL-🚗-blue.svg" alt="mysql">
 </a>
 <a href="https://github.com/TIGERB/easy-tips/tree/master/redis">
-  <img src="https://img.shields.io/badge/redis-🚗-blue.svg" alt="redis">
+  <img src="https://img.shields.io/badge/Redis-🚗-blue.svg" alt="redis">
 </a>
 <a href="https://github.com/TIGERB/easy-tips/tree/master/patterns">
   <img src="https://img.shields.io/badge/patterns-✅-brightgreen.svg" alt="patterns">
@@ -219,7 +222,6 @@
   + 网关服务kong的环境搭建和使用
   + 我所理想的架构
 
----
 
 ## 测试用例
 
