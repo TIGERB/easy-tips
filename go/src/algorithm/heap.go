@@ -2,6 +2,11 @@ package main
 
 import "fmt"
 
+// 树：节点node、根节点root、子节点child、叶节点leaf
+// 二叉树：每个节点最多有两个节点
+// 完全二叉树
+// 满二叉树
+
 // bigTopHeap 大顶堆
 func bigTopHeap(input []int) []int {
 	aroundFind := false

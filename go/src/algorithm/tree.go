@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 // Tree 二叉树
 type Tree struct {
@@ -166,4 +169,42 @@ func main() {
 	fmt.Println("层序遍历开始...")
 	levelorder(root)
 	fmt.Println("")
+}
+
+// ================
+// 平衡二叉树
+// ================
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func isBalanced(root *TreeNode) bool {
+
+	return false
+}
+
+func recursionTree(node *TreeNode, high int) int, bool{
+	if node == nil {
+		return high, true
+	}
+
+	highLeft := recursionTree(node.Left, high)
+	highRight := recursionTree(node.Right, high)
+
+	if math.Abs(highLeft-highRight) > 1 {
+		return high, false
+	}
+
+	return high, true
 }

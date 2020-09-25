@@ -1,4 +1,4 @@
-package main
+package leetcode
 
 // ================
 // leetcode题解
