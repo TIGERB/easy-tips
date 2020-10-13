@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  elasticsearch:
+      container_name: elasticsearch
+      build: ./elasticsearch
+      # environment: 
+      #   JAVA_HOME: /usr/lib/jvm/java-11-openjdk
+      ports:
+        - "9200:9200"
+      privileged: true
+      networks: 
+        - default
+# networks: 
+#   default:
+#     external: 
+#       name: mysql_default
