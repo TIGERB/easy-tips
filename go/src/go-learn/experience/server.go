@@ -14,6 +14,7 @@ func (DemoHandle) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello TIGERB !\n"))
 }
 
+// Server Server
 func Server() {
 	// // ------------------ 使用http包启动一个http服务 方式一 ------------------
 	// // *http.Request http请求内容实例的指针

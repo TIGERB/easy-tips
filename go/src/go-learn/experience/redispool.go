@@ -8,6 +8,7 @@ import (
 	"github.com/gomodule/redigo/redis"
 )
 
+// RedisPool RedisPool
 var RedisPool *redis.Pool
 
 func init() {
@@ -15,25 +16,26 @@ func init() {
 	fmt.Println("RedisPool.Stats: ", RedisPool.Stats())
 }
 
-func main() {
-	// ------------------ defer 使用 ------------------
-	for {
-		redisConn := RedisPool.Get()
-		defer redisConn.Close()
-		defer DeferDemo()
+// func main() {
+// 	// ------------------ defer 使用 ------------------
+// 	for {
+// 		redisConn := RedisPool.Get()
+// 		defer redisConn.Close()
+// 		defer DeferDemo()
 
-		// 一堆业务逻辑
-		_, err := redisConn.Do("set", "demo_key", "666")
-		if err != nil {
-			fmt.Println("redis set err: ", err.Error())
-			continue
-		}
-		res, _ := redis.String(redisConn.Do("get", "demo_key"))
-		fmt.Println("get demo_key: ", res, " redis conn active", RedisPool.ActiveCount())
-		time.Sleep(1 * time.Second)
-	}
-}
+// 		// 一堆业务逻辑
+// 		_, err := redisConn.Do("set", "demo_key", "666")
+// 		if err != nil {
+// 			fmt.Println("redis set err: ", err.Error())
+// 			continue
+// 		}
+// 		res, _ := redis.String(redisConn.Do("get", "demo_key"))
+// 		fmt.Println("get demo_key: ", res, " redis conn active", RedisPool.ActiveCount())
+// 		time.Sleep(1 * time.Second)
+// 	}
+// }
 
+// NewRedisPool NewRedisPool
 func NewRedisPool() *redis.Pool {
 	return &redis.Pool{
 		MaxIdle:     6,
@@ -55,6 +57,7 @@ func NewRedisPool() *redis.Pool {
 	}
 }
 
+// DeferDemo DeferDemo
 func DeferDemo() {
 	fmt.Println("DeferDemo...")
 }
