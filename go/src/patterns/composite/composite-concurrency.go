@@ -1,9 +1,13 @@
 package main
 
 import (
+	"context"
+	"errors"
 	"fmt"
 	"reflect"
 	"runtime"
+	"sync"
+	"time"
 )
 
 //------------------------------------------------------------
@@ -12,8 +16,44 @@ import (
 //@auhtor TIGERB<https://github.com/TIGERB>
 //------------------------------------------------------------
 
-// Context 上下文
-type Context struct{}
+//example:
+// 创建一个并发组件
+// type DemoConcurrenyComponent struct {
+// 	BaseConcurrencyComponent
+// }
+// func (bc *DemoConcurrenyComponent) BusinessLogicDo(resChan chan interface{}) (err error) {
+// 	// 并发组件业务逻辑填充到这
+// 	return
+// }
+// 创建一个普通组件
+// type DemoComponent struct {
+// 	BaseComponent
+// }
+// func (bc *DemoComponent) BusinessLogicDo(resChan chan interface{}) (err error) {
+// 	// 普通组件业务逻辑填充到这
+// 	return
+// }
+
+var (
+	// ErrConcurrencyComponentTimeout 并发组件业务超时
+	ErrConcurrencyComponentTimeout = errors.New("Concurrency Component Timeout")
+)
+
+// Context 业务上下文
+type Context struct {
+	// 请求上下文
+	rCtx context.Context
+	// 超时函数
+	context.CancelFunc
+}
+
+// GetContext 获取业务上下文实例
+// d 超时时间
+func GetContext(d time.Duration) *Context {
+	c := &Context{}
+	c.rCtx, c.CancelFunc = context.WithTimeout(context.Background(), d)
+	return c
+}
 
 // Component 组件接口
 type Component interface {
@@ -21,8 +61,14 @@ type Component interface {
 	Mount(c Component, components ...Component) error
 	// 移除一个子组件
 	Remove(c Component) error
-	// 执行组件&子组件
-	Do(ctx *Context) error
+	// 执行子组件
+	// ctx 业务上下文
+	// currentConponent 当前组件
+	// wg 父组件的waitgroup对象
+	Do(ctx *Context, currentConponent Component, wg *sync.WaitGroup) error
+	// 执行组件业务逻辑
+	// resChan 回写当前组件业务执行结果的channel
+	BusinessLogicDo(resChan chan interface{}) error
 }
 
 // BaseComponent 基础组件
@@ -31,8 +77,6 @@ type Component interface {
 type BaseComponent struct {
 	// 子组件列表
 	ChildComponents []Component
-	// 并发子组件列表
-	ChildConcurrencyComponents []Component
 }
 
 // Mount 挂载一个子组件
@@ -42,16 +86,6 @@ func (bc *BaseComponent) Mount(c Component, components ...Component) (err error)
 		return
 	}
 	bc.ChildComponents = append(bc.ChildComponents, components...)
-	return
-}
-
-// MountConcurrency 挂载一个并发子组件
-func (bc *BaseComponent) MountConcurrency(c Component, components ...Component) (err error) {
-	bc.ChildConcurrencyComponents = append(bc.ChildConcurrencyComponents, c)
-	if len(components) == 0 {
-		return
-	}
-	bc.ChildConcurrencyComponents = append(bc.ChildConcurrencyComponents, components...)
 	return
 }
 
@@ -69,8 +103,20 @@ func (bc *BaseComponent) Remove(c Component) (err error) {
 	return
 }
 
-// Do 执行组件&子组件
-func (bc *BaseComponent) Do(ctx *Context) (err error) {
+// Do 执行子组件
+// ctx 业务上下文
+// currentConponent 当前组件
+// wg 父组件的waitgroup对象
+func (bc *BaseComponent) Do(ctx *Context, currentConponent Component, wg *sync.WaitGroup) (err error) {
+	//执行当前组件业务代码
+	currentConponent.BusinessLogicDo(nil)
+	// 执行子组件
+	bc.ChildsDo(ctx)
+	return
+}
+
+// BusinessLogicDo 当前组件业务逻辑代码填充处
+func (bc *BaseComponent) BusinessLogicDo(resChan chan interface{}) (err error) {
 	// do nothing
 	return
 }
@@ -79,9 +125,107 @@ func (bc *BaseComponent) Do(ctx *Context) (err error) {
 func (bc *BaseComponent) ChildsDo(ctx *Context) (err error) {
 	// 执行子组件
 	for _, childComponent := range bc.ChildComponents {
-		if err = childComponent.Do(ctx); err != nil {
+		if err = childComponent.Do(ctx, childComponent, nil); err != nil {
 			return err
 		}
+	}
+	return
+}
+
+// BaseConcurrencyComponent 基础组件
+// 实现Add:添加一个子组件
+// 实现Remove:移除一个子组件
+type BaseConcurrencyComponent struct {
+	BaseComponent
+	// 当前组件是否有并发子组件
+	HasChildConcurrencyComponents bool
+	// 并发子组件列表
+	ChildConcurrencyComponents []Component
+	// wg 等待子组件执行完成
+	*sync.WaitGroup
+	// 当前组件业务执行结果channel
+	logicResChan chan interface{}
+	// 当前组件执行过程中的错误信息
+	Err error
+}
+
+// Remove 移除一个子组件
+func (bc *BaseConcurrencyComponent) Remove(c Component) (err error) {
+	if len(bc.ChildComponents) == 0 {
+		return
+	}
+	for k, childComponent := range bc.ChildComponents {
+		if c == childComponent {
+			fmt.Println(runFuncName(), "移除:", reflect.TypeOf(childComponent))
+			bc.ChildComponents = append(bc.ChildComponents[:k], bc.ChildComponents[k+1:]...)
+		}
+	}
+	for k, childComponent := range bc.ChildConcurrencyComponents {
+		if c == childComponent {
+			fmt.Println(runFuncName(), "移除:", reflect.TypeOf(childComponent))
+			bc.ChildConcurrencyComponents = append(bc.ChildComponents[:k], bc.ChildComponents[k+1:]...)
+		}
+	}
+	return
+}
+
+// MountConcurrency 挂载一个并发子组件
+func (bc *BaseConcurrencyComponent) MountConcurrency(c Component, components ...Component) (err error) {
+	bc.HasChildConcurrencyComponents = true
+	bc.ChildConcurrencyComponents = append(bc.ChildConcurrencyComponents, c)
+	if len(components) == 0 {
+		return
+	}
+	bc.ChildConcurrencyComponents = append(bc.ChildConcurrencyComponents, components...)
+	return
+}
+
+// ChildsDo 执行子组件
+func (bc *BaseConcurrencyComponent) ChildsDo(ctx *Context) (err error) {
+	if bc.WaitGroup == nil {
+		bc.WaitGroup = &sync.WaitGroup{}
+	}
+	// 执行并发子组件
+	for _, childComponent := range bc.ChildConcurrencyComponents {
+		bc.WaitGroup.Add(1)
+		go childComponent.Do(ctx, childComponent, bc.WaitGroup)
+	}
+	// 执行子组件
+	for _, childComponent := range bc.ChildComponents {
+		if err = childComponent.Do(ctx, childComponent, nil); err != nil {
+			return err
+		}
+	}
+	if bc.HasChildConcurrencyComponents {
+		// 等待并发组件执行结果
+		bc.WaitGroup.Wait()
+	}
+	return
+}
+
+// Do 执行子组件
+// ctx 业务上下文
+// currentConponent 当前组件
+// wg 父组件的waitgroup对象
+func (bc *BaseConcurrencyComponent) Do(ctx *Context, currentConponent Component, wg *sync.WaitGroup) (err error) {
+	defer wg.Done()
+	// 初始化并发子组件channel
+	if bc.logicResChan == nil {
+		bc.logicResChan = make(chan interface{}, 1)
+	}
+
+	go currentConponent.BusinessLogicDo(bc.logicResChan)
+
+	select {
+	case <-bc.logicResChan:
+		// 业务执行结果
+		fmt.Println(runFuncName(), "bc.BusinessLogicDo wait.done...")
+		break
+	case <-ctx.rCtx.Done():
+		// 超时退出
+		fmt.Println(runFuncName(), "bc.BusinessLogicDo timeout...")
+		bc.Err = ErrConcurrencyComponentTimeout
+		break
 	}
 	return
 }
@@ -89,77 +233,47 @@ func (bc *BaseComponent) ChildsDo(ctx *Context) (err error) {
 // CheckoutPageComponent 订单结算页面组件
 type CheckoutPageComponent struct {
 	// 合成复用基础组件
-	BaseComponent
+	BaseConcurrencyComponent
 }
 
-// Do 执行组件&子组件
-func (bc *CheckoutPageComponent) Do(ctx *Context) (err error) {
+// BusinessLogicDo 当前组件业务逻辑代码填充处
+func (bc *CheckoutPageComponent) BusinessLogicDo(resChan chan interface{}) (err error) {
 	// 当前组件的业务逻辑写这
 	fmt.Println(runFuncName(), "订单结算页面组件...")
-
-	// 执行子组件
-	bc.ChildsDo(ctx)
-
-	// 当前组件的业务逻辑写这
-
 	return
 }
 
 // AddressComponent 地址组件
 type AddressComponent struct {
 	// 合成复用基础组件
-	BaseComponent
-	// AddressInfo
-	AddressInfo *AddressInfo
-	resChan     chan *AddressInfo
+	BaseConcurrencyComponent
 }
 
-// AddressInfo 地址信息
-type AddressInfo struct {
-	AddressID  int64
-	FristName  string
-	SecondName string
-}
-
-// Do 执行组件&子组件
-func (bc *AddressComponent) Do(ctx *Context) (err error) {
-	// 当前组件的业务逻辑写这
-	bc.resChan = make(chan *AddressInfo, 1)
-	go func(ctx *Context, resChan chan<- *AddressInfo) {
-		fmt.Println(runFuncName(), "获取地址信息 ing...")
-		addressInfo := &AddressInfo{
-			AddressID:  9931831,
-			FristName:  "hei",
-			SecondName: "heihei",
-		}
-		resChan <- addressInfo
-		fmt.Println(runFuncName(), "获取地址信息 成功...")
-	}(ctx, bc.resChan)
-	res := <-bc.resChan
-	if res == nil {
-		return fmt.Errorf("获取地址信息失败")
-	}
-	bc.AddressInfo = res
-	return
+// BusinessLogicDo 并发组件实际填充业务逻辑的地方
+func (bc *AddressComponent) BusinessLogicDo(resChan chan interface{}) error {
+	fmt.Println(runFuncName(), "地址组件...")
+	fmt.Println(runFuncName(), "获取地址信息 ing...")
+	time.Sleep(2 * time.Second)
+	resChan <- struct{}{} // 写入业务执行结果
+	fmt.Println(runFuncName(), "获取地址信息 done...")
+	return nil
 }
 
 // PayMethodComponent 支付方式组件
 type PayMethodComponent struct {
 	// 合成复用基础组件
-	BaseComponent
+	BaseConcurrencyComponent
 }
 
-// Do 执行组件&子组件
-func (bc *PayMethodComponent) Do(ctx *Context) (err error) {
+// BusinessLogicDo 并发组件实际填充业务逻辑的地方
+func (bc *PayMethodComponent) BusinessLogicDo(resChan chan interface{}) (err error) {
 	// 当前组件的业务逻辑写这
 	fmt.Println(runFuncName(), "支付方式组件...")
-
-	// 执行子组件
-	bc.ChildsDo(ctx)
-
-	// 当前组件的业务逻辑写这
-
-	return
+	fmt.Println(runFuncName(), "获取支付方式 ing...")
+	time.Sleep(2 * time.Second)
+	resChan <- struct{}{}
+	fmt.Println(runFuncName(), "获取支付方式 done...")
+	return nil
 }
 
 // StoreComponent 店铺组件
@@ -168,16 +282,10 @@ type StoreComponent struct {
 	BaseComponent
 }
 
-// Do 执行组件&子组件
-func (bc *StoreComponent) Do(ctx *Context) (err error) {
+// BusinessLogicDo 并发组件实际填充业务逻辑的地方
+func (bc *StoreComponent) BusinessLogicDo(resChan chan interface{}) (err error) {
 	// 当前组件的业务逻辑写这
 	fmt.Println(runFuncName(), "店铺组件...")
-
-	// 执行子组件
-	bc.ChildsDo(ctx)
-
-	// 当前组件的业务逻辑写这
-
 	return
 }
 
@@ -187,16 +295,10 @@ type SkuComponent struct {
 	BaseComponent
 }
 
-// Do 执行组件&子组件
-func (bc *SkuComponent) Do(ctx *Context) (err error) {
+// BusinessLogicDo 并发组件实际填充业务逻辑的地方
+func (bc *SkuComponent) BusinessLogicDo(resChan chan interface{}) (err error) {
 	// 当前组件的业务逻辑写这
 	fmt.Println(runFuncName(), "商品组件...")
-
-	// 执行子组件
-	bc.ChildsDo(ctx)
-
-	// 当前组件的业务逻辑写这
-
 	return
 }
 
@@ -206,16 +308,10 @@ type PromotionComponent struct {
 	BaseComponent
 }
 
-// Do 执行组件&子组件
-func (bc *PromotionComponent) Do(ctx *Context) (err error) {
+// BusinessLogicDo 并发组件实际填充业务逻辑的地方
+func (bc *PromotionComponent) BusinessLogicDo(resChan chan interface{}) (err error) {
 	// 当前组件的业务逻辑写这
 	fmt.Println(runFuncName(), "优惠信息组件...")
-
-	// 执行子组件
-	bc.ChildsDo(ctx)
-
-	// 当前组件的业务逻辑写这
-
 	return
 }
 
@@ -225,16 +321,10 @@ type ExpressComponent struct {
 	BaseComponent
 }
 
-// Do 执行组件&子组件
-func (bc *ExpressComponent) Do(ctx *Context) (err error) {
+// BusinessLogicDo 并发组件实际填充业务逻辑的地方
+func (bc *ExpressComponent) BusinessLogicDo(resChan chan interface{}) (err error) {
 	// 当前组件的业务逻辑写这
 	fmt.Println(runFuncName(), "物流组件...")
-
-	// 执行子组件
-	bc.ChildsDo(ctx)
-
-	// 当前组件的业务逻辑写这
-
 	return
 }
 
@@ -244,73 +334,61 @@ type AftersaleComponent struct {
 	BaseComponent
 }
 
-// Do 执行组件&子组件
-func (bc *AftersaleComponent) Do(ctx *Context) (err error) {
+// BusinessLogicDo 并发组件实际填充业务逻辑的地方
+func (bc *AftersaleComponent) BusinessLogicDo(resChan chan interface{}) (err error) {
 	// 当前组件的业务逻辑写这
 	fmt.Println(runFuncName(), "售后组件...")
-
-	// 执行子组件
-	bc.ChildsDo(ctx)
-
-	// 当前组件的业务逻辑写这
-
 	return
 }
 
 // InvoiceComponent 发票组件
 type InvoiceComponent struct {
 	// 合成复用基础组件
-	BaseComponent
+	BaseConcurrencyComponent
 }
 
-// Do 执行组件&子组件
-func (bc *InvoiceComponent) Do(ctx *Context) (err error) {
+// BusinessLogicDo 并发组件实际填充业务逻辑的地方
+func (bc *InvoiceComponent) BusinessLogicDo(resChan chan interface{}) (err error) {
 	// 当前组件的业务逻辑写这
 	fmt.Println(runFuncName(), "发票组件...")
-
-	// 执行子组件
-	bc.ChildsDo(ctx)
-
-	// 当前组件的业务逻辑写这
-
+	fmt.Println(runFuncName(), "获取发票信息 ing...")
+	time.Sleep(1 * time.Second)
+	resChan <- struct{}{} // 写入业务执行结果
+	fmt.Println(runFuncName(), "获取发票信息 done...")
 	return
 }
 
 // CouponComponent 优惠券组件
 type CouponComponent struct {
 	// 合成复用基础组件
-	BaseComponent
+	BaseConcurrencyComponent
 }
 
-// Do 执行组件&子组件
-func (bc *CouponComponent) Do(ctx *Context) (err error) {
+// BusinessLogicDo 并发组件实际填充业务逻辑的地方
+func (bc *CouponComponent) BusinessLogicDo(resChan chan interface{}) (err error) {
 	// 当前组件的业务逻辑写这
 	fmt.Println(runFuncName(), "优惠券组件...")
-
-	// 执行子组件
-	bc.ChildsDo(ctx)
-
-	// 当前组件的业务逻辑写这
-
+	fmt.Println(runFuncName(), "获取发票信息 ing...")
+	time.Sleep(3 * time.Second)
+	resChan <- struct{}{} // 写入业务执行结果
+	fmt.Println(runFuncName(), "获取发票信息 done...")
 	return
 }
 
 // GiftCardComponent 礼品卡组件
 type GiftCardComponent struct {
 	// 合成复用基础组件
-	BaseComponent
+	BaseConcurrencyComponent
 }
 
-// Do 执行组件&子组件
-func (bc *GiftCardComponent) Do(ctx *Context) (err error) {
+// BusinessLogicDo 并发组件实际填充业务逻辑的地方
+func (bc *GiftCardComponent) BusinessLogicDo(resChan chan interface{}) (err error) {
 	// 当前组件的业务逻辑写这
 	fmt.Println(runFuncName(), "礼品卡组件...")
-
-	// 执行子组件
-	bc.ChildsDo(ctx)
-
-	// 当前组件的业务逻辑写这
-
+	fmt.Println(runFuncName(), "获取礼品卡信息 ing...")
+	time.Sleep(5 * time.Second)
+	resChan <- struct{}{} // 写入业务执行结果
+	fmt.Println(runFuncName(), "获取礼品卡信息 done...")
 	return
 }
 
@@ -320,20 +398,16 @@ type OrderComponent struct {
 	BaseComponent
 }
 
-// Do 执行组件&子组件
-func (bc *OrderComponent) Do(ctx *Context) (err error) {
+// BusinessLogicDo 当前组件业务逻辑代码填充处
+func (bc *OrderComponent) BusinessLogicDo(resChan chan interface{}) (err error) {
 	// 当前组件的业务逻辑写这
 	fmt.Println(runFuncName(), "订单金额详细信息组件...")
-
-	// 执行子组件
-	bc.ChildsDo(ctx)
-
-	// 当前组件的业务逻辑写这
-
 	return
 }
 
 func main() {
+	runtime.GOMAXPROCS(runtime.NumCPU() - 1)
+
 	// 初始化订单结算页面 这个大组件
 	checkoutPage := &CheckoutPageComponent{}
 
@@ -349,19 +423,27 @@ func main() {
 		&ExpressComponent{},
 	)
 
-	// 挂载组件
+	// ---挂载组件---
+
+	// 普通组件
 	checkoutPage.Mount(
+		storeComponent,
+		&OrderComponent{},
+	)
+	// 并发组件
+	checkoutPage.MountConcurrency(
 		&AddressComponent{},
 		&PayMethodComponent{},
-		storeComponent,
 		&InvoiceComponent{},
 		&CouponComponent{},
 		&GiftCardComponent{},
-		&OrderComponent{},
 	)
 
+	// 初始化业务上下文 并设置超时时间
+	ctx := GetContext(5 * time.Second)
+	defer ctx.CancelFunc()
 	// 开始构建页面组件数据
-	checkoutPage.Do(&Context{})
+	checkoutPage.ChildsDo(ctx)
 }
 
 // 获取正在运行的函数名
