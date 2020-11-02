@@ -11,7 +11,13 @@ func main() {
 	// DemoWithTimeout()
 	// DemoWithDeadline()
 	// DemoWithCancel()
-	demoChan()
+	// demoChan()
+
+	time.AfterFunc(3*time.Second, func() {
+		fmt.Println("aaa")
+	})
+
+	time.Sleep(5 * time.Second)
 }
 
 // DemoWithTimeout context.WithTimeout使用示例
@@ -85,8 +91,9 @@ func DemoWithDeadline() {
 // DemoWithCancel context.WithCancel 使用示例
 func DemoWithCancel() {
 
-	// 当主goroutine执行 cancelFunc()时  <-ctx.Done()会接受到数据
+	// 当主goroutine执行 cancelFunc()时  <-ctx.Done()会被关闭
 	ctx, cancelFunc := context.WithCancel(context.Background())
+	defer cancelFunc()
 
 	// 模拟修数据库数据
 	requestHandleResult := make(chan string, 1)
@@ -120,7 +127,7 @@ func DemoWithCancel() {
 	for res := range requestHandleResult {
 		fmt.Println("res: ", res)
 		if res == "alldone" {
-			cancelFunc()                 // 执行cancelFunc 触发 ctx.Done()写数据
+			cancelFunc()                 // 模拟：这里手动执行cancelFunc 触发 ctx.Done()写数据，为了可以看见子协程的打印结果
 			time.Sleep(10 * time.Second) // 再睡会 保证子goroutine的内容可以打印出来
 			return
 		}
