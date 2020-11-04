@@ -1,8 +1,0 @@
-hash: 45fe673dada391721cf25dc388488ea572338f304b8c8982a486f121c535bb91
-updated: 2019-01-19T22:12:29.830321+08:00
-imports:
-- name: github.com/gomodule/redigo
-  version: 9c11da706d9b7902c6da69c592f75637793fe121
-  subpackages:
-  - redis
-testImports: []
