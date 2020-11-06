@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 type stack struct {
 	val []interface{}
 }
@@ -32,14 +30,14 @@ func (s *stack) Len() int {
 	return len(s.val)
 }
 
-func main() {
-	stack := New()
-	stack.Push(1)
-	stack.Push(2)
-	stack.Push(3)
-	fmt.Println(stack.Get(), stack.Len())
-	stack.Push(6)
-	stack.Push(9)
-	fmt.Println(stack.Get(), stack.Len())
-	fmt.Println(stack.Pop(), stack.Get(), stack.Len())
-}
+// func main() {
+// 	stack := New()
+// 	stack.Push(1)
+// 	stack.Push(2)
+// 	stack.Push(3)
+// 	fmt.Println(stack.Get(), stack.Len())
+// 	stack.Push(6)
+// 	stack.Push(9)
+// 	fmt.Println(stack.Get(), stack.Len())
+// 	fmt.Println(stack.Pop(), stack.Get(), stack.Len())
+// }

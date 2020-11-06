@@ -60,13 +60,13 @@
 
 # 文章列表
 
-- [代码模板 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/template)
-- [链式调用 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/responsibility)
-- [代码组件 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/composite)
-- [订阅通知 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/observer)
-- [客户决策 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/strategy)
-- [状态变换 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/state)
-- [状态机器 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/state/README-Machine.md)
+- [代码模板 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/template)
+- [链式调用 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/responsibility)
+- [代码组件 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/composite)
+- [订阅通知 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/observer)
+- [客户决策 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/strategy)
+- [状态变换 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/state)
+- [状态机器 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/state/README-Machine.md)
 
-> [Go设计模式实战系列 更多文章 点击此处查看](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns)
+> [Go设计模式实战系列 更多文章 点击此处查看](https://github.com/TIGERB/easy-tips/tree/master/go/patterns)
 

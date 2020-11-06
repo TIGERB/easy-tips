@@ -18,9 +18,9 @@
 
 本文主要介绍「组合模式」结合Go语言天生的并发特性，如何在真实业务场景中使用。
 
-之前文章[《代码组件 | Go设计模式实战》](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/composite)已经介绍了「组合模式」的概念，以及在业务中的使用。今天我们结合Go语言天生的并发特性，升级「组合模式」为「并发组合模式」。
+之前文章[《代码组件 | Go设计模式实战》](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/composite)已经介绍了「组合模式」的概念，以及在业务中的使用。今天我们结合Go语言天生的并发特性，升级「组合模式」为「并发组合模式」。
 
-我们先来简单回顾下「组合模式」的知识，详细可以查看上篇文章[《代码组件 | Go设计模式实战》](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/composite)
+我们先来简单回顾下「组合模式」的知识，详细可以查看上篇文章[《代码组件 | Go设计模式实战》](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/composite)
 
 ## 什么是「并发组合模式」？
 
@@ -82,7 +82,7 @@
 
 ## 怎么用「并发组合模式」？
 
-关于「并发组合模式」的建模过程完全可以参考之前文章[《代码组件 | Go设计模式实战》](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/composite)，我们这里只说说需要着重注意的地方。
+关于「并发组合模式」的建模过程完全可以参考之前文章[《代码组件 | Go设计模式实战》](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/composite)，我们这里只说说需要着重注意的地方。
 
 「并发组合模式」的核心还是`Component`组件接口，我们先看看「组合模式」的`Component`组件接口如下(再之前的文章上做了优化，进一步封装提取了`BusinessLogicDo`方法)：
 
@@ -734,7 +734,7 @@ func Demo() {
 
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU() - 1)
-	DemoConcurrency(
+	Demo()
 }
 
 // 获取正在运行的函数名
@@ -1103,11 +1103,11 @@ func (bc *BaseConcurrencyComponent) Do(ctx *Context, currentConponent Component,
 
 # 文章列表
 
-- [代码模板 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/template)
-- [链式调用 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/responsibility)
-- [代码组件 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/composite)
-- [订阅通知 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/observer)
-- [客户决策 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/strategy)
-- [状态变换 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/state)
+- [代码模板 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/template)
+- [链式调用 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/responsibility)
+- [代码组件 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/composite)
+- [订阅通知 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/observer)
+- [客户决策 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/strategy)
+- [状态变换 | Go设计模式实战](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/state)
 
-> [Go设计模式实战系列 更多文章 点击此处查看](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns)
+> [Go设计模式实战系列 更多文章 点击此处查看](https://github.com/TIGERB/easy-tips/tree/master/go/patterns)
