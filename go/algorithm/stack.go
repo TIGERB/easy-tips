@@ -1,18 +1,22 @@
-package main
+package algorithm
 
-type stack struct {
+// Stack Stack
+type Stack struct {
 	val []interface{}
 }
 
-func New() *stack {
-	return &stack{val: []interface{}{}}
+// New New
+func New() *Stack {
+	return &Stack{val: []interface{}{}}
 }
 
-func (s *stack) Push(item interface{}) {
+// Push Push
+func (s *Stack) Push(item interface{}) {
 	s.val = append(s.val, item)
 }
 
-func (s *stack) Pop() interface{} {
+// Pop Pop
+func (s *Stack) Pop() interface{} {
 	len := len(s.val)
 	if len == 0 {
 		return nil
@@ -22,22 +26,24 @@ func (s *stack) Pop() interface{} {
 	return item
 }
 
-func (s *stack) Get() []interface{} {
+// Get Get
+func (s *Stack) Get() []interface{} {
 	return s.val
 }
 
-func (s *stack) Len() int {
+// Len Len
+func (s *Stack) Len() int {
 	return len(s.val)
 }
 
 // func main() {
-// 	stack := New()
-// 	stack.Push(1)
-// 	stack.Push(2)
-// 	stack.Push(3)
-// 	fmt.Println(stack.Get(), stack.Len())
-// 	stack.Push(6)
-// 	stack.Push(9)
-// 	fmt.Println(stack.Get(), stack.Len())
-// 	fmt.Println(stack.Pop(), stack.Get(), stack.Len())
+// 	Stack := New()
+// 	Stack.Push(1)
+// 	Stack.Push(2)
+// 	Stack.Push(3)
+// 	fmt.Println(Stack.Get(), Stack.Len())
+// 	Stack.Push(6)
+// 	Stack.Push(9)
+// 	fmt.Println(Stack.Get(), Stack.Len())
+// 	fmt.Println(Stack.Pop(), Stack.Get(), Stack.Len())
 // }

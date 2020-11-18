@@ -1,12 +1,12 @@
-package main
+package leetcode
 
 import "fmt"
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
+// type TreeNode struct {
+// 	Val   int
+// 	Left  *TreeNode
+// 	Right *TreeNode
+// }
 
 func main() {
 	two := &TreeNode{Val: 3}

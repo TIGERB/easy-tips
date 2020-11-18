@@ -46,5 +46,4 @@ func search(nums []int, target int) int {
 			continue
 		}
 	}
-	return -1
 }

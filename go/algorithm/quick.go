@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+package algorithm
 
 // 快速排序
 func quick(resSlice []int, left int, right int) (res []int) {
@@ -41,7 +39,7 @@ func quick(resSlice []int, left int, right int) (res []int) {
 	return resSlice
 }
 
-func main() {
-	a := []int{2, 21, 3, 1, 5, 91, 7, 0, 21, 11, 12, 33}
-	fmt.Println(quick(a, 0, len(a)-1))
-}
+// func main() {
+// 	a := []int{2, 21, 3, 1, 5, 91, 7, 0, 21, 11, 12, 33}
+// 	fmt.Println(quick(a, 0, len(a)-1))
+// }

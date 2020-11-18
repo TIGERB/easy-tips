@@ -1,9 +1,6 @@
-package main
+package algorithm
 
-import (
-	"fmt"
-	"math"
-)
+import "fmt"
 
 // Tree 二叉树
 type Tree struct {
@@ -153,28 +150,29 @@ func levelorder(r *Tree) {
 	}
 }
 
-func main() {
-	fmt.Println("前序遍历开始...")
-	preorder(root)
-	fmt.Println("")
+// func main() {
+// 	fmt.Println("前序遍历开始...")
+// 	preorder(root)
+// 	fmt.Println("")
 
-	fmt.Println("中序遍历开始...")
-	inorder(root)
-	fmt.Println("")
+// 	fmt.Println("中序遍历开始...")
+// 	inorder(root)
+// 	fmt.Println("")
 
-	fmt.Println("后序遍历开始...")
-	postorder(root)
-	fmt.Println("")
+// 	fmt.Println("后序遍历开始...")
+// 	postorder(root)
+// 	fmt.Println("")
 
-	fmt.Println("层序遍历开始...")
-	levelorder(root)
-	fmt.Println("")
-}
+// 	fmt.Println("层序遍历开始...")
+// 	levelorder(root)
+// 	fmt.Println("")
+// }
 
 // ================
 // 平衡二叉树
 // ================
 
+// TreeNode TreeNode
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
@@ -192,19 +190,4 @@ type TreeNode struct {
 func isBalanced(root *TreeNode) bool {
 
 	return false
-}
-
-func recursionTree(node *TreeNode, high int) int, bool{
-	if node == nil {
-		return high, true
-	}
-
-	highLeft := recursionTree(node.Left, high)
-	highRight := recursionTree(node.Right, high)
-
-	if math.Abs(highLeft-highRight) > 1 {
-		return high, false
-	}
-
-	return high, true
 }

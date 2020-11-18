@@ -1,8 +1,4 @@
-package main
-
-func main() {
-
-}
+package leetcode
 
 func uniqueOccurrences(arr []int) bool {
 	resMap := map[int]int{}

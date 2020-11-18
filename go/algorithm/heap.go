@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+package algorithm
 
 // 树：节点node、根节点root、子节点child、叶节点leaf
 // 二叉树：每个节点最多有两个节点
@@ -35,7 +33,6 @@ func bigTopHeap(input []int) []int {
 		}
 		i++
 	}
-	return input
 }
 
 // lessTopHeap 小顶堆
@@ -66,11 +63,10 @@ func lessTopHeap(input []int) []int {
 		}
 		i++
 	}
-	return input
 }
 
-func main() {
-	input := []int{2, 7, 26, 25, 19, 17, 1, 90, 3, 36}
-	fmt.Println(bigTopHeap(input))
-	fmt.Println(lessTopHeap(input))
-}
+// func main() {
+// 	input := []int{2, 7, 26, 25, 19, 17, 1, 90, 3, 36}
+// 	fmt.Println(bigTopHeap(input))
+// 	fmt.Println(lessTopHeap(input))
+// }

@@ -7,18 +7,18 @@ import (
 	"time"
 )
 
-func main() {
-	// DemoWithTimeout()
-	// DemoWithDeadline()
-	// DemoWithCancel()
-	// demoChan()
+// func main() {
+// 	// DemoWithTimeout()
+// 	// DemoWithDeadline()
+// 	// DemoWithCancel()
+// 	// demoChan()
 
-	time.AfterFunc(3*time.Second, func() {
-		fmt.Println("aaa")
-	})
+// 	time.AfterFunc(3*time.Second, func() {
+// 		fmt.Println("aaa")
+// 	})
 
-	time.Sleep(5 * time.Second)
-}
+// 	time.Sleep(5 * time.Second)
+// }
 
 // DemoWithTimeout context.WithTimeout使用示例
 func DemoWithTimeout() {
