@@ -3,3 +3,4 @@ go/src/.DS_Store
 vendor
 go/bin
 go/pkg
+go/go-learn/ssa.html
