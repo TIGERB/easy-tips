@@ -41,12 +41,12 @@ func preorderTraversal(root *TreeNode) []int {
 	}
 	// 出栈
 	popStack := func(stack []*TreeNode) ([]*TreeNode, *TreeNode) {
-		len := len(stack)
-		if len == 0 {
+		lenStack := len(stack)
+		if lenStack == 0 {
 			return []*TreeNode{}, nil
 		}
-		val := stack[len-1]
-		return append(stack[:0], stack[:len-1]...), val
+		val := stack[lenStack-1]
+		return append(stack[:0], stack[:lenStack-1]...), val
 	}
 
 	// 根节点入栈

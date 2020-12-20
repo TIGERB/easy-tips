@@ -8,8 +8,8 @@
 <a href="https://github.com/TIGERB/easy-tips#目录">
   <img src="https://img.shields.io/badge/PHP-✅-brightgreen.svg" alt="php">
 </a>
-<a href="https://github.com/TIGERB/easy-tips/tree/master/mysql">
-  <img src="https://img.shields.io/badge/Go-🚗-blue.svg" alt="mysql">
+<a href="https://github.com/TIGERB/easy-tips/tree/master/go">
+  <img src="https://img.shields.io/badge/Go-🚗-blue.svg" alt="go">
 </a>
 <a href="https://github.com/TIGERB/easy-tips/tree/master/mysql">
   <img src="https://img.shields.io/badge/MySQL-🚗-blue.svg" alt="mysql">
@@ -66,14 +66,16 @@
     * [文档](https://github.com/TIGERB/easy-tips/blob/master/php/standard.md)
     * [经验](https://github.com/TIGERB/easy-tips/blob/master/php/artisan.md)
   + [记一些PHP的坑](https://github.com/TIGERB/easy-tips/blob/master/pit.md#记一些坑)
-- Go基础学习 🚗
+- Go语言学习 🚗
   + Go框架源码阅读&解析
     * [Go框架解析-beego](http://tigerb.cn/2018/12/06/beego/)
     * [Go框架解析-iris](http://tigerb.cn/2019/06/29/go-iris/)
     * [Go框架解析-gin](http://tigerb.cn/2019/07/06/go-gin/)
     * [Go框架解析-echo](http://tigerb.cn/2019/07/13/go-echo/)
-  + go常用包解析
+  + Go常用包解析
     * go常用包解析-fasthttp
+  + Go语言进阶学习
+    * [由浅到深，入门Go语言Map实现原理](http://tigerb.cn/2020/12/20/go-base/map/)
 - 高并发相关 🚗
   + [处理高并发的一般思路](http://tigerb.cn/2019/04/18/top-qps-experience/)
   + [秒杀系统设计](http://tigerb.cn/2020/05/05/skrshop/seckill/)
@@ -136,13 +138,14 @@
   + [概念](https://github.com/TIGERB/easy-tips/blob/master/patterns/thought.md#设计模式)
   + [面向对象的设计过程](http://tigerb.cn/2019/10/11/oop/)
   + Go版本 🚗
-    * [我的代码没有else系列](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns)
-      - [模板模式](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/template)
-      - [责任链模式](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/responsibility)
-      - [组合模式](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/composite)
-      - [观察者模式](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/observer)
-      - [策略模式](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/strategy)
-      - [状态模式](https://github.com/TIGERB/easy-tips/tree/master/go/src/patterns/state)
+    * [我的代码没有else系列](https://github.com/TIGERB/easy-tips/tree/master/go/patterns)
+      - [模板模式](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/template)
+      - [责任链模式](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/responsibility)
+      - [组合模式](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/composite)
+      - [观察者模式](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/observer)
+      - [策略模式](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/strategy)
+      - [状态模式](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/state)
+      - [并发组合模式](https://github.com/TIGERB/easy-tips/blob/master/go/patterns/composite/README-Concurrency.md)
       - ...
   + PHP版本 ✅
     * 创建型模式实例

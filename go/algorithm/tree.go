@@ -1,6 +1,9 @@
 package algorithm
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 // Tree 二叉树
 type Tree struct {
@@ -188,6 +191,44 @@ type TreeNode struct {
  * }
  */
 func isBalanced(root *TreeNode) bool {
+	stack := []*TreeNode{}
+	pushStack := func(stack []*TreeNode, val *TreeNode) []*TreeNode {
+		return append(stack, val)
+	}
+	popStack := func(stack []*TreeNode) ([]*TreeNode, *TreeNode) {
+		lenStack := len(stack)
+		if lenStack == 0 {
+			return []*TreeNode{}, nil
+		}
+		val := stack[lenStack-1]
+		return append(stack[:0], stack[:lenStack-1]...), val
+	}
 
-	return false
+	// push根节点
+	stack = pushStack(stack, root)
+	node := &TreeNode{}
+	// 右节点深度
+	i := 0
+	// 左节点深度
+	j := 0
+	for len(stack) > 0 {
+		// 弹出
+		stack, node = popStack(stack)
+		fmt.Println(node.Val)
+		if node.Right != nil {
+			// 压栈
+			i++
+			stack = pushStack(stack, node.Right)
+		}
+		if node.Left != nil {
+			// 压栈
+			j++
+			stack = pushStack(stack, node.Left)
+		}
+		if math.Abs(float64(i-j)) > 1 {
+			return false
+		}
+	}
+
+	return true
 }

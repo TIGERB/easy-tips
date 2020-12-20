@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"unsafe"
 )
 
 // 理解unsafe.Pointer笔记
@@ -46,27 +46,32 @@ func main() {
 
 	// ------------ 理解 uintptr
 
-	// d := &demo{
-	// 	PropertyOne: "one",
-	// 	PropertyTwo: "two",
-	// }
-	// fmt.Println("d", d)
-	// fmt.Printf("d %p", d)
+	d := &demo{
+		PropertyOne: "one",
+		PropertyTwo: "two",
+	}
+	fmt.Println("d", d)
+	fmt.Printf("d %p", d)
 
-	// dStr := (*string)(unsafe.Pointer(d))
-	// fmt.Println("")
-	// fmt.Printf("dStr %p %v", dStr, *dStr)
-	// fmt.Println("")
-	// dTwoPointer := (*string)(unsafe.Pointer(uintptr(unsafe.Pointer(d)) + unsafe.Offsetof(d.PropertyTwo)))
-	// fmt.Println("uintptr", *(dTwoPointer))
-	// *dTwoPointer = "three"
-	// fmt.Println("uintptr", *(dTwoPointer))
-	// fmt.Println("d.PropertyTwo", d.PropertyTwo)
+	dStr := (*string)(unsafe.Pointer(d))
+	fmt.Println("")
+	fmt.Printf("dStr %p %v", dStr, *dStr)
+	fmt.Println("")
+	dTwoPointer := (*string)(unsafe.Pointer(uintptr(unsafe.Pointer(d)) + unsafe.Offsetof(d.PropertyTwo)))
+	fmt.Println("uintptr", *(dTwoPointer))
+	*dTwoPointer = "three"
+	fmt.Println("uintptr", *(dTwoPointer))
+	fmt.Println("d.PropertyTwo", d.PropertyTwo)
+
+	var a float64 = 1.0
+	var b *int64
+	b = (*int64)(unsafe.Pointer(&a))
+	fmt.Println("a, b", &a, a, b, *b)
 
 	// ------------
 
-	a := "aaa"
+	// a := "aaa"
 
-	fmt.Println(strings.Count(a, ""), len(a))
+	// fmt.Println(strings.Count(a, ""), len(a))
 
 }
