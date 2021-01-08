@@ -129,3 +129,85 @@ fmt.Println("d.PropertyTwo", d.PropertyTwo)
 buckets
 ```
 
+## 内存管理
+
+内存对齐？
+
+---
+
+> 一个指针8字节？ 
+
+- 为何64位下一个指针大小为8个字节？https://www.jianshu.com/p/14b4bc2a76cc
+- 为什么一个指针在32位系统中占4个字节，在64位系统中占8个字节？https://www.cnblogs.com/gaoxiaoniu/p/10677754.html
+
+> 地址总线?
+
+- 总结总线的一些基本知识 https://www.junmajinlong.com/os/bus/
+
+> CPU的寻址能力为什么以字节为单位？
+
+- 32位cpu 内存空间4GB 是怎么算的？为什么单位从b变成了B? https://www.zhihu.com/question/61974351
+- 8位、16位、32位操作系统的区别 https://blog.csdn.net/luckyzhoustar/article/details/80384827
+- 存储单元是CPU访问存储器的基本单位 https://baike.baidu.com/item/%E5%AD%98%E5%82%A8%E5%8D%95%E5%85%83
+
+> 寻址?
+
+```
+存储器(这里指计算机的内存)由存储单位构成
+存储单元 = 8bit = 1byte
+
+---
+
+储存器地址就是储存单元的编号
+```
+
+> CPU的寻址范围?
+
+```
+32位CPU：
+一般指的是地址总线的宽度 -> 32位 -> 0 ~ 2^32-1(bit）
+64位CPU：
+一般指的是地址总线的宽度 -> 64位 -> 0 ~ 2^64-1(bit）
+
+地址总线的1bit ---(对应)---> 1个存储单元 == 8位(bit) == 1byte
+
+---
+
+32位 -> 0 ~ 2^32-1(bit）---(对应)---> 0 ~ 2^32-1(byte）容量 == 4G
+64位 -> 0 ~ 2^64-1(bit） == 0X0000 0000 0000 0000 ~ 0XFFFF FFFF FFFF FFFF ---(对应)---> 0 ~ 2^64-1(byte）容量 （16 EB）
+```
+
+- 寄存器，存储器，RAM，ROM有什么区别？https://www.zhihu.com/question/288534298
+- 64位linux操作系统每个进程分配的虚拟内存有多大，4G还是说2的64次方？https://www.zhihu.com/question/265014061
+
+- Golang 是否有必要内存对齐？https://ms2008.github.io/2019/08/01/golang-memory-alignment/
+- 在 Go 中恰到好处的内存对齐 https://zhuanlan.zhihu.com/p/53413177
+
+- 你真的了解虚拟内存和物理内存吗 https://juejin.cn/post/6844903970981281800
+- 为什么 Linux 需要虚拟内存 https://draveness.me/whys-the-design-os-virtual-memory/
+
+golangci-lint
+
+```
+1. 为什么64位平台Go语言里的指针`uintptr`的实际类型是uint64?
+
+2. 为什么32位平台的最大寻址空间是4GB？那64位平台的寻址空间又是多大？---> 为什么CPU的寻址能力以字节(Byte)为单位？
+
+3. 为什么需要虚拟内存？
+
+4. 我们知道32位平台下，每个进程对应4GB虚拟内存，1GB高地址作为内核空间，3GB低地址作为用户空间。
+那么：64位平台下是如何分配内核空间和用户空间的？
+
+5. 当我们看到Go的内存对齐，这到底是在干些什么？
+```
+
+---
+
+TCMalloc
+
+- 图解 TCMalloc https://zhuanlan.zhihu.com/p/29216091
+- TCMalloc解密 https://wallenwang.com/2018/11/tcmalloc/
+- TCMalloc : Thread-Caching Malloc https://github.com/google/tcmalloc/blob/master/docs/design.md
+- 可利用空间表（Free List）https://songlee24.github.io/2015/04/08/free-list/
+
+page 8kb
