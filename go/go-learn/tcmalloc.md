@@ -2,7 +2,7 @@
 
 > 源码版本(commit:9d274df) https://github.com/google/tcmalloc/tree/master/tcmalloc
 
-## 导读
+# 导读
 
 ```
 本系列基于64位平台、1Page=8KB
@@ -38,9 +38,9 @@
 - `TCMalloc`基本结构的依赖关系(简易)
 - `TCMalloc`基本结构的依赖关系(详细)
 
-## 64位平台下，指针自身的大小为什么是8字节？
+# 64位平台下，指针自身的大小为什么是8字节？
 
-## 本篇前言
+## 本篇导读
 
 第一部分`知识预备`的第一个知识点`指针的大小`。
 
@@ -125,31 +125,87 @@ CPU总线由系统总线、等等其他总线组成。
 - 指针的值就是存储单元的编号
 - CPU地址总线的宽度决定了指针的值的最大范围
 
+# 20张图解密TCMalloc内存分配原理
+
+## 本文导读
+
+先，了解三个读前的基本知识储备，目的辅助我们更好的理解内存分配原理：
+
+- 内存的线性分配
+- 什么是`FreeList`？
+- 虚拟内存
+
+接着，了解`TCMalloc`中的三个基本概念，目的`TCMalloc`各个主要部分是基于这些基础结构组成的：
+
+- `Page`的概念
+- `Span`的概念
+- `Object`的概念
+
+再接着，在掌握了上面基础概念的基础上，简单看看`TCMalloc`的基本结构：
+
+- `PageHeap`的概念
+- `CentralFreeList`和`TransferCacheManager`的概念
+- `ThreadCache`的概念
+
+最后，在掌握如上基础知识的概念上看看，`TCMalloc`主要三部分的结构关系，以及内存分配的大致过程：
+  
+- `TCMalloc`基本结构的依赖关系(简易)
+- `TCMalloc`基本结构的依赖关系(详细)
+
+## 目录
+
+- 读前基本知识储备
+  + 内存的线性分配
+  + 什么是`FreeList`？
+  + 虚拟内存
+- `TCMalloc`中的三个基本概念
+  + `Page`的概念
+  + `Span`的概念
+  + `Object`的概念
+- `TCMalloc`基本结构
+  + `PageHeap`的概念
+  + `CentralFreeList`和`TransferCacheManager`的概念
+  + `ThreadCache`的概念
+- `TCMalloc`基本结构的关系以及内存分配过程
+  + `TCMalloc`基本结构的依赖关系(简易)
+  + `TCMalloc`基本结构的依赖关系(详细)
+
 ## 内存的线性分配
 
-线性分配大致就是需要使用多少分配多少，用到哪了标识到哪，如下图所示：
+线性分配大致就是需要使用多少分配多少，“用到哪了标识到哪”，如下图所示：
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210124225714.png" style="width:100%">
 </p>
 
-线性分配有个问题，已经分配的内存被释放了，我们再如何再次分配。大家会想到用链表`LinkedList`，是的没错，但是内存管理中一般使用的是`FreeList`。
+线性分配有个问题：“已经分配的内存被释放了，我们如何再次分配？”。大家会想到用链表`LinkedList`，是的没错，但是内存管理中一般使用的是`FreeList`。
 
 ## 什么是`FreeList`？
 
 `FreeList`本质上还是个`LinkedList`，和`LinkedList`的区别：
 
-- `FreeList`没有`Next`属性存放下一个节点的指针的值。
-- `FreeList`使用了`Value`的前8字节存放下一个节点的指针的值。
+- `FreeList`没有`Next`属性，所以不是用`Next`属性存放下一个节点的指针的值。
+- `FreeList`“相当于使用了`Value`的前8字节”(其实就是整块内存的前8字节)存放下一个节点的指针。
 - 分配出去的节点，节点整块内存空间可以被复写(指针的值可以被覆盖掉)
 
-用于内存的管理再合适不过了。
+如下图所示：
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210124224723.png" style="width:100%">
 </p>
 
 因为我们的主要目的是**掌握Go语言的内存分配原理**，但是呢，Go语言的内存分配主要是参考**Tcmalloc内存分配器**实现的，所以，我们想搞懂Go语言的内存分配原理前，必须先了解**Tcmalloc内存分配器**，便于我们对后续知识的深入理解。
+
+## 虚拟内存
+
+我们的进程是运行再虚拟内存上的，使用虚拟内存：
+
+- 对于我们的进程而言，可使用的内存是连续的
+- 安全，防止了进程直接对物理内存的操作(如果进程可以直接操作物理内存，那么存在某个进程篡改其他进程数据的可能)
+- 虚拟内存和物理内存是通过MMU(Memory Manage Unit)映射的(感兴趣的可以研究下)
+- 等等(感兴趣的可以研究下)
+
+所以以下文章我们所说的内存都是指对**虚拟内存的操作**。
 
 ## 什么是`Tcmalloc`？
 
@@ -161,7 +217,7 @@ CPU总线由系统总线、等等其他总线组成。
 
 ### `Page`的概念
 
-操作系统是按`Page`管理内存的，本文中1Page为8KB。
+操作系统是按`Page`管理内存的，本文中1Page为8KB，如下图所示：
 
 ```
 备注：操作系统为什么按`Page`管理内存？不在本文范围。
@@ -190,7 +246,7 @@ CPU总线由系统总线、等等其他总线组成。
 - 2个连续`Page`构成的16KB的`Span`
 - 3个连续`Page`构成的24KB的`Span`
 
-除此之外，`Span`和`Span`之间可以构成**双向链表**，内存管理中通常持有相同数量`Page`的`Span`会构成一个双向链表，如下图所示：
+除此之外，`Span`和`Span`之间可以构成**双向链表**，内存管理中通常将持有相同数量`Page`的`Span`构成一个双向链表，如下图所示：
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210125202222.png" style="width:100%">
@@ -198,7 +254,7 @@ CPU总线由系统总线、等等其他总线组成。
 
 ### `Object`的概念
 
-一个`Span`会被按照某个大小拆分成N个`Object`，同时这N个`Object`构成一个`FreeList`(如果忘了FreeList的概念可以再返回上文重新看看)。
+一个`Span`会被按照某个大小拆分为N个`Objects`，同时这N个`Objects`构成一个`FreeList`(如果忘了FreeList的概念可以再返回上文重新看看)。
 
 我们以持有`1Page`的`Span`为例，`Span`、`Page`、`Object`关系图示如下：
 
@@ -211,7 +267,7 @@ CPU总线由系统总线、等等其他总线组成。
 > 上图怎么知道拆分`Span`为一个个24字节大小的`Object`，这个规则是怎么知道的呢？
 
 ```c++
-答：依赖代码维护的映射列表。
+答案：依赖代码维护的映射列表。
 
 我们以Google开源的TCMalloc源码(commit:9d274df)为例来看一下这个映射列表 https://github.com/google/tcmalloc/tree/master/tcmalloc
 
@@ -220,7 +276,7 @@ CPU总线由系统总线、等等其他总线组成。
 
 const SizeClassInfo SizeMap::kSizeClasses[SizeMap::kSizeClassesCount] = {
     // <bytes>, <pages>, <batch size>    <fixed>
-    // Object大小列，一次申请的page数，一次移动的object数(申请或回收)
+    // Object大小列，一次申请的page数，一次移动的objects数(内存申请或回收)
     {        0,       0,           0},  // +Inf%
     {        8,       1,          32},  // 0.59%
     {       16,       1,          32},  // 0.59%
@@ -240,12 +296,14 @@ const SizeClassInfo SizeMap::kSizeClasses[SizeMap::kSizeClassesCount] = {
     {   262144,      32,           2},  // 0.02%
 };
 
-我们来分下下这个过程：
-1. 先找到对应行(也就是说所有行都会被维护)
+获取拆分规则的过程(先找到行、再找到这行第一列的值)：
+1. 先找到对应行(如何找到这个行？是不是有人有疑惑了，
+想知道这个答案就需要了解`CentralFreeList`这个结构了，
+下文我们会讲到。)
 2. 找到第一列，这个数字就是object的大小
 ```
 
-所以，N个Span会按照`SizeMap::kSizeClasses`这个列表的所有列会维护一个`SpanList`，我们用熟悉的Go语言写个伪代码如下：
+<!-- 规则(SizeMap)有`SizeMap::kSizeClassesCount`个规则，所以所有的Span会按照`SizeMap::kSizeClasses`这个列表的每一列规则维护一个`SpanList`，用熟悉的Go语言写个伪代码如下：
 
 ```go
 // Go版伪代码
@@ -270,82 +328,108 @@ type Span struct {
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210125201952.png" style="width:100%">
-</p>
+</p> -->
 
+> 这个三个基本概念具体干什么用的呢？
 
-`Tcmalloc`的基本结构
+```
+答案：支撑了`Tcmalloc`的基本结构的实现。
+```
 
-## 基本结构
+## 解密`Tcmalloc`的基本结构
 
-主要由三部分构成
+接着来看看`Tcmalloc`的基本结构，`Tcmalloc`主要由三部分构成(这个三部分基于`Page`、`Span`、`Object`实现)：
 
-- `PageHeap`的概念
-- `CentralFreeList`和TransferCacheManager的概念
-- `ThreadCache`的概念
+- `PageHeap`
+- `CentralFreeList`
+- `ThreadCache`
+
+如下图所示：
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132020.png" style="width:60%">
 </p>
 
-``CentralFreeList``被`TransferCacheManager`管理
+但是呢，实际上`CentralFreeList`是被`TransferCacheManager`管理的，所以我们转换下这个基本结构，图示如下：
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132031.png" style="width:80%">
 </p>
 
-`ThreadCache`被线程持有
+> 接着，`ThreadCache`其实被线程持有，为什么呢？
+
+```
+答案：减少线程之间的竞争，分配内存时减少锁的过程.
+```
+
+进一步得到简易的建构图示如下：
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132037.png" style="width:80%">
 </p>
 
+继续看看`PageHeap`、`CentralFreeList`、`ThreadCache`三部分的概念与详细构成。
 
-分别看看三部分的详细概念
+## 解密`PageHeap`、`CentralFreeList`、`ThreadCache`的意义与构成
 
 - `PageHeap`的概念
-- `CentralFreeList`和TransferCacheManager的概念
-- ThreadCache的概念
+- `CentralFreeList`和`TransferCacheManager`的概念
+- `ThreadCache`的概念
 
-## `PageHeap`的概念
+### 解密`PageHeap`意义与构成
+
+- `SpanList`
+  + 双向链表
+  + 相同page数
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132117.png" style="width:100%">
 </p>
 
+- `SpanListPair`
+  - normal `SpanList`
+    + 双向链表
+    + 相同page数
+  - returned `SpanList`
+    + 双向链表
+    + 相同page数
+
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132136.png" style="width:100%">
 </p>
+
+large
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132145.png" style="width:100%">
 </p>
 
-## `CentralFreeList`和TransferCacheManager的概念
-### `CentralFreeList`
+### 解密`CentralFreeList`和`TransferCacheManager`的意义与构成
+#### 解密`CentralFreeList`
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132206.png" style="width:100%">
 </p>
 
-## TransferCacheManager
+#### 解密`TransferCacheManager`
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132218.png" style="width:100%">
 </p>
 
-## ThreadCache的概念
+### 解密`ThreadCache`的意义与构成
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132229.png" style="width:100%">
 </p>
 
-## `Tcmalloc`基本结构的依赖关系(简易)
+## 解密`Tcmalloc`基本结构的依赖关系(简易)
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132244.png" style="width:66%">
 </p>
 
-## `Tcmalloc`基本结构的依赖关系(详细)
+## 解密`Tcmalloc`基本结构的依赖关系(详细)
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132256.png" style="width:100%">
