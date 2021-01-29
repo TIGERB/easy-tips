@@ -133,7 +133,7 @@ CPU总线由系统总线、等等其他总线组成。
 - 指针的值就是存储单元的编号
 - CPU地址总线的宽度决定了指针的值的最大范围
 
-# 20张图解密TCMalloc内存分配原理
+# 18张图解密TCMalloc内存分配原理
 
 ## 本文导读
 
@@ -497,7 +497,7 @@ class PageHeap final : public PageAllocatorInterface {
   struct SpanListPair {
     // Span构成的双向链表 正常的
     SpanList normal; 
-    // Span构成的双向链表 物理内存已经回收 但是虚拟内存还被持有
+    // Span构成的双向链表 大概是 物理内存已经回收 但是虚拟内存还被持有(感兴趣可以研究)
     SpanList returned;
   };
 
@@ -522,7 +522,7 @@ class PageHeap final : public PageAllocatorInterface {
   <img src="http://cdn.tigerb.cn/20210129132903.png" style="width:100%">
 </p>
 
-大于kMaxPages个Pages(大对象)的内存分配是从`large_`中分配的，代码如下：
+又因为大于kMaxPages个Pages(大对象)的内存分配是从`large_`中分配的，代码如下：
 
 ```c++
 class PageHeap final : public PageAllocatorInterface {
@@ -544,7 +544,7 @@ class PageHeap final : public PageAllocatorInterface {
   <img src="http://cdn.tigerb.cn/20210129132923.png" style="width:100%">
 </p>
 
-同时`PageHeap`核心属性的代码片段如下：
+同时`PageHeap`核心的代码片段如下：
 
 ```c++
 class PageHeap final : public PageAllocatorInterface {
@@ -575,9 +575,15 @@ class PageHeap final : public PageAllocatorInterface {
 ### 解密`CentralFreeList`和`TransferCacheManager`的构成
 #### 解密`CentralFreeList`
 
-<p align="center">
-  <img src="http://cdn.tigerb.cn/20210120132206.png" style="width:100%">
-</p>
+我们可以称之为中央缓存，中央缓存被线程共享，从中央缓存`CentralFreeList`获取缓存需要加锁。
+
+把`Span`按照`SizeClass`里面的规则拆解成`Object`，同时`Object`构成`FreeList`
+
+`CentralFreeList`里面有个属性`size_class_`，就是`SizeClass`的值，来自于映射表`SizeMap`这个数组的索引值
+
+每个`SizeClass`对应一个`CentralFreeList`
+
+有N个`CentralFreeList`，N的值为`kNumClasses`
 
 ```c++
 class CentralFreeList {
@@ -603,11 +609,14 @@ class CentralFreeList {
   // ...略
 ```
 
+<p align="center">
+  <img src="http://cdn.tigerb.cn/20210120132206.png" style="width:100%">
+</p>
+
 #### 解密`TransferCacheManager`
 
-<p align="center">
-  <img src="http://cdn.tigerb.cn/20210120132218.png" style="width:100%">
-</p>
+有`kNumClasses`个`CentralFreeList`，这些`CentralFreeList`在哪维护的呢？
+就是`TransferCacheManager`这个结构里的`freelist_`属性，代码如下：
 
 ```c++
 class TransferCacheManager {
@@ -622,12 +631,16 @@ class TransferCacheManager {
 } ABSL_CACHELINE_ALIGNED;
 ```
 
+<p align="center">
+  <img src="http://cdn.tigerb.cn/20210120132218.png" style="width:100%">
+</p>
+
 
 ### 解密`ThreadCache`的构成
 
-<p align="center">
-  <img src="http://cdn.tigerb.cn/20210120132229.png" style="width:100%">
-</p>
+我们可以称之为线程缓存，`TCMalloc`内存分配器的核心所在。`ThreadCache`被每个线程持有，分配内存时不用加锁，性能好。
+
+`ThreadCache`对象里维护了一个属性`list_`类型是个数组，数组元素的类型是`FreeList`，代码如下：
 
 ```c++
 class ThreadCache {
@@ -637,16 +650,70 @@ class ThreadCache {
   // 元素的类型是FreeList
   // 元素的数量与 映射表 SizeClassInfo对应
   FreeList list_[kNumClasses]; 
-  
-  // ...略
-
-  // 自身构成双向链表
-  ThreadCache* next_;
-  ThreadCache* prev_;
 
   // ...略
 };
 ```
+
+同时`FreeList`里的元素还具有以下特性：
+
+- 索引值为1对应的`FreeList`，该`FreeList`的`Object`大小为8 Bytes；
+- 索引值为2对应的`FreeList`，该`FreeList`的`Object`大小为16 Bytes；
+- 以此类推，`free_`索引值为MaxNumber对应的`FreeList`，该`FreeList`的`Object`大小为MaxNumber Bytes；
+- MaxNumber的值由`kNumClasses`决定
+
+这个规则怎么来的？还是取决于映射列表，同样以Google开源的TCMalloc源码(commit:9d274df)为例，来看一下这个映射列表：
+
+```c++
+https://github.com/google/tcmalloc/tree/master/tcmalloc
+
+代码位置：tcmalloc/tcmalloc/size_classes.cc
+代码示例(摘取一部分)：
+
+const SizeClassInfo SizeMap::kSizeClasses[SizeMap::kSizeClassesCount] = {
+    // 这里的每一行 称之为SizeClass
+    // <bytes>, <pages>, <batch size>    <fixed>
+    // Object大小列，一次申请的page数，一次移动的objects数(内存申请或回收)
+    {        0,       0,           0},  // +Inf%
+    {        8,       1,          32},  // 0.59%
+    {       16,       1,          32},  // 0.59%
+    {       24,       1,          32},  // 0.68%
+    {       32,       1,          32},  // 0.59%
+    {       40,       1,          32},  // 0.98%
+    {       48,       1,          32},  // 0.98%
+    // ...略...
+    {    98304,      12,           2},  // 0.05%
+    {   114688,      14,           2},  // 0.04%
+    {   131072,      16,           2},  // 0.04%
+    {   147456,      18,           2},  // 0.03%
+    {   163840,      20,           2},  // 0.03%
+    {   180224,      22,           2},  // 0.03%
+    {   204800,      25,           2},  // 0.02%
+    {   229376,      28,           2},  // 0.02%
+    {   262144,      32,           2},  // 0.02%
+};
+```
+我们可以得到：
+
+数组索引|FreeList里单个Object的大小
+---|---
+1|8 Bytes
+2|16 Bytes
+3|24 Bytes
+4|32 Bytes
+5|40 Bytes
+...|...
+kNumClasses|kNumClasses Bytes
+
+得到`ThreadCache`结构图如下所示：
+
+```
+注意：图示中索引为3的FreeList的Span尾部会浪费掉8字节。
+```
+
+<p align="center">
+  <img src="http://cdn.tigerb.cn/20210120132229.png" style="width:100%">
+</p>
 
 ## 解密`Tcmalloc`基本结构的依赖关系
 
