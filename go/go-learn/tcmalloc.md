@@ -17,26 +17,34 @@
 关于「内存与垃圾回收」章节，大体从如下三大部分展开：
 
 - 知识预备：为后续的内容做一些知识储备，知识预备包括
-  + 指针的大小
-  + Tcmalloc内存分配原理
+	+ 指针的大小
+	+ Tcmalloc内存分配原理
 - Go内存设计与实现
 - Go的垃圾回收原理
 
 ## 目录
 
 - 指针自身的大小为什么是8字节(64位平台)？
-- 内存的线性分配
-- 什么是`FreeList`？
-- 什么是`TCMalloc`？
-  - `Page`的概念
-  - `Span`的概念
-  - `Object`的概念
-- `TCMalloc`的基本结构
-  - `PageHeap`的概念
-  - `CentralFreeList`和`TransferCacheManager`的概念
-  - `ThreadCache`的概念
-- `TCMalloc`基本结构的依赖关系(简易)
-- `TCMalloc`基本结构的依赖关系(详细)
+- 读前知识储备
+	+ 内存的线性分配
+	+ 什么是`FreeList`？
+	+ 虚拟内存
+- `TCMalloc`中的五个基本概念
+	+ `Page`的概念
+	+ `Span`的概念
+    	* `SpanList`的概念
+	+ `Object`的概念
+    	* `SizeClass`的概念
+- 解密`Tcmalloc`的基本结构
+- `PageHeap`、`CentralFreeList`、`ThreadCache`的详细构成
+	+ 解密`PageHeap`
+	+ 解密`CentralFreeList`和`TransferCacheManager`的构成
+    	* 解密`CentralFreeList`
+		* 解密`TransferCacheManager`
+	+ 解密`ThreadCache`
+- 解密`TCMalloc`基本结构的依赖关系
+	+ 简易版
+	+ 详细版
 
 # 64位平台下，指针自身的大小为什么是8字节？
 
@@ -129,17 +137,19 @@ CPU总线由系统总线、等等其他总线组成。
 
 ## 本文导读
 
-先，了解三个读前的基本知识储备，目的辅助我们更好的理解内存分配原理：
+<!-- 先，了解三个读前的基本知识储备，目的辅助我们更好的理解内存分配原理：
 
 - 内存的线性分配
 - 什么是`FreeList`？
 - 虚拟内存
 
-接着，了解`TCMalloc`中的三个基本概念，目的`TCMalloc`各个主要部分是基于这些基础结构组成的：
+接着，了解`TCMalloc`中的五个基本概念，目的`TCMalloc`各个主要部分是基于这些基本概念组成的：
 
 - `Page`的概念
 - `Span`的概念
+	+ `SpanList`的概念
 - `Object`的概念
+	+ `SizeClass`的概念
 
 再接着，在掌握了上面基础概念的基础上，简单看看`TCMalloc`的基本结构：
 
@@ -152,25 +162,42 @@ CPU总线由系统总线、等等其他总线组成。
 - `TCMalloc`基本结构的依赖关系(简易)
 - `TCMalloc`基本结构的依赖关系(详细)
 
-## 目录
+## 目录 -->
 
-- 读前基本知识储备
-  + 内存的线性分配
-  + 什么是`FreeList`？
-  + 虚拟内存
-- `TCMalloc`中的三个基本概念
-  + `Page`的概念
-  + `Span`的概念
-  + `Object`的概念
-- `TCMalloc`基本结构
-  + `PageHeap`的概念
-  + `CentralFreeList`和`TransferCacheManager`的概念
-  + `ThreadCache`的概念
-- `TCMalloc`基本结构的关系以及内存分配过程
-  + `TCMalloc`基本结构的依赖关系(简易)
-  + `TCMalloc`基本结构的依赖关系(详细)
+- 读前知识储备
+	+ 内存的线性分配
+	+ 什么是`FreeList`？
+	+ 虚拟内存
+	+ 什么是`TCMalloc`?
+- `TCMalloc`中的五个基本概念
+	+ `Page`的概念
+	+ `Span`的概念
+    	* `SpanList`的概念
+	+ `Object`的概念
+    	* `SizeClass`的概念
+- 解密`Tcmalloc`的基本结构
+- `PageHeap`、`CentralFreeList`、`ThreadCache`的详细构成
+	+ 解密`PageHeap`
+	+ 解密`CentralFreeList`和`TransferCacheManager`的构成
+    	* 解密`CentralFreeList`
+		* 解密`TransferCacheManager`
+	+ 解密`ThreadCache`
+- 解密`TCMalloc`基本结构的依赖关系
+	+ 简易版
+	+ 详细版
 
-## 内存的线性分配
+## 读前知识储备
+
+本小节的结构如下：
+
+- 内存的线性分配
+- 什么是`FreeList`？
+- 虚拟内存
+- 什么是`TCMalloc`?
+
+> 目的：辅助我们更好的理解内存分配原理。
+
+### 内存的线性分配
 
 线性分配大致就是需要使用多少分配多少，“用到哪了标识到哪”，如下图所示：
 
@@ -180,7 +207,7 @@ CPU总线由系统总线、等等其他总线组成。
 
 线性分配有个问题：“已经分配的内存被释放了，我们如何再次分配？”。大家会想到用链表`LinkedList`，是的没错，但是内存管理中一般使用的是`FreeList`。
 
-## 什么是`FreeList`？
+### 什么是`FreeList`？
 
 `FreeList`本质上还是个`LinkedList`，和`LinkedList`的区别：
 
@@ -196,24 +223,36 @@ CPU总线由系统总线、等等其他总线组成。
 
 因为我们的主要目的是**掌握Go语言的内存分配原理**，但是呢，Go语言的内存分配主要是参考**Tcmalloc内存分配器**实现的，所以，我们想搞懂Go语言的内存分配原理前，必须先了解**Tcmalloc内存分配器**，便于我们对后续知识的深入理解。
 
-## 虚拟内存
+### 虚拟内存
 
-我们的进程是运行再虚拟内存上的，使用虚拟内存：
+这里直说结论哈，我们的进程是运行在虚拟内存上的，图示如下：
+
+<p align="center">
+  <img src="http://cdn.tigerb.cn/20210129194928.png" style="width:90%">
+</p>
 
 - 对于我们的进程而言，可使用的内存是连续的
 - 安全，防止了进程直接对物理内存的操作(如果进程可以直接操作物理内存，那么存在某个进程篡改其他进程数据的可能)
 - 虚拟内存和物理内存是通过MMU(Memory Manage Unit)映射的(感兴趣的可以研究下)
 - 等等(感兴趣的可以研究下)
 
-所以以下文章我们所说的内存都是指对**虚拟内存的操作**。
+所以，以下文章我们所说的内存都是指**虚拟内存**。
 
-## 什么是`Tcmalloc`？
+### 什么是`TCMalloc`？
 
-讲`Tcmalloc`前我们先来了解三个概念：
+`TCMalloc`全称`Thread Cache Alloc`，是Google开源的一个内存分配器，基于数据结构`FreeList`实现，并引入了线程级别的缓存，性能更加优异。
+
+## `TCMalloc`中的五个基本概念
+
+本小节的结构如下：
 
 - `Page`的概念
 - `Span`的概念
+	+ `SpanList`的概念
 - `Object`的概念
+	+ `SizeClass`的概念
+
+> 目的：`TCMalloc`各个主要部分是基于这些基本概念组成的.
 
 ### `Page`的概念
 
@@ -227,7 +266,7 @@ CPU总线由系统总线、等等其他总线组成。
   <img src="http://cdn.tigerb.cn/20210120131944.png" style="width:100%">
 </p>
 
-### `Span`的概念
+### `Span`和`SpanList`的概念
 
 一个`Span`是由N个`Page`构成的，且：
 
@@ -246,13 +285,40 @@ CPU总线由系统总线、等等其他总线组成。
 - 2个连续`Page`构成的16KB的`Span`
 - 3个连续`Page`构成的24KB的`Span`
 
-除此之外，`Span`和`Span`之间可以构成**双向链表**，内存管理中通常将持有相同数量`Page`的`Span`构成一个双向链表，如下图所示：
+除此之外，`Span`和`Span`之间可以构成**双向链表**我们称之为`SpanList`，内存管理中通常将持有相同数量`Page`的`Span`构成一个双向链表，如下图所示(**N个持有1Page的`Span`构成的`SpanList`**)：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210125202222.png" style="width:100%">
+  <img src="http://cdn.tigerb.cn/20210128131031.png" style="width:100%">
 </p>
 
-### `Object`的概念
+```c++
+class Span : public SpanList::Elem {
+ public:
+
+  ...
+
+  // 把span拆解成object的方法
+  void BuildFreelist(size_t size, size_t count);
+
+  
+  ...
+
+  union {
+    // 
+    ObjIdx cache_[kCacheSize];
+    
+    ...
+  };
+
+  PageId first_page_;  // 当前span是从哪个page开始的
+  Length num_pages_;   // 当前page持有的page数量
+
+  ...
+};
+
+```
+
+### `Object`和`SizeClass`的概念
 
 一个`Span`会被按照某个大小拆分为N个`Objects`，同时这N个`Objects`构成一个`FreeList`(如果忘了FreeList的概念可以再返回上文重新看看)。
 
@@ -275,6 +341,7 @@ CPU总线由系统总线、等等其他总线组成。
 代码示例(摘取一部分)：
 
 const SizeClassInfo SizeMap::kSizeClasses[SizeMap::kSizeClassesCount] = {
+    // 这里的每一行 称之为SizeClass
     // <bytes>, <pages>, <batch size>    <fixed>
     // Object大小列，一次申请的page数，一次移动的objects数(内存申请或回收)
     {        0,       0,           0},  // +Inf%
@@ -303,6 +370,8 @@ const SizeClassInfo SizeMap::kSizeClasses[SizeMap::kSizeClassesCount] = {
 2. 找到第一列，这个数字就是object的大小
 ```
 
+同时通过上面我们知道了：`SizeMap::kSizeClasses`的每一行元素我们称之为**SizeClass**(下文中我们直接就称之为`SizeClass`).
+
 <!-- 规则(SizeMap)有`SizeMap::kSizeClassesCount`个规则，所以所有的Span会按照`SizeMap::kSizeClasses`这个列表的每一列规则维护一个`SpanList`，用熟悉的Go语言写个伪代码如下：
 
 ```go
@@ -330,7 +399,7 @@ type Span struct {
   <img src="http://cdn.tigerb.cn/20210125201952.png" style="width:100%">
 </p> -->
 
-> 这个三个基本概念具体干什么用的呢？
+> 这个5个基本概念具体干什么用的呢？
 
 ```
 答案：支撑了`Tcmalloc`的基本结构的实现。
@@ -338,19 +407,19 @@ type Span struct {
 
 ## 解密`Tcmalloc`的基本结构
 
-接着来看看`Tcmalloc`的基本结构，`Tcmalloc`主要由三部分构成(这个三部分基于`Page`、`Span`、`Object`实现)：
+`Tcmalloc`主要由三部分构成：
 
 - `PageHeap`
 - `CentralFreeList`
 - `ThreadCache`
 
-如下图所示：
+图示如下：
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132020.png" style="width:60%">
 </p>
 
-但是呢，实际上`CentralFreeList`是被`TransferCacheManager`管理的，所以我们转换下这个基本结构，图示如下：
+但是呢，实际上`CentralFreeList`是被`TransferCacheManager`管理的，所以`Tcmalloc`的基本结构实际应该为下图所示：
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132031.png" style="width:80%">
@@ -359,57 +428,180 @@ type Span struct {
 > 接着，`ThreadCache`其实被线程持有，为什么呢？
 
 ```
-答案：减少线程之间的竞争，分配内存时减少锁的过程.
+答案：减少线程之间的竞争，分配内存时减少锁的过程。
+这也是为什么叫`Thread Cache Alloc`的原因。
 ```
 
-进一步得到简易的建构图示如下：
+进一步得到简易的结构图：
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132037.png" style="width:80%">
 </p>
 
-继续看看`PageHeap`、`CentralFreeList`、`ThreadCache`三部分的概念与详细构成。
+## 解密`PageHeap`、`CentralFreeList`、`ThreadCache`的详细构成
 
-## 解密`PageHeap`、`CentralFreeList`、`ThreadCache`的意义与构成
+本小节的结构如下：
 
-- `PageHeap`的概念
-- `CentralFreeList`和`TransferCacheManager`的概念
-- `ThreadCache`的概念
++ 解密`PageHeap`
++ 解密`CentralFreeList`和`TransferCacheManager`的构成
+	* 解密`CentralFreeList`
+	* 解密`TransferCacheManager`
++ 解密`ThreadCache`
 
-### 解密`PageHeap`意义与构成
+> 目的：详细了解`TCMalloc`各个组成部分的实现。
 
-- `SpanList`
-  + 双向链表
-  + 相同page数
+### 解密`PageHeap`
+
+`PageHeap`主要负责管理不同规格的`Span`，相同规格的`Span`构成`SpanList`(可回顾上文`SpanList`的概念)。
+
+> 什么是相同规格的`Span`？
+
+```
+答：持有相同`Page`数目的`Span`。
+```
+
+`PageHeap`对象里维护了一个属性`free_`类型是个数组，**粗略看**数组元素的类型是`SpanList`，同时`free_`这个数据的元素具有以下特性：
+
+- 索引值为1对应的`SpanList`，该`SpanList`的`Span`都持有1Pages；
+- 索引值为2对应的`SpanList`，该`SpanList`的`Span`都持有2Pages；
+- 以此类推，`free_`索引值为MaxNumber对应的`SpanList`，该`SpanList`的`Span`都持有MaxNumber Pages；
+- MaxNumber的值由`kMaxPages`决定
+
+
+数组索引|SpanList里单个Span持有Page数
+---|---
+1|1Pages
+2|2Pages
+3|3Pages
+4|4Pages
+5|5Pages
+...|...
+kMaxPages|kMaxPages Pages
+
+图示如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210120132117.png" style="width:100%">
+  <img src="http://cdn.tigerb.cn/20210129133136.png" style="width:100%">
 </p>
 
-- `SpanListPair`
-  - normal `SpanList`
-    + 双向链表
-    + 相同page数
-  - returned `SpanList`
-    + 双向链表
-    + 相同page数
+但是呢，实际上从代码可知：数组元素的实际类型为`SpanListPair`，代码如下
+
+```c++
+class PageHeap final : public PageAllocatorInterface {
+ public:
+
+  // ...略
+
+ private:
+  // 持有两个Span构成的双向链表
+  struct SpanListPair {
+    // Span构成的双向链表 正常的
+    SpanList normal; 
+    // Span构成的双向链表 物理内存已经回收 但是虚拟内存还被持有
+    SpanList returned;
+  };
+
+  // ...略
+
+  // kMaxPages.raw_num()这么多个，由上面SpanListPair类型构成的数组
+  SpanListPair free_[kMaxPages.raw_num()] ABSL_GUARDED_BY(pageheap_lock);
+
+  // ...略
+};
+
+```
+
+结论：
+
+- `free_`数组元素的类型是`SpanListPair`
+- `SpanListPair`里维护了两个`SpanList`
+
+根据这个结论我们修正下`PageHeap`结构图，如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210120132136.png" style="width:100%">
+  <img src="http://cdn.tigerb.cn/20210129132903.png" style="width:100%">
 </p>
 
-large
+大于kMaxPages个Pages(大对象)的内存分配是从`large_`中分配的，代码如下：
+
+```c++
+class PageHeap final : public PageAllocatorInterface {
+ public:
+
+  // ...略
+
+  //  大对象的内存从这里分配(length >= kMaxPages)
+  SpanListPair large_ ABSL_GUARDED_BY(pageheap_lock);
+
+  // ...略
+};
+
+```
+
+所以我们再加上大对象的分配时的`large_`属性，得到`PageHeap`的结构图如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210120132145.png" style="width:100%">
+  <img src="http://cdn.tigerb.cn/20210129132923.png" style="width:100%">
 </p>
 
-### 解密`CentralFreeList`和`TransferCacheManager`的意义与构成
+同时`PageHeap`核心属性的代码片段如下：
+
+```c++
+class PageHeap final : public PageAllocatorInterface {
+ public:
+
+  // ...略
+
+ private:
+  // 持有两个Span构成的双向链表
+  struct SpanListPair {
+    // Span构成的双向链表
+    SpanList normal; 
+    // Span构成的双向链表
+    SpanList returned;
+  };
+
+  //  大对象的内存从这里分配(length >= kMaxPages)
+  SpanListPair large_ ABSL_GUARDED_BY(pageheap_lock);
+
+  // kMaxPages.raw_num()这么多个，由上面SpanListPair类型构成的数组
+  SpanListPair free_[kMaxPages.raw_num()] ABSL_GUARDED_BY(pageheap_lock);
+
+  // ...略
+};
+
+```
+
+### 解密`CentralFreeList`和`TransferCacheManager`的构成
 #### 解密`CentralFreeList`
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132206.png" style="width:100%">
 </p>
+
+```c++
+class CentralFreeList {
+
+  // ...略
+
+ private:
+
+  // 锁
+  // 线程从此处获取内存 需要加锁 保证并发安全
+  absl::base_internal::SpinLock lock_;
+
+  // 对应上文提到的映射表SizeClassInfo中的某个索引值
+  // 目的找到Span拆解为object时，object的大小等规则
+  size_t size_class_;  
+  // object的总数量
+  size_t object_size_;
+  // 一个Span持有的object的数量
+  size_t objects_per_span_;
+  // 一个Span持有的page的数量
+  Length pages_per_span_;
+
+  // ...略
+```
 
 #### 解密`TransferCacheManager`
 
@@ -417,19 +609,65 @@ large
   <img src="http://cdn.tigerb.cn/20210120132218.png" style="width:100%">
 </p>
 
-### 解密`ThreadCache`的意义与构成
+```c++
+class TransferCacheManager {
+  
+  // ...略
+
+ private:
+  // freelist_是个数组
+  // 元素的类型是上面的CentralFreeList
+  // 元素的数量与 映射表 SizeClassInfo对应
+  CentralFreeList freelist_[kNumClasses];
+} ABSL_CACHELINE_ALIGNED;
+```
+
+
+### 解密`ThreadCache`的构成
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132229.png" style="width:100%">
 </p>
 
-## 解密`Tcmalloc`基本结构的依赖关系(简易)
+```c++
+class ThreadCache {
+  // ...略
+
+  // list_是个数组
+  // 元素的类型是FreeList
+  // 元素的数量与 映射表 SizeClassInfo对应
+  FreeList list_[kNumClasses]; 
+  
+  // ...略
+
+  // 自身构成双向链表
+  ThreadCache* next_;
+  ThreadCache* prev_;
+
+  // ...略
+};
+```
+
+## 解密`Tcmalloc`基本结构的依赖关系
+
+本小节的结构如下：
+
+- 简易版
+- 详细版
+
+> 目的：了解`Tcmalloc`内存分配的大致过程。
+
+### 简易版
+
+当给小对象分配内存时，先`ThreadCache`的内存不足时，从对应`SizeClass`的`CentralFreeList`获取，再`CentralFreeList`，最后，从对应`SizeClass`的`PageHeap`。
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132244.png" style="width:66%">
 </p>
 
 ## 解密`Tcmalloc`基本结构的依赖关系(详细)
+
+以`SizeClass`的值为1为例，看一下详细内存分配过程。
 
 <p align="center">
   <img src="http://cdn.tigerb.cn/20210120132256.png" style="width:100%">
