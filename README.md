@@ -74,8 +74,9 @@
     * [Go框架解析-echo](http://tigerb.cn/2019/07/13/go-echo/)
   + Go常用包解析
     * go常用包解析-fasthttp
-  + Go语言进阶学习
-    * [由浅到深，入门Go语言Map实现原理](http://tigerb.cn/2020/12/20/go-base/map/)
+  + [Go语言进阶学习](http://tigerb.cn/go/#/kernal/)
+    * [Map](http://tigerb.cn/go/#/kernal/map)
+    * [内存](http://tigerb.cn/go/#/kernal/memory)
 - 高并发相关 🚗
   + [处理高并发的一般思路](http://tigerb.cn/2019/04/18/top-qps-experience/)
   + [秒杀系统设计](http://tigerb.cn/2020/05/05/skrshop/seckill/)
@@ -138,7 +139,7 @@
   + [概念](https://github.com/TIGERB/easy-tips/blob/master/patterns/thought.md#设计模式)
   + [面向对象的设计过程](http://tigerb.cn/2019/10/11/oop/)
   + Go版本 🚗
-    * [我的代码没有else系列](https://github.com/TIGERB/easy-tips/tree/master/go/patterns)
+    * [Go设计模式实战系列](http://tigerb.cn/go/#/patterns/)
       - [模板模式](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/template)
       - [责任链模式](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/responsibility)
       - [组合模式](https://github.com/TIGERB/easy-tips/tree/master/go/patterns/composite)
