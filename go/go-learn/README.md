@@ -153,7 +153,7 @@ buckets
 > 寻址?
 
 ```
-存储器(这里指计算机的内存)由存储单位构成
+存储器(这里指计算机的内存)由存储单元构成
 存储单元 = 8bit = 1byte
 
 ---
@@ -205,9 +205,125 @@ golangci-lint
 
 TCMalloc
 
+- 可利用空间表（Free List）https://songlee24.github.io/2015/04/08/free-list/
 - 图解 TCMalloc https://zhuanlan.zhihu.com/p/29216091
 - TCMalloc解密 https://wallenwang.com/2018/11/tcmalloc/
 - TCMalloc : Thread-Caching Malloc https://github.com/google/tcmalloc/blob/master/docs/design.md
-- 可利用空间表（Free List）https://songlee24.github.io/2015/04/08/free-list/
+- TCMalloc : Thread-Caching Malloc https://gperftools.github.io/gperftools/tcmalloc.html
+- tcmalloc原理剖析(基于gperftools-2.1) http://gao-xiao-long.github.io/2017/11/25/tcmalloc/
+
 
 page 8kb
+
+---
+
+> 栈内存在哪？
+
+- 什么是堆和栈，它们在哪儿？
+
+--- 
+
+> Go垃圾回收
+
+- Garbage Collection In Go : Part I - Semantics https://www.ardanlabs.com/blog/2018/12/garbage-collection-in-go-part1-semantics.html
+- Garbage Collection In Go : Part II - GC Traces https://www.ardanlabs.com/blog/2019/05/garbage-collection-in-go-part2-gctraces.html
+- Garbage Collection In Go : Part III - GC Pacing https://www.ardanlabs.com/blog/2019/07/garbage-collection-in-go-part3-gcpacing.html
+
+
+
+# 逃逸分析
+
+- golang 逃逸分析详解 https://zhuanlan.zhihu.com/p/91559562
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+74041843
+
+# 牛年到，提前给大家拜年发红包了~~~
+
+关注我的个人技术公众号(搜索公众号**tigerbcode**或者扫下方二维码关注) 回复关键字【**牛犇牛**】获取支付宝红包口令领取现金红包
+
+🐂
+
+最后在这里感谢2020这一年来大家的支持，新的牛年继续和大家一起互相学习，预祝大家：
+
+# 牛年大吉！！！
+
+![https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5f8f021eb2934b60af98089ca2a22942~tplv-k3u1fbpfcp-watermark.image](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5f8f021eb2934b60af98089ca2a22942~tplv-k3u1fbpfcp-watermark.image)
+
+

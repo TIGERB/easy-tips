@@ -287,11 +287,12 @@ map[int]int{
 
 ```
 答：
-1. 根据上文判断是否会触发「等量扩容」的公式：noverflow >= uint16(1)<<(B&15)
-2. 上文我们已经假设：忽略索引为1的的`bucket`(也就是`buckets`的第2个`bmap`)
-3. 上文我们已经假设：以索引为0的`bucket`(也就是`buckets`的第1个`bmap`)里的键值为例
-4. noverflow = 2
-5. B = 1
+条件1. 否会触发「等量扩容」的公式：noverflow >= uint16(1)<<(B&15)
+条件2. 上文我们已经假设：忽略索引为1的的`bucket`(也就是`buckets`的第2个`bmap`)，仅以索引为0的`bucket`(也就是`buckets`的第1个`bmap`)里的键值为例
+
+可得：
+noverflow = 2
+B = 1
 
 我们套入这个公式：
 
