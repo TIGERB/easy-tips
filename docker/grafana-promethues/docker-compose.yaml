@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  prometheus:
+    image: bitnami/prometheus:2.26.0
+    container_name: prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/opt/bitnami/prometheus/conf/prometheus.yml
+    ports:
+      - "9090:9090"
+    privileged: true
+    networks: 
+      - default
+  grafana:
+    image: bitnami/grafana:7.5.4
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    privileged: true
+    networks: 
+      - default
+  go-demo:
+    container_name: go-demo
+    build: ./go-demo
+    volumes:
+      - ./go-demo:/home/deploy/go-demo
+    ports:
+      - "2112:2112"
+    privileged: true
+    networks: 
+      - default
+networks: 
+  default:
+    external: 
+      name: example_default
