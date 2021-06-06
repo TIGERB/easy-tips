@@ -206,9 +206,9 @@ function doSomething() {
         ...
     };
     ...
-    package(...);
+    $package(...);
     ...
-    package(...);
+    $package(...);
     ...
 }
 ```
@@ -357,7 +357,7 @@ class One
         if (...) {
             $instance = new A();
         }　elseif (...) {
-            $instance = new A();
+            $instance = new B();
         } else {
             $instance = new C();
         }
