@@ -1,8 +1,9 @@
-# Go服务监控搭建入门 | 教程
+<!-- # Go服务监控搭建入门 | 教程 -->
 
 ## 前言
 
-一直都想知道现在「Go服务监控」是如何搭建和工作的，于是最近就抽了点时间去学习下这服务监控的搭建过程。
+一直以来都想知道现在「Go服务监控」是如何搭建和工作的，于是最近就抽了点时间去学习下这服务监控的搭建过程。
+
 我选用的技术栈是「prometheus + grafana」。
 
 ## 架构简介
@@ -10,12 +11,12 @@
 整体的简易架构如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529213128.png" style="width:100%">
+  <img src="http://cdn.tigerb.cn/20210531132351.png" style="width:100%">
 </p>
 
-- Grafana作为UI层：提供了丰富的监控面板。
-- Prometheus基础数据层: Prometheus是一个时序数据库。
-- 服务层：需要被监控的服务按照标准提供一个`metrics`接口，Prometheus会去通过暴露的这个接口拉取数据。Go已经有封装好的包`github.com/prometheus/client_golang/prometheus`，我们直接采用就可以了。
+- Grafana：作为UI，提供了丰富的监控面板。
+- Prometheus：Prometheus是一个监控&时序数据库。
+- 需要被监控的服务：需要被监控的服务按照标准提供一个`metrics`接口，Prometheus会去通过暴露的这个接口拉取数据。Go已经有封装好的包`github.com/prometheus/client_golang/prometheus`，我们直接采用就可以了。
 
 ## 准备镜像
 
