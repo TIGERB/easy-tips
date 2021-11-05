@@ -235,3 +235,25 @@ b
 
 按n跳到下一行
 ```
+
+32. `perf`使用介绍
+
+```
+1. 安装：
+yum install perf
+
+2. 采样：
+perf record -F 99 -p 6 -g -- sleep 30
+释义：
+-F 频率 每秒采样多少次
+-p 进程 进程id
+-g 记录调用栈
+sleep 采样多少秒
+
+3. 分析采样结果
+perf report -n --stdio
+
+top函数查看
+perf top -p 6 -g
+
+```

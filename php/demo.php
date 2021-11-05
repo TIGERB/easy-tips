@@ -1,14 +1,23 @@
 <?php
 
-$demo = range(1, 3);
-foreach ($demo as &$v) {
+abstract class AbstractClassDemo {
 
+    // 抽象方法
+    abstract public function demoFun();
+    
+    // 公有方法
+    public function publicFun()
+    {
+        $this->demoFun();
+    }
 }
-foreach ($demo as $v) {
 
+class ClassDemo extends AbstractClassDemo {
+
+    public function demoFun()
+    {
+        var_dump("Demo");
+    }
 }
 
-var_dump($demo);
-
-// $a = 0;
-// var_dump([$a, isset($a)]);
+(new ClassDemo())->demoFun();
