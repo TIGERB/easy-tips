@@ -104,6 +104,21 @@ closure(闭包)|`$varClosure = function() {};`|`var varClosure func() = func() {
 channel|无|`var varChannel chan string = make(chan string)` 无缓存channel；<br>`var varChannelBuffer chan string = make(chan string, 6)`有缓存channel
 
 ### 常用函数对比
+
+常用函数描述 | PHP | Go
+--------|--------|--------
+数组长度 | count() | len()
+分割字符串为数组 | explode() | strings.Split(s string, sep string) []string
+转大写 | strtoupper() | strings.ToUpper(s string) string
+转小写 | strtolower() | strings.ToLower(s string) string
+去除空格 | trim() | strings.Trim(s, cutset string) string
+json序列化 | json_encode() | json.Marshal(v interface{}) ([]byte, error)
+json反序列化 | json_decode() | json.Unmarshal(data []byte, v interface{}) error
+序列化(不再建议使用) | serialize()、unserialize() | 包https://github.com/wulijun/go-php-serialize
+md5 | md5() | 包crypto/md5
+终端输出 | echo、var_dump等 | fmt.Println(a ...interface{})
+各种类型互转 | intval()等 | 包strconv
+
 ### PHP类的实例化和Go结构体的初始化的对比
 
 PHP类的实例化
