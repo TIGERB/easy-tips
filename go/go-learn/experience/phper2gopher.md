@@ -1204,11 +1204,6 @@ func main() {
 		}
 	}
 }
-
-// [Running] go run ".../demo/main.go"
-// resultB {{0 } {[]}}
-// resultA {{0 } {}}
-// 退出
 ```
 
 ### 8. 单元测试&基准测试
