@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  http-demo:
+    container_name: http-demo
+    build: ./http-demo
+    volumes:
+      - ./http-demo:/home/deploy/http-demo
+    ports:
+      - "6060:6060"
+    privileged: true
+    networks: 
+      - default
+  grpc-demo:
+    container_name: grpc-demo
+    build: ./grpc-demo
+    volumes:
+      - ./grpc-demo:/home/deploy/grpc-demo
+    ports:
+      - "9090:9090"
+      - "9091:9091"
+    privileged: true
+    networks: 
+      - default
+networks: 
+  default:
+    external: 
+      name: example_default
