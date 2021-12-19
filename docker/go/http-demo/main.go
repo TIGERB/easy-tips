@@ -3,10 +3,10 @@ package main
 import (
 	// 导入net/http包
 	"context"
-	"fmt"
 	"http-demo/demov1"
 	"net/http"
 
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"google.golang.org/grpc"
 )
 
@@ -22,16 +22,22 @@ func main() {
 		// 写入响应内容
 		w.Write([]byte(name))
 	})
+
+	go (func() {
+		http.Handle("/metrics", promhttp.Handler())
+		http.ListenAndServe(":6061", nil)
+	})()
+
 	// 启动一个http服务并监听8888端口 这里第二个参数可以指定handler
 	http.ListenAndServe(":6060", nil)
 }
 
 func demoGrpcReq() (string, error) {
-	conn, err := grpc.Dial("grpc-demo:9090", grpc.WithInsecure())
+	conn, err := grpc.Dial("grpc-demo:1010", grpc.WithInsecure())
 	if err != nil {
 		return "", err
 	}
-	defer conn.Close()
+	// defer conn.Close()
 
 	client := demov1.NewGreeterClient(conn)
 	resp, err := client.SayHello(context.TODO(), &demov1.HelloRequest{
@@ -40,6 +46,5 @@ func demoGrpcReq() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	fmt.Println("response", resp.GetMessage())
 	return resp.GetMessage(), nil
 }

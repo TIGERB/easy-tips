@@ -8,7 +8,10 @@ services:
       - ./http-demo:/home/deploy/http-demo
     ports:
       - "6060:6060"
+      - "6061:6061"
     privileged: true
+    environment:
+      - GOPROXY=https://goproxy.cn
     networks: 
       - default
   grpc-demo:
@@ -17,9 +20,11 @@ services:
     volumes:
       - ./grpc-demo:/home/deploy/grpc-demo
     ports:
-      - "9090:9090"
-      - "9091:9091"
+      - "1010:1010"
+      - "1011:1011"
     privileged: true
+    environment:
+      - GOPROXY=https://goproxy.cn
     networks: 
       - default
 networks: 
