@@ -17,7 +17,7 @@ func main() {
 	http.HandleFunc("/v1/demo", func(w http.ResponseWriter, r *http.Request) {
 		name, err := demoGrpcReq()
 		if err != nil {
-			w.Write([]byte("err"))
+			w.Write([]byte(err.Error()))
 		}
 		// 写入响应内容
 		w.Write([]byte(name))
@@ -27,7 +27,7 @@ func main() {
 }
 
 func demoGrpcReq() (string, error) {
-	conn, err := grpc.Dial("grpc-demo:9090")
+	conn, err := grpc.Dial("grpc-demo:9090", grpc.WithInsecure())
 	if err != nil {
 		return "", err
 	}
