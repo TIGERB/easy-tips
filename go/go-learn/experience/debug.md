@@ -29,6 +29,8 @@ perf report -n --stdio
 top函数查看
 perf top -p 6 -g
 
+
+perf record -a sleep 30
 ```
 
 ## Go服务内存泄露排查

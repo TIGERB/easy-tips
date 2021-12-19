@@ -51,27 +51,27 @@ Term Frequence - Inverse Document Frequence
 1. 索引文档的时候(建立倒排索引的时候)，使用分析器处理被索引的文档
 2. 查询的时候，使用分析器处理「查询字符串」
 
-                                                                                            属性1
-                                                                                文档1 --->
-                                                                                            属性2
-                                                                                            ...
-                                                                                            属性N
-                                        类型1 ---> 映射(属性类型、属性分析器类型) --->
-                                                                                文档2 --->
-                                                                                ...
-                                                                                文档N --->
-                        ---> 索引1 ---> 
-                                        类型2 ---> 映射 ---> ...
-                                        ...
-                                        类型N ---> 映射 ---> ...
+                                                                                                属性1
+                                                                                        文档1 --->
+                                                                                                属性2
+                                                                                                ...
+                                                                                                属性N
+                                            类型1(type) ---> 映射(属性类型、属性分析器类型) --->
+                                                                                        文档2 --->
+                                                                                        ...
+                                                                                        文档N --->
+                            ---> 索引1(index) ---> 
+                                            类型2 ---> 映射 ---> ...
+                                            ...
+                                            类型N ---> 映射 ---> ...
 
-                        ---> 索引2 ---> ...
-ES集群 ---> node ---> 分片
-                        ---> 索引3 ---> ...
+                            ---> 索引2 ---> ...
+ES集群 ---> 节点(node) ---> 分片(shard)
+                            ---> 索引3 ---> ...
 
-                            ...
+                                  ...
 
-                        ---> 索引N ---> ...
+                            ---> 索引N ---> ...
 ```
 
 ```
@@ -124,7 +124,14 @@ Idf全称为Inverse Document Frequence，指的是逆文档频率。在说idf前
 对于较为简单的文本相关性排序，相关性的分值可以用Tf*idf来表示，分值越高，说明文本相关性越高。
 ```
 
+# 推荐
 
+- ctr(Click Through Rate) 点击通过率
+- 协同过滤：CF（Collaborative Filteing
+
+
+- 舍弃 Python，为什么知乎选用 Go 重构推荐系统？https://www.infoq.cn/article/ur32plxfwkeydg*zle0f
+- 推荐系统--召回 https://zhuanlan.zhihu.com/p/107715284
 
 # 大数据
 
@@ -156,13 +163,43 @@ ODS层(Operation Data Source): 源数据或者经过简单清洗的数据
 
 # 推荐
 
+- CF 协同过滤
+    + UserCF 基于用户相似度的过滤
+    + ItemCF 基于物品相似度的过滤
+
 # 云市场调研
 
-- 电商云应用框架 https://mp.weixin.qq.com/s?__biz=MzAxOTY5MDMxNA==&mid=2455759241&idx=1&sn=ad486d10a00e0cf063e20a028e441a28&chksm=8c686facbb1fe6bab4a951c0a9adc44626d7e78b61ceb66d1c4f19838c992e4c98616fbea0a4&scene=21#wechat_redirect
-- 有赞扩展点文档 https://doc.youzanyun.com/detail/EXT/4
-- 微盟后端扩展点说明 https://cloud.weimob.com/saas/word/detail.html?tag=1090&menuId=2
+- 有赞
+    + 电商云应用框架 https://mp.weixin.qq.com/s?__biz=MzAxOTY5MDMxNA==&mid=2455759241&idx=1&sn=ad486d10a00e0cf063e20a028e441a28&chksm=8c686facbb1fe6bab4a951c0a9adc44626d7e78b61ceb66d1c4f19838c992e4c98616fbea0a4&scene=21#wechat_redirect
+    + 扩展点文档 https://doc.youzanyun.com/detail/EXT/4
+    + 有赞云如何支持多语言 https://segmentfault.com/a/1190000021890970
+    + 有赞权限系统(SAM) https://tech.youzan.com/sam/
+- 微盟
+    + 后端扩展点说明 https://cloud.weimob.com/saas/word/detail.html?tag=1090&menuId=2
 - 扩展点的设计 https://juejin.cn/post/6844904146248663047
 - 扩展点设计 https://www.jianshu.com/p/a20e1793f6d9
 - https://github.com/asim/go-micro
 - MOSN 扩展机制解析 https://mosn.io/docs/concept/extensions/
-- 有赞云如何支持多语言 https://segmentfault.com/a/1190000021890970
+- shopify
+    + https://code006.myshopify.com/admin/apps
+    + https://apps.shopify.com/collections/works-with-shopify-marketing?locale=zh-CN
+
+
+- IaaS，PaaS，SaaS 的区别 https://www.ruanyifeng.com/blog/2017/07/iaas-paas-saas.html
+- 多租户技术是什么？怎么实现多租户？https://juejin.cn/post/7002609579087364103
+- 一文带您了解软件多租户技术架构 https://mp.weixin.qq.com/s/HaXlKWVQ9uijnAx5ej61kw#at
+
+> 比如我们开发一个SaaS云服务的CRM系统。这个系统部署在公有云端可以开放给多个企业客户使用。那么我们就遇到了一个关键问题。即是否当新入驻一个新的企业客户的时候，我们都需要重新在部署一套应用给这个客户使用？https://cloud.tencent.com/developer/article/1889603
+
+> 可以看到独立数据库模式资源利用率低，但是数据隔离性最好；而完全共享模式下资源利用率高，但是数据隔离性最弱。因此具体采用哪种模式仍然需要根据实际租户的需求来进行灵活创建和配置，一个灵活的SaaS应用实际需要同时灵活支撑上面三种模式。https://cloud.tencent.com/developer/article/1889603
+
+
+1. 独立DB
+2. 共享DB，独立Schema
+3. 共享DB，共享Schema
+
+# 业务配置中心
+
+- 从 0 到 1, 构建达达快送自动化业务配置中心 https://www.modb.pro/db/126069
+
+    
