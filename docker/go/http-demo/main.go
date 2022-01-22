@@ -37,7 +37,8 @@ func demoGrpcReq() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	// defer conn.Close()
+	// 泄露
+	defer conn.Close()
 
 	client := demov1.NewGreeterClient(conn)
 	resp, err := client.SayHello(context.TODO(), &demov1.HelloRequest{
