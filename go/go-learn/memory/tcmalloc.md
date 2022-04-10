@@ -1,5 +1,3 @@
-# 
-
 > 源码版本(commit:9d274df) https://github.com/google/tcmalloc/tree/master/tcmalloc
 
 # 导读
