@@ -60,6 +60,7 @@
 
 ## 目录
 
+- [PHP到Go速转手册](http://tigerb.cn/php2go/#/)
 - PHP基础学习 ✅
   + 符合PSR的PHP编程规范(含个人建议)
     * [实例](https://github.com/TIGERB/easy-tips/blob/master/php/standard.php)
