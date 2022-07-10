@@ -33,4 +33,4 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-    - targets: ['go-demo:2112']
+    - targets: ['grpc-demo:1011', 'http-demo:6061']

@@ -211,7 +211,7 @@ Go的内存统一由内存管理器管理的，Go的内存管理器是基于Goog
   + `mcache`：线程缓存
   + `mcentral`：中央缓存
   + `mheap`：堆内存
-- 线程缓存`mcache`是被逻辑处理器`p`持有，而不是系统线程`m`
+- (下篇文章)线程缓存`mcache`是被逻辑处理器`p`持有，而不是系统线程`m`
 
 # 《Go内存管理实现中一个很有意思的地方》
 
@@ -291,6 +291,7 @@ Go的内存统一由内存管理器管理的，Go的内存管理器是基于Goog
 这样看起来`mcache`被逻辑处理器`p`持有 是不是更合适？
 
 ```go
+// Go版本1.6
 // 退出系统调用的代码逻辑
 // 代码位置
 // src/runtime/proc.go::3813
@@ -313,14 +314,14 @@ func exitsyscall0(gp *g) {
 	unlock(&sched.lock)
 	if _p_ != nil {
 		acquirep(_p_)
-		execute(gp, false) // 执行系统调用阻塞的g
+		execute(gp, false) // 执行当前因系统调用阻塞的g
 	}
 	if _g_.m.lockedg != 0 {
 		stoplockedm()
-		execute(gp, false) // 执行系统调用阻塞的g
+		execute(gp, false) // 执行当前因系统调用阻塞的g
 	}
 	stopm() // 停止m，并放到调度器的m闲置列表
-	schedule()
+	schedule() // 触发调度
 }
 ```
 
