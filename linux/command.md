@@ -257,3 +257,12 @@ top函数查看
 perf top -p 6 -g
 
 ```
+
+33. tcp常用命令
+
+```
+查看某个pid下持有的所有fd:
+ll /proc/<pid>/fd
+
+cat /proc/net/tcp | grep <uid>
+```

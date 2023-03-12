@@ -7,6 +7,7 @@ import (
 	"grpc-demo/demo"
 	"net"
 	"net/http"
+	"time"
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 
@@ -48,6 +49,7 @@ type demoServer struct {
 
 func (s *demoServer) SayHello(context.Context, *demo.HelloRequest) (reply *demo.HelloReply, err error) {
 	fmt.Println("SayHello")
+	time.Sleep(5 * time.Second)
 	reply = &demo.HelloReply{
 		Message: "hello",
 	}
