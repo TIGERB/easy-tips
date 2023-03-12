@@ -2,4 +2,4 @@
 
 cd /home/deploy/grpc-demo \
     && go build \
-    && ./http-demo
+    && ./grpc-demo

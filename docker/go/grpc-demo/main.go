@@ -11,6 +11,14 @@ import (
 
 	grpcprometheus "github.com/grpc-ecosystem/go-grpc-prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+
+	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/exporters/jaeger"
+	"go.opentelemetry.io/otel/propagation"
+	"go.opentelemetry.io/otel/sdk/resource"
+	tracesdk "go.opentelemetry.io/otel/sdk/trace"
+	semconv "go.opentelemetry.io/otel/semconv/v1.17.0"
 )
 
 // https://github.com/grpc/grpc-go/tree/master/examples/helloworld
@@ -41,7 +49,32 @@ import (
 
 var (
 	grpcServerEndpoint = flag.String("grpc-server-endpoint", "localhost:1010", "gRPC server endpoint")
+
+	tracer *tracesdk.TracerProvider
 )
+
+func init() {
+	// 集成链路追踪
+	// https://github.com/open-telemetry/opentelemetry-go/blob/main/example/jaeger/main.go
+	// Create the Jaeger exporter
+	exp, err := jaeger.New(jaeger.WithCollectorEndpoint(jaeger.WithEndpoint("http://jaeger-demo:14268/api/traces")))
+	if err != nil {
+		panic(err)
+		return
+	}
+	tracer = tracesdk.NewTracerProvider(
+		// Always be sure to batch in production.
+		tracesdk.WithBatcher(exp),
+		// Record information about this application in a Resource.
+		tracesdk.WithResource(resource.NewWithAttributes(
+			semconv.SchemaURL,
+			semconv.ServiceNameKey.String("grpc-demo"),
+			// attribute.String("environment", "production"),
+			// attribute.Int64("ID", 2),
+		)),
+	)
+	return
+}
 
 type demoServer struct {
 }
@@ -54,6 +87,12 @@ func (s *demoServer) SayHello(context.Context, *demo.HelloRequest) (reply *demo.
 }
 
 func main() {
+	otel.SetTracerProvider(tracer)
+	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagation.TraceContext{}, propagation.Baggage{}))
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	defer tracer.Shutdown(ctx)
+
 	go runGrpc()
 	runHttp()
 }
@@ -64,8 +103,11 @@ func runGrpc() {
 		panic(err)
 	}
 	s := grpc.NewServer(
-		grpc.StreamInterceptor(grpcprometheus.StreamServerInterceptor),
-		grpc.UnaryInterceptor(grpcprometheus.UnaryServerInterceptor),
+		// grpc.StreamInterceptor(grpcprometheus.StreamServerInterceptor),
+		// grpc.UnaryInterceptor(grpcprometheus.UnaryServerInterceptor),
+		// 集成opentelemetry
+		grpc.UnaryInterceptor(otelgrpc.UnaryServerInterceptor()),
+		grpc.StreamInterceptor(otelgrpc.StreamServerInterceptor()),
 	)
 	demo.RegisterGreeterServer(s, &demoServer{})
 	grpcprometheus.Register(s)
