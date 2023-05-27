@@ -74,7 +74,7 @@
 > 一个容器集群N个宿主机如何管理？
 
 <p align="center">
-  <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/why%20k8s/%E5%8D%95%E5%AE%BF%E4%B8%BB%E6%9C%BA%E4%B8%8AN%E4%B8%AA%E5%AE%B9%E5%99%A8%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%EF%BC%9F.png" style="width:60%">
+  <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/why%20k8s/%E4%B8%80%E4%B8%AA%E5%AE%B9%E5%99%A8%E9%9B%86%E7%BE%A4N%E4%B8%AA%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%EF%BC%9F.png" style="width:60%">
 </p>
 
 ### 如何实现负载均衡

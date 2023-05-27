@@ -3,7 +3,7 @@ version: "3"
 services:
   http-demo:
     container_name: http-demo
-    build: ./http-demo
+    build: ./src/http-demo
     volumes:
       - ./src/http-demo:/home/deploy/http-demo
     ports:
@@ -16,7 +16,7 @@ services:
       - default
   grpc-demo:
     container_name: grpc-demo
-    build: ./grpc-demo
+    build: ./src/grpc-demo
     volumes:
       - ./src/grpc-demo:/home/deploy/grpc-demo
     ports:
