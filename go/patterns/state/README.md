@@ -55,7 +55,7 @@
 先来看看一个短信验证码登录的界面。
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20200522131127.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200522131127.png" style="width:100%">
 </p>
 
 可以得到：
@@ -69,7 +69,7 @@
 我们通过梳理的文本业务流程得到了如下的业务流程图：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20200522130715.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200522130715.png" style="width:100%">
 </p>
 
 #### 代码建模
@@ -110,7 +110,7 @@
 同时得到了我们的UML图：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20200527141350.jpg" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200527141350.jpg" style="width:100%">
 </p>
 
 #### 代码demo

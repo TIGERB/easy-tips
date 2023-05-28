@@ -3,7 +3,7 @@
 > 嗯，Go设计模式实战系列，一个设计模式业务真实使用的golang系列。
 
 <p align="left">
-  <img src="http://cdn.tigerb.cn/20201103130617.png" style="width:38%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201103130617.png" style="width:38%">
 </p>
 
 ## 前言
@@ -41,7 +41,7 @@
 我们还是以「组合模式」中的“订单结算页面”为例，继续来看看某东的订单结算页面：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20200331124724.jpeg" style="width:30%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200331124724.jpeg" style="width:30%">
 </p>
 
 从页面的展示形式上，可以看出：
@@ -65,7 +65,7 @@
 按照「组合模式」的业务逻辑执行流程：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20201103203539.png" style="width:38%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201103203539.png" style="width:38%">
 </p>
 
 但是，我们很清楚有些模块之间并没有依赖，**且该模块涉及服务远程调用等阻塞操作**，比如：
@@ -77,7 +77,7 @@
 如果把上面不存在依赖关系的模块修改为并发的执行，则我们得到如下的执行流程：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20201103203735.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201103203735.png" style="width:100%">
 </p>
 
 ## 怎么用「并发组合模式」？

@@ -386,7 +386,7 @@ coupon_id
 
 从而我们就可以把这个事物转化成一个类(或结构体)，或者抽象类。
 
-<img src="http://cdn.tigerb.cn/20191020223812.jpg" width="100%">
+<img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20191020223812.jpg" width="100%">
 
 ### 获取行为
 
@@ -395,11 +395,11 @@ coupon_id
 事物有了：`订单生成机器人`
 行为呢？毫无义务就是上面各种业务逻辑。把具体的行为抽象成一个订单创建行为接口：
 
-<img src="http://cdn.tigerb.cn/20191020224230.jpg" width="100%">
+<img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20191020224230.jpg" width="100%">
 
 ### UML
 
-<img src="http://cdn.tigerb.cn/20191020233121.png" width="100%">
+<img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20191020233121.png" width="100%">
 
 ### 设计代码
 

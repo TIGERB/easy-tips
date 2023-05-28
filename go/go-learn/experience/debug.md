@@ -61,7 +61,7 @@ perf report -n --stdio
 ```
 
 <p>
-    <img src="http://cdn.tigerb.cn/20220121152729.png" width="100%">
+    <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220121152729.png" width="100%">
 </p>
 
 除此之外，查看实时top函数
@@ -71,7 +71,7 @@ perf top -p 6
 ```
 
 <p>
-    <img src="http://cdn.tigerb.cn/20220121152934.png" width="100%">
+    <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220121152934.png" width="100%">
 </p>
 
 ### 生成火焰图
@@ -103,7 +103,7 @@ git clone git@github.com:brendangregg/FlameGraph.git && cd ./FlameGraph
 ```
 
 <p>
-    <img src="http://cdn.tigerb.cn/20220122220117.png" width="100%">
+    <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220122220117.png" width="100%">
 </p>
 ## Go服务内存泄露排查
 

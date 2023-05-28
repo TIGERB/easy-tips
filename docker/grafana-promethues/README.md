@@ -11,7 +11,7 @@
 整体的简易架构如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210531132351.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210531132351.png" style="width:100%">
 </p>
 
 - Grafana：作为UI，提供了丰富的监控面板。
@@ -183,11 +183,11 @@ prometheus http://localhost:9090
 举个例子，比如通过如下的操作，我们就可以看见我们Go服务的`Goroutines`监控。
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529155608.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210529155608.png" style="width:100%">
 </p>
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529160638.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210529160638.png" style="width:100%">
 </p>
 
 但是呢，Grafana提供了更丰富的监控面板，接着我们来搭建一个简单的Go服务监控。
@@ -206,71 +206,71 @@ admin
 
 进入首页：
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529160749.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210529160749.png" style="width:100%">
 </p>
 
 添加数据源：
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529160803.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210529160803.png" style="width:100%">
 </p>
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529160812.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210529160812.png" style="width:100%">
 </p>
 
 选择数据源为Prometheus:
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529160823.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210529160823.png" style="width:100%">
 </p>
 
 填写Prometheus服务的地址：
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529160842.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210529160842.png" style="width:100%">
 </p>
 
 点击添加：
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529160856.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210529160856.png" style="width:100%">
 </p>
 
 切换到Dashboards面板，选择导入一个面板：
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529160917.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210529160917.png" style="width:100%">
 </p>
 
 接着我们就可以看见一个已经存在的面板了，这个面板是Prometheus自身监控的面板。
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529160925.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210529160925.png" style="width:100%">
 </p>
 
 接着，我们来创建一个我们自己Go服务的面板，首先创建一个Go服务的目录(保证隔离和可读性，相当于namespace)：
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529163049.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210529163049.png" style="width:100%">
 </p>
 
 创建一个Go服务的面板：
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529163058.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210529163058.png" style="width:100%">
 </p>
 
 创建一个指标视图：
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529163105.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210529163105.png" style="width:100%">
 </p>
 
 选择视图类型为折线统计图，选择数据指标为`go_gotoutines`:
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529163114.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210529163114.png" style="width:100%">
 </p>
 
 只展示我们的Go样例服务数据，这里采用的是 语法：
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529163122.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210529163122.png" style="width:100%">
 </p>
 
 以此类推，我们就创建了一些列监控视图数据，比如goroutine数量、线程数量、heap内存数据、stack内存数据、mcache数据、mspan数据、GC数据等等，如下：
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210529163131.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210529163131.png" style="width:100%">
 </p>
 
 

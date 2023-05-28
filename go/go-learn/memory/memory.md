@@ -29,7 +29,7 @@
 另外本篇章的内容会归档到《Go语言轻松系列》第二章「内存与垃圾回收」第二部分「Go内存设计与实现」中，方便大家后续查阅。
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210109200839.png" style="width:60%;box-shadow: 3px 3px 3px 3px #ddd;">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210109200839.png" style="width:60%;box-shadow: 3px 3px 3px 3px #ddd;">
 </p>
 
 # 目录
@@ -64,7 +64,7 @@
 今天我们开始进入《Go语言轻松系列》第二章「内存与垃圾回收」第二部分「Go内存设计与实现」。
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210109200839.png" style="width:60%;box-shadow: 3px 3px 3px 3px #ddd;">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210109200839.png" style="width:60%;box-shadow: 3px 3px 3px 3px #ddd;">
 </p>
 
 关于「内存与垃圾回收」章节，会从如下三大部分展开：
@@ -155,7 +155,7 @@ Go的内存统一由内存管理器管理的，Go的内存管理器是基于Goog
 - 最后，再从对应`SizeClass`的`PageHeap`中分配
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210120132244.png" style="width:66%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210120132244.png" style="width:66%">
 </p>
 
 ## Go内存分配器的逻辑架构
@@ -167,7 +167,7 @@ Go的内存统一由内存管理器管理的，Go的内存管理器是基于Goog
 - `mheap`：堆内存
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405133623.png" style="width:60%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405133623.png" style="width:60%">
 </p>
 
 实际中央缓存`central`是一个由136个`mcentral`类型元素的数组构成。
@@ -177,7 +177,7 @@ Go的内存统一由内存管理器管理的，Go的内存管理器是基于Goog
 我们更新下架构图如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405224809.png" style="width:60%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405224809.png" style="width:60%">
 </p>
 
 「Go内存分配器」把申请的内存对象按大小分为了三类：
@@ -194,7 +194,7 @@ Go的内存统一由内存管理器管理的，Go的内存管理器是基于Goog
 
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405224348.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405224348.png" style="width:80%">
 </p>
 
 ## 总结
@@ -202,7 +202,7 @@ Go的内存统一由内存管理器管理的，Go的内存管理器是基于Goog
 通过以上的分析可以看出Go内存分配器的设计和开源`TCMalloc`内存分配器的理念、思路基本一致。对比图如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405225026.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405225026.png" style="width:100%">
 </p>
 
 最后我们总结下：
@@ -328,19 +328,19 @@ func exitsyscall0(gp *g) {
 # Go内存管理单元`mspan`
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405234945.png" style="width:30%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405234945.png" style="width:30%">
 </p>
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405235014.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405235014.png" style="width:100%">
 </p>
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405235024.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405235024.png" style="width:100%">
 </p>
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405235059.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405235059.png" style="width:100%">
 </p>
 
 
@@ -350,7 +350,7 @@ func exitsyscall0(gp *g) {
 # 堆内存的分配
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405235337.png" style="width:30%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405235337.png" style="width:30%">
 </p>
 
 - 微对象 0 < Micro Object < 16B
@@ -358,66 +358,66 @@ func exitsyscall0(gp *g) {
 - 大对象 32KB < Large Object
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405235126.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405235126.png" style="width:80%">
 </p>
 
 mcache:
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405235250.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405235250.png" style="width:80%">
 </p>
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405235037.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405235037.png" style="width:80%">
 </p>
 
 central:
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405234451.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405234451.png" style="width:80%">
 </p>
 
 ## 微对象的分配
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405234253.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405234253.png" style="width:80%">
 </p>
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405234330.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405234330.png" style="width:80%">
 </p>
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405234341.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405234341.png" style="width:80%">
 </p>
 
 
 ## 小对象的分配
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405234409.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405234409.png" style="width:80%">
 </p>
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405234425.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405234425.png" style="width:80%">
 </p>
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405234513.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405234513.png" style="width:80%">
 </p>
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405234521.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405234521.png" style="width:80%">
 </p>
 
 ## 大对象的分配
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405234609.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405234609.png" style="width:80%">
 </p>
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405234616.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405234616.png" style="width:80%">
 </p>
 
 # 栈内存和堆内存的关系
@@ -514,7 +514,7 @@ func copystack(gp *g, newsize uintptr) {
 都指向了 函数 `stackalloc`
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405133309.png" style="width:50%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405133309.png" style="width:50%">
 </p>
 
 分析 `stackalloc`
@@ -534,7 +534,7 @@ func copystack(gp *g, newsize uintptr) {
 - 栈内存来自于`mheap`堆内存
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405132922.png" style="width:60%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405132922.png" style="width:60%">
 </p>
 
 - 小于32KB的栈内存
@@ -543,22 +543,22 @@ func copystack(gp *g, newsize uintptr) {
 ### 小于32KB栈分配过程
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405234800.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405234800.png" style="width:80%">
 </p>
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405234810.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405234810.png" style="width:80%">
 </p>
 
 
 ### 大于等于32KB栈分配过程
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405234822.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405234822.png" style="width:80%">
 </p>
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20220405234828.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20220405234828.png" style="width:80%">
 </p>
 
 

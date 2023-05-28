@@ -245,5 +245,5 @@ beego.Router()
 
 > 备注：go导入包相当于入栈过程，先import后执行init
 
-![http://cdn.tigerb.cn/beego_2.png](http://cdn.tigerb.cn/beego_2.png)
+![http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/beego_2.png](http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/beego_2.png)
 

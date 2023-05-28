@@ -48,7 +48,7 @@
 大致结构如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20201216161128.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201216161128.png" style="width:100%">
 </p>
 
 读取一个key值的过程大致如下：
@@ -100,13 +100,13 @@ Go语言解决hash冲突不是链表，实际**主要**用的数组(内存上的
 ```
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20201219202458.png" style="width:60%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201219202458.png" style="width:60%">
 </p>
 
 但是并不是只使用一个数组(连续内存空间)存放键和值，而是使用了两个数组分别存储键和值，图示如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20201217210507.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201217210507.png" style="width:100%">
 </p>
 
 上图中：
@@ -117,7 +117,7 @@ Go语言解决hash冲突不是链表，实际**主要**用的数组(内存上的
 把上面简化的关系转换一下，其实就是这样的一个大致关系，如下图所示：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20201217210752.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201217210752.png" style="width:100%">
 </p>
 
 我们通过一次`读操作`为例，看看读取某个key的值的一个**大致过程**：
@@ -131,7 +131,7 @@ Go语言解决hash冲突不是链表，实际**主要**用的数组(内存上的
 读过程图示如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20201217210816.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201217210816.png" style="width:100%">
 </p>
 
 这么看起来是不是“很简单”、很清晰，所以读到这里，你是不是已经入门了`Go语言Map底层实现`并且：
@@ -156,7 +156,7 @@ Go语言解决hash冲突不是链表，实际**主要**用的数组(内存上的
 `hmap`的结构其实刚开始看起来其实还是比较复杂的，有不少的字段，具体字段如下图所示：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20201218132443.png" style="width:20%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201218132443.png" style="width:20%">
 </p>
 
 字段释义如下：
@@ -182,7 +182,7 @@ flags|状态标识，比如正在被写、buckets和oldbuckets在被遍历、等
 #### 字段`buckets`
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20201216202022.png" style="width:66%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201216202022.png" style="width:66%">
 </p>
 
 `buckets`指向了一个数组(连续的内存空间)，数组的元素是`bmap`类型，这个字段我们称之为正常桶。
@@ -213,7 +213,7 @@ type hmap struct {
 正常桶`hmap.buckets`的元素是一个`bmap`结构。`bmap`的具体字段如下图所示：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20201216202114.png" style="width:66%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201216202114.png" style="width:66%">
 </p>
 
 字段释义如下：
@@ -227,7 +227,7 @@ overflow|指向的`hmap.extra.overflow`溢出桶里的`bmap`，上面的字段`t
 pad|对齐内存使用的，不是每个bmap都有会这个字段，需要满足一定条件
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20201216202224.png" style="width:60%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201216202224.png" style="width:60%">
 </p>
 
 推断出`bmap`结构字段的代码和位置如下：
@@ -273,7 +273,7 @@ func bmap(t *types.Type) *types.Type {
 分别了解了`hmap`和`bmap`的基本结构后，我们把上面的内容合并起来，就得到如下的Map结构图：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20201216202349.png" style="width:90%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201216202349.png" style="width:90%">
 </p>
 
 ### 溢出桶
@@ -289,7 +289,7 @@ func bmap(t *types.Type) *types.Type {
 解决这个问题我们就要说到`hmap.extra`结构了，`hmap.extra`是个结构体，结构图示和字段释义如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20201216202608.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201216202608.png" style="width:80%">
 </p>
 
 字段|解释
@@ -425,7 +425,7 @@ func makeBucketArray(t *maptype, b uint8, dirtyalloc unsafe.Pointer) (buckets un
 **当`hmap`存在溢出桶时，且当前溢出桶只被使用了一个bamp**时，我们可以得到如下的关系图：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20201217165310.png" style="width:90%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201217165310.png" style="width:90%">
 </p>
 
 同时我们可以看出正常桶的`bmap`和溢出桶的`bmap`实际构成了链表关系，所以这也解释了开篇我们说到的“Go里面Map的实现**主要**用到了数组”，其次还用到了链表。
@@ -440,7 +440,7 @@ func makeBucketArray(t *maptype, b uint8, dirtyalloc unsafe.Pointer) (buckets un
 通过上面的学习，我们再次通过一次读操作为例，看看读取某个key的值的一个大致过程：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20201217165551.png" style="width:90%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201217165551.png" style="width:90%">
 </p>
 
 结合代码分析下整个大体的过程：

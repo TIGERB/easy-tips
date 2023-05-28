@@ -73,18 +73,18 @@
 - 支付宝支付(策略)
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20200424131625.png" style="width:50%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200424131625.png" style="width:50%">
 </p>
 
 用户决定使用美团支付下的银行卡支付方式的参数
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20200424132214.png" style="width:50%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200424132214.png" style="width:50%">
 </p>
 
 用户决定使用支付宝网页版支付方式的参数
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20200424132232.png" style="width:50%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200424132232.png" style="width:50%">
 </p>
 
 > 注：不一定完全准确。
@@ -94,7 +94,7 @@
 我们通过梳理的文本业务流程得到了如下的业务流程图：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20200425192752.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200425192752.png" style="width:100%">
 </p>
 
 > 注：流程不一定完全准确。
@@ -135,7 +135,7 @@
 同时得到了我们的UML图：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20200425151733.jpg" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200425151733.jpg" style="width:100%">
 </p>
 
 #### 代码demo

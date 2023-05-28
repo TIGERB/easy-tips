@@ -9,8 +9,8 @@
 > 嗯，Go设计模式实战系列，一个设计模式业务真实使用的golang系列。
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20201103130617.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20201103130617.png" width="60%">
+    <a href="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201103130617.png" data-lightbox="roadtrip">
+        <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20201103130617.png" width="60%">
     </a>
 </p>
 ![]()
@@ -20,7 +20,7 @@
 - 未经版权所有者事先授权，禁止将此作品及其衍生作品以标准（纸质）书籍形式发行。  
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/wechat-blog-qrcode.jpg?imageMogr2/thumbnail/260x260!/format/webp/blur/1x0/quality/90|imageslim" width="200px">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/wechat-blog-qrcode.jpg?imageMogr2/thumbnail/260x260!/format/webp/blur/1x0/quality/90|imageslim" width="200px">
 </p>
 
 # 目标

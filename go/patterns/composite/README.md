@@ -42,7 +42,7 @@
 比如我们以“复杂的订单结算页面”为例，下面是某东的订单结算页面：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20200331124724.jpeg" style="width:38%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200331124724.jpeg" style="width:38%">
 </p>
 
 从页面的展示形式上，可以看出：
@@ -77,7 +77,7 @@
 按照如上某东的订单结算页面的示例，我们得到了如下的订单结算页面模块组成图：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20200329222214.png" style="width:46%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200329222214.png" style="width:46%">
 </p>
 
 > 注：模块不一定完全准确
@@ -194,7 +194,7 @@
 同时得到了我们的UML图：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20200403125814.jpg" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200403125814.jpg" style="width:100%">
 </p>
 
 #### 代码demo

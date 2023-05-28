@@ -1,6 +1,6 @@
 # iris源码阅读
 
-![](http://cdn.tigerb.cn/20190704211456.png)
+![](http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20190704211456.png)
 
 ```
 package main

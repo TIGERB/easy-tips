@@ -9,7 +9,7 @@
 今天我们开始拉开《Go语言轻松系列》第二章「内存与垃圾回收」的序幕。
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210109200839.png" style="width:60%;box-shadow: 3px 3px 3px 3px #ddd;">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210109200839.png" style="width:60%;box-shadow: 3px 3px 3px 3px #ddd;">
 </p>
 
 关于「内存与垃圾回收」章节，大体从如下三大部分展开：
@@ -63,7 +63,7 @@
 
 存储单元是存储器(本文指内存)的基本单位，每个存储单元是8bit，也就是1Byte，如下图所示：
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210121193201.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210121193201.png" style="width:100%">
 </p>
 
 同时从上图中我们可以看出，每个存储单元会被编号，这个编号又是什么呢？
@@ -95,7 +95,7 @@ CPU总线由系统总线、等等其他总线组成。
 内存的地址(存储单元的编号)是通过**地址总线**传递的，地址总线里的“每一根线”传递二进制`0`或`1`，如下图所示(实际不是这么简单，图示为了便于大家理解)。
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210121194127.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210121194127.png" style="width:100%">
 </p>
 
 地址总线的**宽度**决定了一次能传递多少个`0`或`1`，由于64位CPU每次可处理64位数据，所以理论上地址总线的宽度可以支持到最大64，也就是2^64种组合，可代表的数字范围为`0 ~ 2^64-1`。
@@ -200,7 +200,7 @@ CPU总线由系统总线、等等其他总线组成。
 线性分配大致就是需要使用多少分配多少，“用到哪了标识到哪”，如下图所示：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210124225714.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210124225714.png" style="width:100%">
 </p>
 
 线性分配有个问题：“已经分配的内存被释放了，我们如何再次分配？”。大家会想到用链表`LinkedList`，是的没错，但是内存管理中一般使用的是`FreeList`。
@@ -216,7 +216,7 @@ CPU总线由系统总线、等等其他总线组成。
 如下图所示：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210124224723.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210124224723.png" style="width:100%">
 </p>
 
 因为我们的主要目的是**掌握Go语言的内存分配原理**，但是呢，Go语言的内存分配主要是参考**Tcmalloc内存分配器**实现的，所以，我们想搞懂Go语言的内存分配原理前，必须先了解**Tcmalloc内存分配器**，便于我们对后续知识的深入理解。
@@ -226,7 +226,7 @@ CPU总线由系统总线、等等其他总线组成。
 这里直说结论哈，我们的进程是运行在虚拟内存上的，图示如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210129194928.png" style="width:90%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210129194928.png" style="width:90%">
 </p>
 
 - 对于我们的进程而言，可使用的内存是连续的
@@ -261,7 +261,7 @@ CPU总线由系统总线、等等其他总线组成。
 ```
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210120131944.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210120131944.png" style="width:100%">
 </p>
 
 ### `Span`和`SpanList`的概念
@@ -274,7 +274,7 @@ CPU总线由系统总线、等等其他总线组成。
 如下图所示：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210124225012.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210124225012.png" style="width:100%">
 </p>
 
 从图中可以看出，有：
@@ -286,7 +286,7 @@ CPU总线由系统总线、等等其他总线组成。
 除此之外，`Span`和`Span`之间可以构成**双向链表**我们称之为`SpanList`，内存管理中通常将持有相同数量`Page`的`Span`构成一个双向链表，如下图所示(**N个持有1Page的`Span`构成的`SpanList`**)：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210128131031.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210128131031.png" style="width:100%">
 </p>
 
 ```c++
@@ -323,7 +323,7 @@ class Span : public SpanList::Elem {
 我们以持有`1Page`的`Span`为例，`Span`、`Page`、`Object`关系图示如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210125201952.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210125201952.png" style="width:100%">
 </p>
 
 看完上面的图示，问题来了：
@@ -394,7 +394,7 @@ type Span struct {
 再来回顾下这张图，是不是理解了。
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210125201952.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210125201952.png" style="width:100%">
 </p> -->
 
 > 这个5个基本概念具体干什么用的呢？
@@ -414,13 +414,13 @@ type Span struct {
 图示如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210120132020.png" style="width:60%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210120132020.png" style="width:60%">
 </p>
 
 但是呢，实际上`CentralFreeList`是被`TransferCacheManager`管理的，所以`Tcmalloc`的基本结构实际应该为下图所示：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210120132031.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210120132031.png" style="width:80%">
 </p>
 
 > 接着，`ThreadCache`其实被线程持有，为什么呢？
@@ -433,7 +433,7 @@ type Span struct {
 进一步得到简易的结构图：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210120132037.png" style="width:80%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210120132037.png" style="width:80%">
 </p>
 
 ## 解密`PageHeap`、`CentralFreeList`、`ThreadCache`的详细构成
@@ -479,7 +479,7 @@ kMaxPages|kMaxPages Pages
 图示如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210129133136.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210129133136.png" style="width:100%">
 </p>
 
 但是呢，实际上从代码可知：数组元素的实际类型为`SpanListPair`，代码如下
@@ -517,7 +517,7 @@ class PageHeap final : public PageAllocatorInterface {
 根据这个结论我们修正下`PageHeap`结构图，如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210129132903.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210129132903.png" style="width:100%">
 </p>
 
 又因为大于kMaxPages个Pages(大对象)的内存分配是从`large_`中分配的，代码如下：
@@ -539,7 +539,7 @@ class PageHeap final : public PageAllocatorInterface {
 所以我们再加上大对象的分配时的`large_`属性，得到`PageHeap`的结构图如下：
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210129132923.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210129132923.png" style="width:100%">
 </p>
 
 同时`PageHeap`核心的代码片段如下：
@@ -608,7 +608,7 @@ class CentralFreeList {
 ```
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210120132206.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210120132206.png" style="width:100%">
 </p>
 
 #### 解密`TransferCacheManager`
@@ -630,7 +630,7 @@ class TransferCacheManager {
 ```
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210120132218.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210120132218.png" style="width:100%">
 </p>
 
 
@@ -710,7 +710,7 @@ kNumClasses|kNumClasses Bytes
 ```
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210120132229.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210120132229.png" style="width:100%">
 </p>
 
 ## 解密`Tcmalloc`基本结构的依赖关系
@@ -727,7 +727,7 @@ kNumClasses|kNumClasses Bytes
 当给小对象分配内存时，先`ThreadCache`的内存不足时，从对应`SizeClass`的`CentralFreeList`获取，再`CentralFreeList`，最后，从对应`SizeClass`的`PageHeap`。
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210120132244.png" style="width:66%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210120132244.png" style="width:66%">
 </p>
 
 ## 解密`Tcmalloc`基本结构的依赖关系(详细)
@@ -735,7 +735,7 @@ kNumClasses|kNumClasses Bytes
 以`SizeClass`的值为1为例，看一下详细内存分配过程。
 
 <p align="center">
-  <img src="http://cdn.tigerb.cn/20210120132256.png" style="width:100%">
+  <img src="http://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20210120132256.png" style="width:100%">
 </p>
 
 
