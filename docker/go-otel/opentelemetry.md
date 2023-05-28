@@ -2,27 +2,27 @@
 
 ## 什么是可观测
 
-观察系统状态
-基于系统状态定位问题
+相信大家日常经常使用`kibana`、`grafana`、`jaeger`等平台观察系统状态和定位问题，这些就是可观测体系的一部分。可观测主要包括：
 
-指标
-日志
-追踪
+- 日志，实现有`ELK(es/logstash/kibana)`等
+- 指标，实现有`grafana`+`promthues`等
+- 追踪，基于`opentracing`协议的实现有`jaeger`、`skywalking`等
+
+我们排查问题过程，一般都会把三者日志、指标、追踪结合来看，比如通过接口异常增量指标发现问题--->链路追踪定位异常服务--->排查异常服务日志，所以关于可观测我们经常可以看见这个经典的图片：
+
+<p align="center">
+  <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/infra%2Ftelemetry.png" style="width:80%">
+</p>
 
 ## 什么是`OpenTelemetry`
 
-指标使用`promethues`采集，`grafana`看板展示
+关于可观测除了上述的各种实现外，还有另一套实现`OpenCensus`，于是诞生统一标准`OpenTelemetry`且兼容`OpenTracing`，`OpenCensus`。不过关于go语言`OpenTelemetry`的统一sdk实现还不完善，比如目前还不支持日志，具体可以查看`https://github.com/open-telemetry/opentelemetry-go`。
 
-参考历史文章[Go服务监控搭建入门](https://tigerb.cn/2021/06/06/prometheus-grafana/)
+<p align="center">
+  <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/infra%2Fopentelemtry.png" style="width:80%">
+</p>
 
-追踪使用基于`OpenTracing`协议的`Jaeger`、`SkyWalking`等
-
-
-除此之外指标、追踪的另一套实现`OpenCensus`
-
-诞生统一标准`OpenTelemetry`
-兼容`OpenTracing` `OpenCensus` 
-
+接下来，我们基于Go来看看，原sdk(也就是未使用`OpenTelemetry`)接入指标和追踪的方式和基于`OpenTelemetry`新体系的指标和追踪接入方式区别。
 
 ## 可观测之指标
 
@@ -43,7 +43,7 @@
 
 代码示例如下：
 
-> https://github.com/TIGERB/easy-tips/tree/master/docker/grafana-promethues/go-demo/main.go.promethues
+> docker示例：https://github.com/TIGERB/easy-tips/tree/master/docker/grafana-promethues/go-demo/main.go.promethues
 
 ```go
 package main
@@ -122,7 +122,7 @@ metricsdk "go.opentelemetry.io/otel/sdk/metric"
 
 代码示例如下：
 
-> https://github.com/TIGERB/easy-tips/tree/master/docker/grafana-promethues/go-demo/main.go
+> docker示例：https://github.com/TIGERB/easy-tips/tree/master/docker/grafana-promethues/go-demo/main.go
 
 ```go
 package main
@@ -188,7 +188,7 @@ demo_api_request_counter_total{domain="127.0.0.1:6060",otel_scope_name="http-dem
 
 ### 基于`OpenTracing`sdk的`jaeger`追踪演示
 
-> Go版本 这里用的1.14 以及grpc服务作为上游服务
+> Go版本 这里用的1.18
 
 主要依赖的包:
 ```
@@ -199,10 +199,11 @@ jaeger "github.com/uber/jaeger-client-go"
 ```
 
 使用方式：
-1. 
-2. 
+1. 使用`jaeger.NewTracer`创建一个tracer对象`tracer`，并制定jaeger服务地址(这里采用的是非agent方式演示)
+2. 使用`tracer`创建一个span`tracer.StartSpan`，并在你想追踪的代码段后面`span.Finish()`
+3. 这里上游使用`grpc`服务做测试，使用opentracing中间件SDK `go-grpc-middleware/tracing/opentracing`
 
-> https://github.com/TIGERB/easy-tips/tree/master/docker/go-jaeger
+> docker示例：https://github.com/TIGERB/easy-tips/tree/master/docker/go-jaeger
 
 ```go
 package main
@@ -277,8 +278,10 @@ func demoGrpcReq() (string, error) {
 }
 ```
 
+使用`docker-compose up -d`启动演示服务，模拟请求`curl 127.0.0.1:6060/v1/demo`，查看jaeger后台`http://localhost:16686/`，示例如下：
+
 <p align="center">
-  <img src="" style="width:100%">
+  <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/infra%2Fjaeger.png" style="width:80%">
 </p>
 
 ### 基于`OpenTelemetry`sdk的`jaeger`追踪演示
@@ -287,6 +290,16 @@ func demoGrpcReq() (string, error) {
 
 主要依赖的包:
 ```
+elemetry.io/contrib/instrumentation/net/http/otelhttp"
+"google.golang.org/grpc"
+
+"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
+"go.opentelemetry.io/otel"
+"go.opentelemetry.io/otel/exporters/jaeger"
+"go.opentelemetry.io/otel/propagation"
+"go.opentelemetry.io/otel/sdk/resource"
+tracesdk "go.opentelemetry.io/otel/sdk/trace"
+semconv "go.opentelemet
 ```
 
 使用方式：
@@ -294,11 +307,105 @@ func demoGrpcReq() (string, error) {
 2. 
 
 
-> https://github.com/TIGERB/easy-tips/tree/master/docker/go-otel
+> docker示例：https://github.com/TIGERB/easy-tips/tree/master/docker/go-otel
 
 ```go
+package main
+
+import (
+	// 导入net/http包
+	"context"
+	"http-demo/demov1"
+	"net/http"
+
+	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
+	"google.golang.org/grpc"
+
+	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/exporters/jaeger"
+	"go.opentelemetry.io/otel/propagation"
+	"go.opentelemetry.io/otel/sdk/resource"
+	tracesdk "go.opentelemetry.io/otel/sdk/trace"
+	semconv "go.opentelemetry.io/otel/semconv/v1.17.0"
+)
+
+// 追踪
+var tracer *tracesdk.TracerProvider
+
+func init() {
+	// 初始化追踪tracer
+	// https://github.com/open-telemetry/opentelemetry-go/blob/main/example/jaeger/main.go
+	// Create the Jaeger exporter
+	exp, err := jaeger.New(jaeger.WithCollectorEndpoint(jaeger.WithEndpoint("http://jaeger-demo:14268/api/traces")))
+	if err != nil {
+		panic(err)
+		return
+	}
+	tracer = tracesdk.NewTracerProvider(
+		tracesdk.WithBatcher(exp),
+		tracesdk.WithResource(resource.NewWithAttributes(
+			semconv.SchemaURL,
+			semconv.ServiceNameKey.String("http-demo"),
+		)),
+	)
+
+}
+
+// 常见框架集成opentelemetry SDK
+// https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation
+func main() {
+	otel.SetTracerProvider(tracer)
+	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagation.TraceContext{}, propagation.Baggage{}))
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	defer tracer.Shutdown(ctx)
+
+	// /v1/demo接口 业务逻辑handler
+	demoHandler := func(w http.ResponseWriter, r *http.Request) {
+		// 调用demo grpc接口
+		name, err := demoGrpcReq()
+		if err != nil {
+			w.Write([]byte(err.Error()))
+		}
+		// 写入响应内容
+		w.Write([]byte(name))
+	}
+
+	// 集成链路追踪
+	// https://github.com/open-telemetry/opentelemetry-go-contrib/blob/main/instrumentation/net/http/otelhttp/example/server/server.go
+	otelHandler := otelhttp.NewHandler(http.HandlerFunc(demoHandler), "otelhttp demo test")
+	http.Handle("/v1/demo", otelHandler)
+
+	// 启动一个http服务并监听6060端口 这里第二个参数可以指定handler
+	http.ListenAndServe(":6060", nil)
+}
+
+func demoGrpcReq() (string, error) {
+	// 使用grpc otel追踪sdk go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc
+	conn, err := grpc.Dial("grpc-demo:1010",
+		grpc.WithInsecure(),
+		grpc.WithUnaryInterceptor(otelgrpc.UnaryClientInterceptor()),
+		grpc.WithStreamInterceptor(otelgrpc.StreamClientInterceptor()),
+	)
+	if err != nil {
+		return "", err
+	}
+	defer conn.Close()
+
+	client := demov1.NewGreeterClient(conn)
+	resp, err := client.SayHello(context.TODO(), &demov1.HelloRequest{
+		Name: "http request",
+	})
+	if err != nil {
+		return "", err
+	}
+	return resp.GetMessage(), nil
+}
 ```
 
+使用`docker-compose up -d`启动演示服务，模拟请求`curl 127.0.0.1:6060/v1/demo`，查看jaeger后台`http://localhost:16686/`，示例如下：
+
 <p align="center">
-  <img src="" style="width:100%">
+  <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/infra%2Fjaeger-otel.png" style="width:80%">
 </p>

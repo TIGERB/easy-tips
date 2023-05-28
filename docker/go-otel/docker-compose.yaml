@@ -2,7 +2,7 @@ version: "3"
 
 services:
   http-demo:
-    container_name: http-demo
+    container_name: go-otel-http-demo
     build: ./src/http-demo
     volumes:
       - ./src/http-demo:/home/deploy/http-demo
@@ -15,7 +15,7 @@ services:
     networks: 
       - default
   grpc-demo:
-    container_name: grpc-demo
+    container_name: go-otel-grpc-demo
     build: ./src/grpc-demo
     volumes:
       - ./src/grpc-demo:/home/deploy/grpc-demo
@@ -28,7 +28,7 @@ services:
     networks: 
       - default
   jaeger-demo:
-    container_name: jaeger
+    container_name: go-otel-jaeger
     build: ./jaeger-demo
     volumes:
       - ./jaeger-demo:/home/deploy/jaeger-demo
