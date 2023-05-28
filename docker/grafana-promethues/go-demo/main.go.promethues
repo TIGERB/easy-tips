@@ -1,0 +1,44 @@
+package main
+
+import (
+	"net/http"
+
+	// 引入prometheus sdk
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+)
+
+var (
+	// 自定义接口请求次数自定义指标
+	GlobalApiCounter *prometheus.CounterVec
+)
+
+func init() {
+	// 初始化接口请求次数自定义指标
+	GlobalApiCounter = prometheus.NewCounterVec(prometheus.CounterOpts{
+		Name: "demo_api_request_counter",
+		Help: "接口请求次数自定义指标",
+	},
+		[]string{"domain", "uri"}, // 域名和接口
+	)
+	prometheus.MustRegister(GlobalApiCounter)
+}
+
+func main() {
+	go (func() {
+		// 创建一个独立的server export暴露Go指标 避免通过业务服务暴露到外网
+		metricServer := http.NewServeMux()
+		metricServer.Handle("/metrics", promhttp.Handler())
+		http.ListenAndServe(":2112", metricServer)
+	})()
+
+	// 使用默认server
+	http.HandleFunc("/v1/demo", func(w http.ResponseWriter, r *http.Request) {
+		// 自定义计数
+		GlobalApiCounter.WithLabelValues(r.Host, r.RequestURI).Inc()
+
+		w.Write([]byte("test"))
+	})
+	// 启动一个http服务并监听6060端口 这里第二个参数可以指定handler
+	http.ListenAndServe(":6060", nil)
+}

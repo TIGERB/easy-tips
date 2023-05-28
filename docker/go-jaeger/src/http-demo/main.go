@@ -7,7 +7,6 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"google.golang.org/grpc"
 
 	grpc_opentracing "github.com/grpc-ecosystem/go-grpc-middleware/tracing/opentracing"
@@ -17,10 +16,12 @@ import (
 )
 
 var (
+	// 创建一个tracer对象
 	tracer opentracing.Tracer
 )
 
 func main() {
+	// 指定上报数据的jaeger服务地址
 	sender := transport.NewHTTPTransport(
 		"http://go-jaeger-jaeger-demo:14268/api/traces",
 	)
@@ -31,10 +32,9 @@ func main() {
 		jaeger.NewRemoteReporter(sender),
 	)
 	defer closer.Close()
-	// ------------------ 使用http包启动一个http服务 方式一 ------------------
-	// *http.Request http请求内容实例的指针
-	// http.ResponseWriter 写http响应内容的实例
+
 	http.HandleFunc("/v1/demo", func(w http.ResponseWriter, r *http.Request) {
+		// 创建一个`span`
 		span := tracer.StartSpan("demo_span_1")
 		defer span.Finish()
 		name, err := demoGrpcReq()
@@ -45,23 +45,18 @@ func main() {
 		w.Write([]byte(name))
 	})
 
-	go (func() {
-		http.Handle("/metrics", promhttp.Handler())
-		http.ListenAndServe(":6061", nil)
-	})()
-
-	// 启动一个http服务并监听8888端口 这里第二个参数可以指定handler
+	// 启动一个http服务并监听6060端口 这里第二个参数可以指定handler
 	http.ListenAndServe(":6060", nil)
 }
 
 func demoGrpcReq() (string, error) {
+	// 使用opentracing中间件SDK go-grpc-middleware/tracing/opentracing
 	conn, err := grpc.Dial("grpc-demo:1010", grpc.WithInsecure(), grpc.WithUnaryInterceptor(grpc_opentracing.UnaryClientInterceptor(
 		grpc_opentracing.WithTracer(tracer),
 	)))
 	if err != nil {
 		return "", err
 	}
-	// 泄露
 	defer conn.Close()
 
 	client := demov1.NewGreeterClient(conn)
