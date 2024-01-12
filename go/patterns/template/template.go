@@ -161,11 +161,7 @@ func (lottery *Lottery) Run(ctx *Context) (err error) {
 // checkSerialNo 校验活动编号(serial_no)是否存在
 func (lottery *Lottery) checkSerialNo(ctx *Context) (err error) {
 	fmt.Println(runFuncName(), "校验活动编号(serial_no)是否存在、并获取活动信息...")
-	// 获取活动信息伪代码
-	ctx.ActInfo = &ActInfo{
-		// 假设当前的活动类型为按抽奖次数抽奖
-		ActivityType: ConstActTypeTimes,
-	}
+	
 
 	// 获取当前抽奖类型的具体行为
 	switch ctx.ActInfo.ActivityType {
@@ -247,6 +243,7 @@ func (lottery *Lottery) packagePrizeInfo(ctx *Context) (err error) {
 }
 
 func main() {
+	ctx:=&Context{&ActInfo{ActivityType: ConstActTypeAmount} }
 	(&Lottery{}).Run(&Context{})
 }
 
